@@ -25,6 +25,9 @@ import { EmployeeProfileDialogComponent } from './components/admin/employee-prof
     VacanciesComponent,
     EmployeeProfileDialogComponent
   ],
+  entryComponents: [
+    EmployeeProfileDialogComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
