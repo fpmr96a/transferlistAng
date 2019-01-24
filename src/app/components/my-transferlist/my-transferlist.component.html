@@ -1,3 +1,73 @@
-<p>
-  my-transferlist works!
-</p>
+<mat-card >
+  <div class="mat-elevation-z1">
+  <mat-form-field style="margin-top:20px; width:275px; margin-left: 10px;" color="primary">
+    <mat-label>Job Class</mat-label>
+    <select matNativeControl placeholder="Select Job Class" [formControl]="jobClassFormControl" name="jobclass">
+        <option value="" label= "-- Select One --" selected></option>
+        <option *ngFor="let jobclass of ToDos" [value]="jobclass.id">
+        {{jobclass.name}}
+        </option>
+    </select>
+    <mat-error *ngIf="jobClassFormControl.hasError('required')">
+        Please select a job class
+    </mat-error>
+  </mat-form-field>
+</div>
+<mat-card-header class="matcard-header-rounded-top-left">
+  <mat-card-title>My Transfer List - {{jobClassFormControl.value}}</mat-card-title>
+</mat-card-header>
+<div class="mat-elevation-z1">
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="facility_Short_Description">
+      <mat-header-cell *matHeaderCellDef>Facility </mat-header-cell>
+      <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.facility_Short_Description}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="functionalUnitDescription">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Functional Unit </mat-header-cell>
+      <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.functionalUnitDescription}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="shiftDescription">
+      <mat-header-cell *matHeaderCellDef> Shift </mat-header-cell>
+      <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.shiftDescription}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="fT_PT_Description">
+      <mat-header-cell *matHeaderCellDef> FT/PT </mat-header-cell>
+      <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.fT_PT_Description}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+              [ngClass]="{highlighted: selectedRowIndex == row.id}"  (click)="highlight(row)" >
+  </mat-row>
+  </mat-table>
+
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+</div>
+
+
+</mat-card>
+<div class="sticky-footer" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="sticky-footer-left" flex>
+            <P style="margin-left: 30px;">My Transfer List</P>
+    </div>
+    <div class="sticky-footer-center" flex>
+      <button mat-raised-button color="primary">Delete All</button>
+      <button mat-raised-button color="primary" style="margin-left: 10px; margin-right: 10px;" >Add to Transfer List</button>
+      <button mat-raised-button color="primary" >Print</button>
+    </div>
+    <div class="sticky-footer-right" flex >
+       &nbsp; 
+    </div>
+</div>
+
+
+
+
