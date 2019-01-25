@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms'
 import { DataService } from '../../core/data.service';
 import { MyTransferList } from '../../models/MyTransferList';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { JobClass } from 'src/app/models/JobClass';
 
 @Component({
   selector: 'app-my-transferlist',
@@ -15,6 +16,7 @@ export class MyTransferlistComponent implements OnInit {
   selectedRowIndex: number;
   errorMessage = '';
 
+  jobClasses: JobClass[] = [];
   filteredTransferLists: MyTransferList[] = [];
 
   displayedColumns: string[] = ['facility_Short_Description', 'functionalUnitDescription', 'shiftDescription', 'fT_PT_Description'];
@@ -27,16 +29,17 @@ export class MyTransferlistComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-   /*  this.dataService.getToDos().subscribe(
-      todos => {
-        this.ToDos = todos;
+   this.dataService.getJobClasses().subscribe(
+      jobclasses => {
+        this.jobClasses = jobclasses;
+        console.log("Job classes Returned" + JSON.stringify(this.jobClasses));
       },
       error => this.errorMessage = <any>error
-    );
+    ); 
 
     this.jobClassFormControl.valueChanges.subscribe(
       value => console.log(value)
-    ); */
+    );
 
     //this.dataSource.paginator = this.paginator;
 

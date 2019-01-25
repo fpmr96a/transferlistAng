@@ -6,6 +6,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 
 //import { ToDo } from '../models/ToDo';
 import { MyTransferList } from '../models/MyTransferList';
+import { JobClass } from 'src/app/models/JobClass';
 
 @Injectable({
   providedIn: 'root'
@@ -13,19 +14,20 @@ import { MyTransferList } from '../models/MyTransferList';
 export class DataService {
   //private transferlistUrl = 'api/todo';
   private todoUrl = 'https://localhost:5001/api/Todo/ ';
+  private webApiUrl = 'http://10.15.56.123:8080/api';
   private transferlistUrl = 'https://localhost:5001/api/MyTransferList/ ';
   // the value assigned, when using a real back-end web service would be:
   //  'www.myWebService.com/api/products';
 
   constructor(private http: HttpClient) { }
 
-  /* getToDos(): Observable<ToDo[]> {
-    return this.http.get<ToDo[]>(this.todoUrl)
+  getJobClasses(): Observable<JobClass[]> {
+    return this.http.get<JobClass[]>(this.webApiUrl + "/lookup/jobcodefour")
       .pipe(
         tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError)
       );
-  } */
+  }
 
   getMyTransferList(): Observable<MyTransferList[]> {
     return this.http.get<MyTransferList[]>(this.transferlistUrl)
