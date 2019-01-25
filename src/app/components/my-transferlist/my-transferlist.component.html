@@ -4,7 +4,7 @@
     <mat-label>Job Class</mat-label>
     <select matNativeControl placeholder="Select Job Class" [formControl]="jobClassFormControl" name="jobclass">
         <option value="" label= "-- Select One --" selected></option>
-        <option *ngFor="let jobclass of jobClasses" [value]="jobclass.value">
+        <option *ngFor="let jobclass of jobClasses" [value]="jobclass.name">
         {{jobclass.value}}
         </option>
     </select>
