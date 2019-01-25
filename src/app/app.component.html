@@ -2,11 +2,12 @@
   <img  flex src="./assets/images/DMHAS-TransferList-Wide.jpg"  style="align-self: left;">
   <img flex alt="DMHAS Logo" id="Img2" runat="server" src="./assets/images/DMHASLogo.gif" style="align-self: right;"/>
 </div>
-
+<!-- skipLocationChange is preventing parameters and routing from appearing in the URL -->
+<!-- ================================================================================= -->
 <nav mat-tab-nav-bar style="margin-left: 190px">
   <a mat-tab-link
   *ngFor="let link of navLinks"
-  [routerLink]="link.link"
+  [routerLink]="link.link" skipLocationChange
   routerLinkActive #rla="routerLinkActive"
   [active]="rla.isActive">
  {{link.label}}
