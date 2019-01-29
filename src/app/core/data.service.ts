@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
@@ -16,6 +16,7 @@ export class DataService {
   private todoUrl = 'https://localhost:5001/api/Todo/ ';
   private webApiUrl = 'http://10.15.56.123:8080/api';
   private transferlistUrl = 'https://localhost:5001/api/MyTransferList/ ';
+  private transferlistUrl2 = 'https://localhost:5001';
   // the value assigned, when using a real back-end web service would be:
   //  'www.myWebService.com/api/products';
 
@@ -31,6 +32,18 @@ export class DataService {
 
   getMyTransferList(): Observable<MyTransferList[]> {
     return this.http.get<MyTransferList[]>(this.transferlistUrl)
+      .pipe(
+        tap(data => console.log(JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
+  getMyTransferListByJobcode(jobcodeSearch: string): Observable<MyTransferList[]> {
+    jobcodeSearch = jobcodeSearch.trim();
+    const options = jobcodeSearch ? { params: new HttpParams().set('jobcode4', jobcodeSearch) } : {};
+
+    //return this.http.get<MyTransferList[]>(this.transferlistUrl, options)
+    return this.http.get<MyTransferList[]>(this.transferlistUrl2 + `/api/MyTransferList/${jobcodeSearch}`)
       .pipe(
         tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError)

@@ -38,7 +38,10 @@ export class MyTransferlistComponent implements OnInit {
     ); 
 
     this.jobClassFormControl.valueChanges.subscribe(
-      value => console.log(value)
+      value => {
+        console.log(value);
+        this.GetMyTransferListByJobCode(value);
+      }
     );
 
     //this.dataSource.paginator = this.paginator;
@@ -56,6 +59,17 @@ export class MyTransferlistComponent implements OnInit {
 
   highlight(row){
     this.selectedRowIndex = row.id;
+    }
+
+GetMyTransferListByJobCode(jobcode: string) {
+      this.dataService.getMyTransferListByJobcode(jobcode).subscribe(
+        mytransferlists => {
+          this.dataSource.data = mytransferlists;
+          this.dataSource.sort = this.sort;
+  
+        },
+        error => this.errorMessage = <any>error
+      );
     }
   
   /* public dataStateChange(state: DataStateChangeEvent): void {
