@@ -46,15 +46,10 @@ export class MyTransferlistComponent implements OnInit {
 
     //this.dataSource.paginator = this.paginator;
 
-    this.dataService.getMyTransferList().subscribe(
-      mytransferlists => {
-        this.dataSource.data = mytransferlists;
-        this.dataSource.sort = this.sort;
-
-      },
-      error => this.errorMessage = <any>error
-    );
-     
+    // Initialize Grid as empty with message about nothing found
+    // ==========================================================
+    this.GetMyTransferListByJobCode("0000");
+         
   }
 
   highlight(row){

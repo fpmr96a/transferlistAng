@@ -43,9 +43,6 @@ export class DataService {
     const options = jobcodeSearch ? { params: new HttpParams().set('jobcode4', jobcodeSearch) } : {};
     
     return this.http.get<MyTransferList[]>(this.webApiUrl + '/TransferListEmployee/ByEmployee/' + 'faraclass' + '/' + jobcodeSearch)
-    //return this.http.get<MyTransferList[]>(this.transferlistUrl2)
-    //return this.http.get<MyTransferList[]>(this.transferlistUrl, options)
-    //return this.http.get<MyTransferList[]>(this.transferlistUrl2 + `/api/MyTransferList/${jobcodeSearch}`)
       .pipe(
         tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError)
