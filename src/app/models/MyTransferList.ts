@@ -6,8 +6,8 @@ export interface MyTransferList {
     functionalUnitDescription: string;
     shiftDescription: string;
     addedToList_DateTime: Date;
-    fT_PT_Code: string;
-    fT_PT_Description: string;
+    ft_PT_Code: string;
+    ft_PT_Description: string;
     userName: string;
-    job_Code4: string;
+    jobCode4: string;
  }

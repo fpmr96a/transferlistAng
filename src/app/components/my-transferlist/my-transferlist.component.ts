@@ -17,9 +17,12 @@ export class MyTransferlistComponent implements OnInit {
   errorMessage = '';
 
   jobClasses: JobClass[] = [];
+  selectedJobClass: JobClass;
+  selectedJobClassDescription: string;
+
   filteredTransferLists: MyTransferList[] = [];
 
-  displayedColumns: string[] = ['facilityShortDescription', 'functionalUnitDescription', 'shiftDescription', 'fT_PT_Description', 'deleteButtonColumn'];
+  displayedColumns: string[] = ['facilityShortDescription', 'functionalUnitDescription', 'shiftDescription', 'ft_PT_Description', 'deleteButtonColumn'];
 
   dataSource = new MatTableDataSource();
 
@@ -39,8 +42,9 @@ export class MyTransferlistComponent implements OnInit {
 
     this.jobClassFormControl.valueChanges.subscribe(
       value => {
-        console.log(value);
-        this.GetMyTransferListByJobCode(value);
+        this.selectedJobClass = JSON.parse(value);
+        this.selectedJobClassDescription = this.selectedJobClass.description;
+        this.GetMyTransferListByJobCode(this.selectedJobClass.code);
       }
     );
 
@@ -69,6 +73,9 @@ GetMyTransferListByJobCode(jobcode: string) {
   
   deleteTransferList(){
 
+  }
+  getSelectedJobClass(selectedJobClass: any): string {
+   return JSON.stringify(selectedJobClass);
   }
   /* public dataStateChange(state: DataStateChangeEvent): void {
       this.state = state;

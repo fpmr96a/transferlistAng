@@ -23,7 +23,7 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getJobClasses(): Observable<JobClass[]> {
-    return this.http.get<JobClass[]>(this.webApiUrl + "/lookup/jobcodefour")
+    return this.http.get<JobClass[]>(this.webApiUrl + "/lookup/maxjobcodefour")
       .pipe(
         tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError)

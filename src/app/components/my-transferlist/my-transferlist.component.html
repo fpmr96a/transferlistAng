@@ -4,8 +4,8 @@
     <mat-label>Job Class</mat-label>
     <select matNativeControl placeholder="Select Job Class" [formControl]="jobClassFormControl" name="jobclass">
         <option value="" label= "-- Select One --" selected></option>
-        <option *ngFor="let jobclass of jobClasses" [value]="jobclass.name">
-        {{jobclass.value}}
+        <option *ngFor="let jobclass of jobClasses" [value]="getSelectedJobClass(jobclass)" >
+        {{jobclass.description}}
         </option>
     </select>
     <mat-error *ngIf="jobClassFormControl.hasError('required')">
@@ -14,7 +14,7 @@
   </mat-form-field>
 </div>
 <mat-card-header class="matcard-header-rounded-top-left">
-  <mat-card-title>My Transfer List - {{jobClassFormControl.value}}</mat-card-title>
+  <mat-card-title>My Transfer List - {{this.selectedJobClassDescription}}</mat-card-title>
 </mat-card-header>
 <div class="mat-elevation-z1">
   <mat-table [dataSource]="dataSource" matSort>
@@ -38,9 +38,9 @@
     </ng-container>
 
     <!-- FT / PT Column -->
-    <ng-container matColumnDef="fT_PT_Description">
+    <ng-container matColumnDef="ft_PT_Description">
       <mat-header-cell *matHeaderCellDef> FT/PT </mat-header-cell>
-      <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.fT_PT_Description}} </mat-cell>
+      <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.ft_PT_Description}} </mat-cell>
     </ng-container>
 
       <!-- Delete Button Column -->

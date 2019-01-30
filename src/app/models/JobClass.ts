@@ -1,4 +1,4 @@
 export interface JobClass {
-    name: string;
-    value: string;
+    code: string;
+    description: string;
  }
