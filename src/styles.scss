@@ -119,9 +119,11 @@ mat-form-field.mat-form-field {
     background: #eee; 
   }
   
-  .mat-row.highlighted {
+ // Selected Row Yellow
+ // ===================
+ /*  .mat-row.highlighted {
     background: lightyellow;
-  }
+  } */
   .mat-header-cell {
      font-weight: 900; 
      font-size: 14px; 
@@ -143,6 +145,15 @@ mat-form-field.mat-form-field {
   .mat-header-row {
     min-height: 38px;
     background-color: whitesmoke;
+  }
+
+  /* Mat table */
+.no-results {
+    display: flex;
+    justify-content: LEFT;
+    padding: 14px;
+    font-size: 14px;
+    font-style: italic;
   }
 
   // ***** IE specific Styling below. Attempting to vertically-align text in mat-table but

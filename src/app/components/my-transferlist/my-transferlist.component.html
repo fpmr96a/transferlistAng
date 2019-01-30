@@ -19,28 +19,38 @@
 <div class="mat-elevation-z1">
   <mat-table [dataSource]="dataSource" matSort>
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="facility_Short_Description">
+    <!-- Facility Column -->
+    <ng-container matColumnDef="facilityShortDescription">
       <mat-header-cell *matHeaderCellDef>Facility </mat-header-cell>
-      <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.facility_Short_Description}} </mat-cell>
+      <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.facilityShortDescription}} </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- Functional Unit Column -->
     <ng-container matColumnDef="functionalUnitDescription">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Functional Unit </mat-header-cell>
       <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.functionalUnitDescription}} </mat-cell>
     </ng-container>
 
-    <!-- Weight Column -->
+    <!-- Shift Column -->
     <ng-container matColumnDef="shiftDescription">
       <mat-header-cell *matHeaderCellDef> Shift </mat-header-cell>
       <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.shiftDescription}} </mat-cell>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <!-- FT / PT Column -->
     <ng-container matColumnDef="fT_PT_Description">
       <mat-header-cell *matHeaderCellDef> FT/PT </mat-header-cell>
       <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.fT_PT_Description}} </mat-cell>
+    </ng-container>
+
+      <!-- Delete Button Column -->
+    <ng-container matColumnDef="deleteButtonColumn">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let myTransferListItem">
+        <button mat-button color="primary" (click)="deleteTransferList()" >
+          <mat-icon>delete_forever</mat-icon>Delete
+        </button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
@@ -48,6 +58,10 @@
               [ngClass]="{highlighted: selectedRowIndex == row.id}"  (click)="highlight(row)" >
   </mat-row>
   </mat-table>
+
+  <div class="no-results" [style.display]="dataSource.data.length == 0 ? '' : 'none'">
+    No transfer lists found ...
+  </div>
 
   <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
 </div>

@@ -16,7 +16,7 @@ export class DataService {
   private todoUrl = 'https://localhost:5001/api/Todo/ ';
   private webApiUrl = 'http://10.15.56.123:8080/api';
   private transferlistUrl = 'https://localhost:5001/api/MyTransferList/ ';
-  private transferlistUrl2 = 'https://localhost:5001';
+  private transferlistUrl2 = 'http://10.15.56.123:8080/api/TransferListEmployee/ByEmployee/faraclass/5724';
   // the value assigned, when using a real back-end web service would be:
   //  'www.myWebService.com/api/products';
 
@@ -41,9 +41,11 @@ export class DataService {
   getMyTransferListByJobcode(jobcodeSearch: string): Observable<MyTransferList[]> {
     jobcodeSearch = jobcodeSearch.trim();
     const options = jobcodeSearch ? { params: new HttpParams().set('jobcode4', jobcodeSearch) } : {};
-
+    
+    return this.http.get<MyTransferList[]>(this.webApiUrl + '/TransferListEmployee/ByEmployee/' + 'faraclass' + '/' + jobcodeSearch)
+    //return this.http.get<MyTransferList[]>(this.transferlistUrl2)
     //return this.http.get<MyTransferList[]>(this.transferlistUrl, options)
-    return this.http.get<MyTransferList[]>(this.transferlistUrl2 + `/api/MyTransferList/${jobcodeSearch}`)
+    //return this.http.get<MyTransferList[]>(this.transferlistUrl2 + `/api/MyTransferList/${jobcodeSearch}`)
       .pipe(
         tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError)

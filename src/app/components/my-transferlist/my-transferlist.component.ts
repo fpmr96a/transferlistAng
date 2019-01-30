@@ -19,7 +19,7 @@ export class MyTransferlistComponent implements OnInit {
   jobClasses: JobClass[] = [];
   filteredTransferLists: MyTransferList[] = [];
 
-  displayedColumns: string[] = ['facility_Short_Description', 'functionalUnitDescription', 'shiftDescription', 'fT_PT_Description'];
+  displayedColumns: string[] = ['facilityShortDescription', 'functionalUnitDescription', 'shiftDescription', 'fT_PT_Description', 'deleteButtonColumn'];
 
   dataSource = new MatTableDataSource();
 
@@ -72,6 +72,9 @@ GetMyTransferListByJobCode(jobcode: string) {
       );
     }
   
+  deleteTransferList(){
+
+  }
   /* public dataStateChange(state: DataStateChangeEvent): void {
       this.state = state;
       this.gridData = process(this.MyTransferLists, this.state);
