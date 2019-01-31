@@ -14,6 +14,9 @@ import { FilteredTransferlistComponent } from './components/filtered-transferlis
 import { ReportsComponent } from './components/reports/reports.component';
 import { VacanciesComponent } from './components/vacancies/vacancies.component';
 import { EmployeeProfileDialogComponent } from './components/admin/employee-profile-dialog/employee-profile-dialog.component';
+import { DeleteAllDialogComponent } from './components/my-transferlist/dialogs/delete-all-dialog.component';
+import { DeleteOneDialogComponent } from './components/my-transferlist/dialogs/delete-one-dialog.component';
+import { CreateTransferlistDialogComponent } from './components/my-transferlist/dialogs/create-transferlist-dialog.component';
 
 
 @NgModule({
@@ -23,10 +26,16 @@ import { EmployeeProfileDialogComponent } from './components/admin/employee-prof
     FilteredTransferlistComponent,
     ReportsComponent,
     VacanciesComponent,
-    EmployeeProfileDialogComponent
+    EmployeeProfileDialogComponent,
+    DeleteAllDialogComponent,
+    DeleteOneDialogComponent,
+    CreateTransferlistDialogComponent
   ],
   entryComponents: [
-    EmployeeProfileDialogComponent
+    EmployeeProfileDialogComponent,
+    DeleteAllDialogComponent,
+    DeleteOneDialogComponent,
+    CreateTransferlistDialogComponent
   ],
   imports: [
     BrowserModule,

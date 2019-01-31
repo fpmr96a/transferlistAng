@@ -1,10 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms'
 
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+
 import { DataService } from '../../core/data.service';
 import { MyTransferList } from '../../models/MyTransferList';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+
 import { JobClass } from 'src/app/models/JobClass';
+
+import { DeleteAllDialogComponent } from './dialogs/delete-all-dialog.component';
+import { DeleteOneDialogComponent } from './dialogs/delete-one-dialog.component';
+import { CreateTransferlistDialogComponent } from './dialogs/create-transferlist-dialog.component';
 
 @Component({
   selector: 'app-my-transferlist',
@@ -30,7 +37,8 @@ export class MyTransferlistComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService,
+               public dialog: MatDialog) { }
 
   ngOnInit(): void {
    this.dataService.getJobClasses().subscribe(
@@ -77,8 +85,18 @@ GetMyTransferListByJobCode(jobcode: string) {
     }
   
   deleteTransferList(){
+    console.log('clicked delete button');
+    let dialogRef = this.dialog.open(DeleteOneDialogComponent, {
+      width: '800px',
+      height: '270px',
+      disableClose: true
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed', result);
+    });
   }
+
  stringifyJobClassObject(selectedJobClass: any): string {
    return JSON.stringify(selectedJobClass);
   }
