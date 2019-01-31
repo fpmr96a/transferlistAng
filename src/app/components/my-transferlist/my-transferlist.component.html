@@ -21,7 +21,7 @@
 
     <!-- Facility Column -->
     <ng-container matColumnDef="facilityShortDescription">
-      <mat-header-cell *matHeaderCellDef>Facility </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Facility </mat-header-cell>
       <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.facilityShortDescription}} </mat-cell>
     </ng-container>
 
@@ -33,13 +33,13 @@
 
     <!-- Shift Column -->
     <ng-container matColumnDef="shiftDescription">
-      <mat-header-cell *matHeaderCellDef> Shift </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Shift </mat-header-cell>
       <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.shiftDescription}} </mat-cell>
     </ng-container>
 
     <!-- FT / PT Column -->
     <ng-container matColumnDef="ft_PT_Description">
-      <mat-header-cell *matHeaderCellDef> FT/PT </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> FT/PT </mat-header-cell>
       <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.ft_PT_Description}} </mat-cell>
     </ng-container>
 
