@@ -19,6 +19,7 @@ export class MyTransferlistComponent implements OnInit {
   jobClasses: JobClass[] = [];
   selectedJobClass: JobClass;
   selectedJobClassDescription: string;
+  selectedJobClassCode: string;
 
   filteredTransferLists: MyTransferList[] = [];
 
@@ -40,11 +41,15 @@ export class MyTransferlistComponent implements OnInit {
       error => this.errorMessage = <any>error
     ); 
 
+    // When an item in Job Class Dropdown selected, grab job class JSON string, load
+    // JSON object, and populate code and description properties
+    // ==============================================================================
     this.jobClassFormControl.valueChanges.subscribe(
       value => {
         this.selectedJobClass = JSON.parse(value);
         this.selectedJobClassDescription = this.selectedJobClass.description;
-        this.GetMyTransferListByJobCode(this.selectedJobClass.code);
+        this.selectedJobClassCode = this.selectedJobClass.code;
+        this.GetMyTransferListByJobCode(this.selectedJobClassCode);
       }
     );
 
@@ -74,7 +79,7 @@ GetMyTransferListByJobCode(jobcode: string) {
   deleteTransferList(){
 
   }
-  getSelectedJobClass(selectedJobClass: any): string {
+ stringifyJobClassObject(selectedJobClass: any): string {
    return JSON.stringify(selectedJobClass);
   }
   /* public dataStateChange(state: DataStateChangeEvent): void {
