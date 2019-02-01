@@ -43,6 +43,12 @@
       <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.ft_PT_Description}} </mat-cell>
     </ng-container>
 
+     <!-- FT / PT Column -->
+    <ng-container matColumnDef="addedToListDateTime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Date Added </mat-header-cell>
+      <mat-cell *matCellDef="let myTransferListItem"> {{myTransferListItem.addedToListDateTime}} </mat-cell>
+    </ng-container>
+
       <!-- Delete Button Column -->
     <ng-container matColumnDef="deleteButtonColumn">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>

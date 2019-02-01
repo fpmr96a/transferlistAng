@@ -5,7 +5,7 @@ export interface MyTransferList {
     facilityShortDescription: string;
     functionalUnitDescription: string;
     shiftDescription: string;
-    addedToList_DateTime: Date;
+    addedToListDateTime: Date;
     ft_PT_Code: string;
     ft_PT_Description: string;
     userName: string;

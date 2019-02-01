@@ -30,7 +30,7 @@ export class MyTransferlistComponent implements OnInit {
 
   filteredTransferLists: MyTransferList[] = [];
 
-  displayedColumns: string[] = ['facilityShortDescription', 'functionalUnitDescription', 'shiftDescription', 'ft_PT_Description', 'deleteButtonColumn'];
+  displayedColumns: string[] = ['facilityShortDescription', 'functionalUnitDescription', 'shiftDescription', 'ft_PT_Description', 'addedToListDateTime', 'deleteButtonColumn'];
 
   dataSource = new MatTableDataSource();
 
