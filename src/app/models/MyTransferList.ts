@@ -1,7 +1,7 @@
 export interface MyTransferList {
     facility_ID: number;
-    chrtfld_Dept_ID: string;
-    shift_CD: string;
+    chrtFldDeptId: string;
+    shiftCd: string;
     facilityShortDescription: string;
     functionalUnitDescription: string;
     shiftDescription: string;

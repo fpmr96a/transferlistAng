@@ -50,6 +50,17 @@ export class DataService {
   }
 
 
+  deleteTransferList(userName: string, jobCode4: string, facility_ID: number, 
+                     chrtFldDeptId: string, shiftCd: string, ft_PT_Code: string ): void {
+    this.http.delete(this.webApiUrl +  '/TransferListEmployee/' + ft_PT_Code + '/' +
+              jobCode4 + '/' + facility_ID + '/' + chrtFldDeptId + '/' +
+              shiftCd + '/' + userName)
+      .pipe(
+        tap(data => console.log('DELETED: ' + JSON.stringify(data))),
+        catchError(this.handleError)
+      ); 
+  }
+
   private handleError(err) {
     // in a real world app, we may send the server to some remote logging infrastructure
     // instead of just logging it to the console
