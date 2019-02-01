@@ -1,3 +1,16 @@
-<p>
-  delete-all-dialog works!
-</p>
+<div mat-dialog-title class="dialog-header-rounded-left"><p style="margin-left:10px;">Confirm Delete</p></div>
+<div class="mat-elevation-z1" style="width: 100%">
+  <div style="width: 90%">
+      <div mat-dialog-title class="gray-dialog-text">
+        Are you sure you'd like to delete this Transfer List?
+      </div>
+  </div>
+  <mat-dialog-actions style="margin-left:160px;">
+    <button mat-button color="primary" (click)="deleteAllConfirmed()" >
+      <mat-icon color="primary">check_circle</mat-icon>Yes
+    </button>
+    <button mat-button color="primary" (click)="noClicked()" >
+        <mat-icon>cancel</mat-icon>No
+      </button>
+  </mat-dialog-actions>
+</div>

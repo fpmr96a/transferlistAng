@@ -97,6 +97,19 @@ GetMyTransferListByJobCode(jobcode: string) {
     });
   }
 
+  deleteAllTransferLists(){
+    console.log('clicked delete button');
+    let dialogRef = this.dialog.open(DeleteAllDialogComponent, {
+      width: '500px',
+      height: '235px',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+        console.log('The Delete All dialog was closed', result);
+    });
+  }
+
  stringifyJobClassObject(selectedJobClass: any): string {
    return JSON.stringify(selectedJobClass);
   }
