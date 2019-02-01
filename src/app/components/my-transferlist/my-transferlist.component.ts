@@ -87,8 +87,8 @@ GetMyTransferListByJobCode(jobcode: string) {
   deleteTransferList(){
     console.log('clicked delete button');
     let dialogRef = this.dialog.open(DeleteOneDialogComponent, {
-      width: '800px',
-      height: '270px',
+      width: '500px',
+      height: '230px',
       disableClose: true
     });
 
