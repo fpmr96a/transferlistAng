@@ -18,7 +18,9 @@ export class DeleteAllDialogComponent implements OnInit {
   }
 
   deleteAllConfirmed(): void {
-    this.dialogRef.close();
+    // The [mat-dialog-close] attribute on the button automatically closes dialog, when clicked,
+    // and returns the value 'true' to calling component.
+    // ===========================================================================================
   }
 
   noClicked(): void {

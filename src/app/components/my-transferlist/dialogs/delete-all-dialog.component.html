@@ -6,7 +6,7 @@
       </div>
   </div>
   <mat-dialog-actions style="margin-left:160px;">
-    <button mat-button color="primary" (click)="deleteAllConfirmed()" >
+    <button mat-button color="primary" [mat-dialog-close]="true" (click)="deleteAllConfirmed()" >
       <mat-icon color="primary">check_circle</mat-icon>Yes
     </button>
     <button mat-button color="primary" (click)="noClicked()" >

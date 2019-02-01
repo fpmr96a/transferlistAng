@@ -93,7 +93,13 @@ GetMyTransferListByJobCode(jobcode: string) {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed', result);
+      if (result === true) {
+          
+        // Refresh the grid, for currently selected job class.
+        // =================================================== 
+        this.GetMyTransferListByJobCode(this.selectedJobClassCode);
+      }
+      
     });
   }
 
@@ -106,7 +112,13 @@ GetMyTransferListByJobCode(jobcode: string) {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-        console.log('The Delete All dialog was closed', result);
+        if (result === true) {
+          
+          // Refresh the grid, for currently selected job class, which should result in an empty grid since we just deleted all.
+          // ===================================================================================================================
+          this.GetMyTransferListByJobCode(this.selectedJobClassCode);
+        }
+       
     });
   }
 
