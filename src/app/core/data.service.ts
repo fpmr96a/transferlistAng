@@ -51,9 +51,9 @@ export class DataService {
 
 
   deleteTransferList(userName: string, jobCode4: string, facility_ID: number, 
-                     chrtFldDeptId: string, shiftCd: string, ft_PT_Code: string ): void {
+                     chrtFldDeptId: string, shiftCd: string, ft_PT_Code: string ): Observable<{}> {
                     
-          this.http.delete(this.webApiUrl +  '/TransferListEmployee/' + ft_PT_Code + '/' +
+          return this.http.delete(this.webApiUrl +  '/TransferListEmployee/' + ft_PT_Code + '/' +
               jobCode4 + '/' + facility_ID.toString().trim() + '/' + chrtFldDeptId + '/' +
               shiftCd.trim() + '/' + userName)
       .pipe(
