@@ -28,6 +28,7 @@ export class DeleteOneDialogComponent implements OnInit {
     this.dataService.deleteTransferList(this.data.userName, this.data.jobCode4, this.data.facility_ID,
                                         this.data.chrtFldDeptId, this.data.shiftCd, this.data.ft_PT_Code)
                                         .subscribe();
+    this.snackBar.open('Transfer List Deleted ...', 'Complete', {duration: 1500, });                                        
   }
 
   noClicked(): void {
