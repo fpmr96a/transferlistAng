@@ -20,7 +20,15 @@ export class DeleteAllDialogComponent implements OnInit {
   deleteAllConfirmed(): void {
     // The [mat-dialog-close] attribute on the button automatically closes dialog, when clicked,
     // and returns the value 'true' to calling component.
+    // NOTE: It is necessary to make the DELETE method in dataService an OBSERVABLE, even though
+    //       nothing returned, and make the calling of this method SUBSCRIBE. Otherwise, the 
+    //       delete will not happen. Calling the SUBSCRIBE triggers the execution. This is allowing
+    //       for additional operations such as TAP before anything actually happens.
     // ===========================================================================================
+    this.dataService.deleteAllTransferLists(this.data.userName, this.data.jobCode4, this.data.userName)
+      .subscribe();
+      this.snackBar.open('All Transfer Lists Deleted for ' + this.data.jobclassDescription, 'Complete', {duration: 1500, }); 
+      console.log('deleteAllTransferLists   username: ' + this.data.userName + ' jobcode: ' + this.data.jobCode4);
   }
 
   noClicked(): void {

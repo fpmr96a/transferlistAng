@@ -112,17 +112,17 @@ GetMyTransferListByJobCode(jobcode: string) {
     height: '275px',
     disableClose: true,
     data: {userName: userName, jobCode4: jobCode4, jobclassDescription: this.selectedJobClassDescription}
-});
+  });
 
-dialogRef.afterClosed().subscribe(result => {
-if (result === true) {
+    dialogRef.afterClosed().subscribe(result => {
+    if (result === true) {
 
-// Refresh the grid, for currently selected job class.
-// =================================================== 
-this.GetMyTransferListByJobCode(this.selectedJobClassCode);
-}
+    // Refresh the grid, for currently selected job class.
+    // =================================================== 
+    this.GetMyTransferListByJobCode(this.selectedJobClassCode);
+    }
 
-});
+  });
 }
 
  stringifyJobClassObject(selectedJobClass: any): string {

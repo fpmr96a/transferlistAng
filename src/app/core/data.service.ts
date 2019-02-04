@@ -62,6 +62,16 @@ export class DataService {
       ); 
   }
 
+  deleteAllTransferLists(userName: string, jobCode4: string, lastModifiedUser: string): Observable<{}> {
+   
+          return this.http.delete(this.webApiUrl +  '/TransferListEmployee/' + userName + '/' +
+                jobCode4 + '/' + lastModifiedUser)
+    .pipe(
+      tap(data => console.log('DELETED: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    ); 
+}
+
   private handleError(err) {
     // in a real world app, we may send the server to some remote logging infrastructure
     // instead of just logging it to the console
