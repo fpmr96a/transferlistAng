@@ -105,24 +105,25 @@ GetMyTransferListByJobCode(jobcode: string) {
     });
   }
 
-  deleteAllTransferLists(){
-    console.log('clicked delete button');
+  deleteAllTransferLists(userName: string, jobCode4: string){
+    
     let dialogRef = this.dialog.open(DeleteAllDialogComponent, {
-      width: '500px',
-      height: '235px',
-      disableClose: true
-    });
+    width: '500px',
+    height: '275px',
+    disableClose: true,
+    data: {userName: userName, jobCode4: jobCode4, jobclassDescription: this.selectedJobClassDescription}
+});
 
-    dialogRef.afterClosed().subscribe(result => {
-        if (result === true) {
-          
-          // Refresh the grid, for currently selected job class, which should result in an empty grid since we just deleted all.
-          // ===================================================================================================================
-          this.GetMyTransferListByJobCode(this.selectedJobClassCode);
-        }
-       
-    });
-  }
+dialogRef.afterClosed().subscribe(result => {
+if (result === true) {
+
+// Refresh the grid, for currently selected job class.
+// =================================================== 
+this.GetMyTransferListByJobCode(this.selectedJobClassCode);
+}
+
+});
+}
 
  stringifyJobClassObject(selectedJobClass: any): string {
    return JSON.stringify(selectedJobClass);
