@@ -1,10 +1,6 @@
-<div mat-dialog-title class="dialog-header-rounded-left"><p style="margin-left:10px;">Add to Transfer List {{ data.jobclassDescription }}</p></div>
+<div mat-dialog-title class="dialog-header-rounded-left"><p style="margin-left:10px;">Add Me to {{ data.jobclassDescription }} Transfer List</p></div>
 <div class="mat-elevation-z1" style="width: 100%">
-  <div style="width: 90%">
-      <div mat-dialog-title class="gray-dialog-text">
-        Add Me to this Transfer List
-      </div>
-  </div>
+  
   <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
     <mat-label>Facility</mat-label>
     <select matNativeControl placeholder="Select Facility" [formControl]="facilityFormControl" name="facility">
@@ -17,7 +13,7 @@
         Please select a facility
     </mat-error>
   </mat-form-field>
-  <mat-dialog-actions style="margin-left:160px;">
+  <mat-dialog-actions style="margin-left:150px;">
     <button mat-button color="primary"  [mat-dialog-close]="true" (click)="createTransferlists()" >
       <mat-icon color="primary">check_circle</mat-icon>Save
     </button>

@@ -20,6 +20,8 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  // Service Calls for MyTransferList page
+  // =====================================
   getJobClasses(): Observable<JobClass[]> {
     return this.http.get<JobClass[]>(this.webApiUrl + "/lookup/maxjobcodefour")
       .pipe(
@@ -48,6 +50,8 @@ export class DataService {
   }
 
 
+  // DELETE Transfer Lists for employee jobcode, facility, functional unit, shift and FT/PT
+  // =======================================================================================
   deleteTransferList(userName: string, jobCode4: string, facility_ID: number, 
                      chrtFldDeptId: string, shiftCd: string, ft_PT_Code: string ): Observable<{}> {
                     
@@ -60,6 +64,8 @@ export class DataService {
       ); 
   }
 
+  // DELETE ALL Transfer Lists for an Employee Job Code
+  // ==================================================
   deleteAllTransferLists(userName: string, jobCode4: string, lastModifiedUser: string): Observable<{}> {
    
           return this.http.delete(this.webApiUrl +  '/TransferListEmployee/' + userName + '/' +
@@ -70,6 +76,8 @@ export class DataService {
     ); 
 }
 
+// The following Service Calls are for the CREATE TRANSFER LIST dialog
+// ===================================================================
   getTransferFacilityByJobcode(jobcodeSearch: string): Observable<Facility[]> {
   jobcodeSearch = jobcodeSearch.trim();
   const options = jobcodeSearch ? { params: new HttpParams().set('jobcode4', jobcodeSearch) } : {};
