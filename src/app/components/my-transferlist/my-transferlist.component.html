@@ -82,7 +82,8 @@
     </div>
     <div class="sticky-footer-center" flex>
       <button mat-raised-button color="primary" (click)="deleteAllTransferLists('faraclass', this.selectedJobClassCode)">Delete All</button>
-      <button mat-raised-button color="primary" style="margin-left: 10px; margin-right: 10px;" >Add to Transfer List</button>
+      <button mat-raised-button color="primary" (click)="createTransferLists('faraclass', this.selectedJobClassCode)" 
+            style="margin-left: 10px; margin-right: 10px;" >Add to Transfer List</button>
       <button mat-raised-button color="primary" >Print</button>
     </div>
     <div class="sticky-footer-right" flex >

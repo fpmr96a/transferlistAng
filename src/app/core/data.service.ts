@@ -7,18 +7,16 @@ import { catchError, tap, map } from 'rxjs/operators';
 //import { ToDo } from '../models/ToDo';
 import { MyTransferList } from '../models/MyTransferList';
 import { JobClass } from 'src/app/models/JobClass';
+import { Facility } from '../models/Facility';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  //private transferlistUrl = 'api/todo';
-  private todoUrl = 'https://localhost:5001/api/Todo/ ';
+  
   private webApiUrl = 'http://10.15.56.123:8080/api';
   private transferlistUrl = 'https://localhost:5001/api/MyTransferList/ ';
-  private transferlistUrl2 = 'http://10.15.56.123:8080/api/TransferListEmployee/ByEmployee/faraclass/5724';
-  // the value assigned, when using a real back-end web service would be:
-  //  'www.myWebService.com/api/products';
+ 
 
   constructor(private http: HttpClient) { }
 
@@ -71,6 +69,18 @@ export class DataService {
       catchError(this.handleError)
     ); 
 }
+
+  getTransferFacilityByJobcode(jobcodeSearch: string): Observable<Facility[]> {
+  jobcodeSearch = jobcodeSearch.trim();
+  const options = jobcodeSearch ? { params: new HttpParams().set('jobcode4', jobcodeSearch) } : {};
+  
+  return this.http.get<Facility[]>(this.webApiUrl + '/Lookup/TransferListFacility/' + jobcodeSearch)
+    .pipe(
+      tap(data => console.log(JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+}
+
 
   private handleError(err) {
     // in a real world app, we may send the server to some remote logging infrastructure
