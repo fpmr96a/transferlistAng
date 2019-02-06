@@ -42,6 +42,16 @@
     </mat-error>
   </mat-form-field>
 
+  <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
+    <mat-label>Full-Time / Part-Time</mat-label>
+    <select matNativeControl placeholder="Select Full-Time / Part-Time" [formControl]="ftptFormControl" name="ftpt">
+        <option value="0" label= "Both" ></option>
+        <option value="1" label= "Full-Time" selected ></option>
+        <option value="2" label= "Part-Time" ></option>
+    </select>
+    
+  </mat-form-field>
+
   <mat-dialog-actions style="margin-left:140px;">
     <button mat-button color="primary"  [mat-dialog-close]="true" (click)="createTransferlists()" >
       <mat-icon color="primary">check_circle</mat-icon>Save

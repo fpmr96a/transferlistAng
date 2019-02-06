@@ -16,7 +16,7 @@ export class CreateTransferlistDialogComponent implements OnInit {
   facilityFormControl = new FormControl('', Validators.required);
   functionalUnitFormControl = new FormControl('', Validators.required);
   shiftFormControl = new FormControl('', Validators.required);
-  ftptFormControl = new FormControl('', Validators.required);
+  ftptFormControl = new FormControl('');
 
   selectedFacility: string = "-1";
   selectedFunctionalUnit: string;

@@ -129,7 +129,7 @@ createTransferLists(userName: string, jobCode4: string){
     
   let dialogRef = this.dialog.open(CreateTransferlistDialogComponent, {
   width: '475px',
-  height: '600px',
+  height: '490px',
   disableClose: true,
   data: {userName: userName, jobCode4: jobCode4, jobclassDescription: this.selectedJobClassDescription}
 });
