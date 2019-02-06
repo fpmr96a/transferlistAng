@@ -8,6 +8,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { MyTransferList } from '../models/MyTransferList';
 import { JobClass } from 'src/app/models/JobClass';
 import { Facility } from '../models/Facility';
+import { FunctionalUnit } from '../models/FunctionalUnit';
 
 @Injectable({
   providedIn: 'root'
@@ -83,6 +84,17 @@ export class DataService {
   const options = jobcodeSearch ? { params: new HttpParams().set('jobcode4', jobcodeSearch) } : {};
   
   return this.http.get<Facility[]>(this.webApiUrl + '/Lookup/TransferListFacility/' + jobcodeSearch)
+    .pipe(
+      tap(data => console.log(JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+}
+
+getFunctionalUnitByFacilityByJobcode(facilityCD: string, jobcodeSearch: string): Observable<FunctionalUnit[]> {
+  jobcodeSearch = jobcodeSearch.trim();
+  facilityCD = facilityCD.trim();
+  console.log(this.webApiUrl + '/Lookup/FunctionalUnit/' + jobcodeSearch + '/' + facilityCD);
+  return this.http.get<FunctionalUnit[]>(this.webApiUrl + '/Lookup/FunctionalUnit/' + jobcodeSearch + '/' + facilityCD)
     .pipe(
       tap(data => console.log(JSON.stringify(data))),
       catchError(this.handleError)
