@@ -1,4 +1,5 @@
-<div mat-dialog-title class="dialog-header-rounded-left"><p style="margin-left:10px;">Add Me to {{ data.jobclassDescription }} Transfer List</p></div>
+<div mat-dialog-title class="dialog-header-rounded-left"><p style="margin-left:10px; margin-top:0px !important;">Add Me to This Transfer List</p></div>
+<div class="dialog-header-rounded-top-left ">{{ data.jobclassDescription }}</div>
 <div class="mat-elevation-z1" style="width: 100%">
   
   <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
@@ -13,7 +14,7 @@
         Please select a facility
     </mat-error>
   </mat-form-field>
-  <mat-dialog-actions style="margin-left:150px;">
+  <mat-dialog-actions style="margin-left:160px;">
     <button mat-button color="primary"  [mat-dialog-close]="true" (click)="createTransferlists()" >
       <mat-icon color="primary">check_circle</mat-icon>Save
     </button>

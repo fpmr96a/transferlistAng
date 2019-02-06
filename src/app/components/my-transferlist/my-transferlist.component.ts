@@ -89,7 +89,7 @@ GetMyTransferListByJobCode(jobcode: string) {
     console.log('clicked delete button' + ' jobcode: ' + jobCode4 + ' chrtFldDeptId: ' + chrtFldDeptId + ' facility_ID: ' + facility_ID + ' shiftCd: ' + shiftCd + ' ft_PT_Code: ' + ft_PT_Code);
     let dialogRef = this.dialog.open(DeleteOneDialogComponent, {
       width: '500px',
-      height: '235px',
+      height: '225px',
       disableClose: true,
       data: {userName: userName, jobCode4: jobCode4, facility_ID: facility_ID, chrtFldDeptId: chrtFldDeptId, shiftCd: shiftCd, ft_PT_Code: ft_PT_Code}
     });
@@ -109,7 +109,7 @@ GetMyTransferListByJobCode(jobcode: string) {
     
     let dialogRef = this.dialog.open(DeleteAllDialogComponent, {
     width: '500px',
-    height: '275px',
+    height: '255px',
     disableClose: true,
     data: {userName: userName, jobCode4: jobCode4, jobclassDescription: this.selectedJobClassDescription}
   });
