@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { DataService } from 'src/app/core/data.service';
 import { Facility } from 'src/app/models/Facility';
 import { FunctionalUnit } from 'src/app/models/FunctionalUnit';
+import { Shift } from 'src/app/models/shift';
 
 @Component({
   selector: 'app-create-transferlist-dialog',
@@ -24,6 +25,7 @@ export class CreateTransferlistDialogComponent implements OnInit {
 
   facilities: Facility[] = [];
   functionalUnits: FunctionalUnit[] = [];
+  shifts: Shift[] = [];
 
   errorMessage = '';
 
@@ -41,6 +43,14 @@ export class CreateTransferlistDialogComponent implements OnInit {
       error => this.errorMessage = <any>error
     ); 
 
+    this.dataService.getShiftByJobcode(this.data.jobCode4).subscribe(
+      returnedShifts => {
+        this.shifts = returnedShifts;
+        console.log("shifts Returned" + JSON.stringify(this.shifts));
+      },
+      error => this.errorMessage = <any>error
+    ); 
+
     this.getFunctionalUnits('-1', this.data.jobCode4);
     /* this.dataService.getFunctionalUnitByFacilityByJobcode(this.selectedFacility,this.data.jobCode4).subscribe(
       returnedFuntionalUnits => {
@@ -50,8 +60,8 @@ export class CreateTransferlistDialogComponent implements OnInit {
       error => this.errorMessage = <any>error
     );  */
 
-    // When an item in Job Class Dropdown selected, grab job class JSON string, load
-    // JSON object, and populate code and description properties
+    // When an item in the Facility Dropdown selected, grab facility code and call
+    // web api to get Functional Units.
     // ==============================================================================
     this.facilityFormControl.valueChanges.subscribe(
       value => {

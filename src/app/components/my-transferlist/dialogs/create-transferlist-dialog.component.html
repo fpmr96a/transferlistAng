@@ -28,6 +28,20 @@
     </mat-error>
   </mat-form-field>
 
+  <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
+    <mat-label>Shift</mat-label>
+    <select matNativeControl placeholder="Select Shift" [formControl]="shiftFormControl" name="shift">
+        <option value="" label= "-- Select One --" selected></option>
+        <option value="1" label= "All" ></option>
+        <option *ngFor="let shift of shifts" [value]="shift.code" >
+        {{shift.description}}
+        </option>
+    </select>
+    <mat-error *ngIf="shiftFormControl.hasError('required')">
+        Please select a shift
+    </mat-error>
+  </mat-form-field>
+
   <mat-dialog-actions style="margin-left:140px;">
     <button mat-button color="primary"  [mat-dialog-close]="true" (click)="createTransferlists()" >
       <mat-icon color="primary">check_circle</mat-icon>Save

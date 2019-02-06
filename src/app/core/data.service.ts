@@ -9,6 +9,7 @@ import { MyTransferList } from '../models/MyTransferList';
 import { JobClass } from 'src/app/models/JobClass';
 import { Facility } from '../models/Facility';
 import { FunctionalUnit } from '../models/FunctionalUnit';
+import { Shift } from '../models/shift';
 
 @Injectable({
   providedIn: 'root'
@@ -101,7 +102,15 @@ getFunctionalUnitByFacilityByJobcode(facilityCD: string, jobcodeSearch: string):
     );
 }
 
-
+getShiftByJobcode(jobcodeSearch: string): Observable<Shift[]> {
+  jobcodeSearch = jobcodeSearch.trim();
+  console.log(this.webApiUrl + '/Lookup/TransferListShift/' + jobcodeSearch);
+  return this.http.get<Shift[]>(this.webApiUrl + '/Lookup/TransferListShift/' + jobcodeSearch)
+    .pipe(
+      tap(data => console.log(JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+}
   private handleError(err) {
     // in a real world app, we may send the server to some remote logging infrastructure
     // instead of just logging it to the console
