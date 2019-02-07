@@ -84,7 +84,7 @@ export class CreateTransferlistDialogComponent implements OnInit {
 
 
   createTransferlists(): void {
-
+    this.snackBar.open('Transfer List(s) created for ' + this.data.jobclassDescription, 'Complete', {duration: 1500, }); 
   }
 
   noClicked(): void {
