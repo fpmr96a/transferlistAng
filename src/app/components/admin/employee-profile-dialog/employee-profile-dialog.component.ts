@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material';
 import { EmployeeProfile } from '../../../models/EmployeeProfile'; 
@@ -10,15 +12,24 @@ import { EmployeeProfile } from '../../../models/EmployeeProfile';
   styleUrls: ['./employee-profile-dialog.component.scss']
 })
 export class EmployeeProfileDialogComponent implements OnInit {
+  employeeProfileForm: FormGroup;
 
   employeeProfile: EmployeeProfile;
+  //employeeProfile: EmployeeProfile = new EmployeeProfile();
+
   constructor(private dialogRef: MatDialogRef<EmployeeProfileDialogComponent>,
               public snackBar: MatSnackBar) {
     
    }
 
-  ngOnInit() {
-    // this.employeeProfile = new EmployeeProfile();
+  ngOnInit(): void {
+    this.employeeProfileForm = new FormGroup({ 
+      firstName: new FormControl(),
+      lastName: new FormControl(),
+      phone: new FormControl(),
+      bilingual: new FormControl(false),
+      languages: new FormControl()
+     });
   }
 
   save() {

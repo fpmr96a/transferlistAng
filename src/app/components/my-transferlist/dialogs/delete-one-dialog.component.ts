@@ -26,9 +26,14 @@ export class DeleteOneDialogComponent implements OnInit {
     //       for additional operations such as TAP before anything actually happens.
     // ===========================================================================================
     this.dataService.deleteTransferList(this.data.userName, this.data.jobCode4, this.data.facility_ID,
-                                        this.data.chrtFldDeptId, this.data.shiftCd, this.data.ft_PT_Code)
-                                        .subscribe();
-    this.snackBar.open('Transfer List Deleted ...', 'Complete', {duration: 1500, });                                        
+          this.data.chrtFldDeptId, this.data.shiftCd, this.data.ft_PT_Code)
+          .subscribe(
+              (data) => this.snackBar.open('Transfer List Deleted ...', 'Complete', {duration: 1500, }),
+              (error: any) => console.log('An error occurred when deleting.')
+
+
+                                        );
+    ;                                        
   }
 
   noClicked(): void {

@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout'; 
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';    
+import { ReactiveFormsModule } from '@angular/forms';    
 
 import { MyTransferlistComponent } from './components/my-transferlist/my-transferlist.component';
 import { FilteredTransferlistComponent } from './components/filtered-transferlist/filtered-transferlist.component';
@@ -44,8 +44,8 @@ import { CreateTransferlistDialogComponent } from './components/my-transferlist/
     BrowserAnimationsModule,
     HttpClientModule,
     FlexLayoutModule,
-    ReactiveFormsModule,
-    FormsModule
+    ReactiveFormsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

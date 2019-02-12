@@ -1,9 +1,9 @@
 
 export interface EmployeeProfile {
-    id: number;
+    userName: string;
     firstName: string;
     lastName: string;
-    phone: string;
+    daytimePhoneNumber: string;
     bilingual: boolean;
-    languages: string;
+    languagesSpoken: string;
 }
