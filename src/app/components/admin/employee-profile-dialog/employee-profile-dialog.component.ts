@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material';
-import { EmployeeProfile } from '../../../models/EmployeeProfile'; 
 
+import { EmployeeProfile } from '../../../models/EmployeeProfile'; 
+import { DataService } from 'src/app/core/data.service';
 
 @Component({
   selector: 'app-employee-profile-dialog',
@@ -17,10 +18,11 @@ export class EmployeeProfileDialogComponent implements OnInit {
   employeeProfile: EmployeeProfile;
   //employeeProfile: EmployeeProfile = new EmployeeProfile();
 
+  errorMessage = '';
+  
   constructor(private dialogRef: MatDialogRef<EmployeeProfileDialogComponent>,
-              public snackBar: MatSnackBar) {
-    
-   }
+              public snackBar: MatSnackBar,
+              @Inject(MAT_DIALOG_DATA) public data: any, public dataService: DataService) { }  
 
   ngOnInit(): void {
     this.employeeProfileForm = new FormGroup({ 
@@ -30,6 +32,14 @@ export class EmployeeProfileDialogComponent implements OnInit {
       bilingual: new FormControl(false),
       languages: new FormControl()
      });
+
+     this.dataService.getEmployeeProfile(this.data.userName).subscribe(
+      returnedEmployeeProfile => {
+        this.employeeProfile = returnedEmployeeProfile;
+        console.log("Employee Profile Returned" + JSON.stringify(this.employeeProfile));
+      },
+      error => this.errorMessage = <any>error
+    ); 
   }
 
   save() {

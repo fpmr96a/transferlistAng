@@ -46,7 +46,8 @@ openEmployeeProfile(): void {
     let dialogRef = this.dialog.open(EmployeeProfileDialogComponent, {
         width: '450px',
         height: '470px',
-        disableClose: true
+        disableClose: true,
+        data: {userName: 'ruggieroc'}
     });
 
     dialogRef.afterClosed().subscribe(result => {

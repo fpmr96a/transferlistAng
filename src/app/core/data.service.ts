@@ -10,6 +10,7 @@ import { JobClass } from 'src/app/models/JobClass';
 import { Facility } from '../models/Facility';
 import { FunctionalUnit } from '../models/FunctionalUnit';
 import { Shift } from '../models/shift';
+import { EmployeeProfile } from '../models/EmployeeProfile';
 
 @Injectable({
   providedIn: 'root'
@@ -111,6 +112,19 @@ getShiftByJobcode(jobcodeSearch: string): Observable<Shift[]> {
       catchError(this.handleError)
     );
 }
+
+// The following calls deal with the Employee Profile
+// ===================================================
+getEmployeeProfile(userName: string): Observable<EmployeeProfile> {
+  userName = userName.trim();
+  console.log(this.webApiUrl + '/employee/profile/' + userName);
+  return this.http.get<EmployeeProfile>(this.webApiUrl + '/employee/profile/' + userName)
+    .pipe(
+      tap(data => console.log(JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+}
+
   private handleError(err) {
     // in a real world app, we may send the server to some remote logging infrastructure
     // instead of just logging it to the console
