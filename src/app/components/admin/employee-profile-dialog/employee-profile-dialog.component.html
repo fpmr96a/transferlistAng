@@ -21,9 +21,12 @@
           <mat-label>Daytime Phone</mat-label>
           <input matInput placeholder="Daytime Phone" 
                           formControlName="phone">
-          <mat-error class="text-box-error-message" *ngIf="employeeProfileForm.get('phone').hasError('required')">
+         <mat-error class="text-box-error-message" *ngIf="employeeProfileForm.get('phone').hasError('required')">
             Phone number is required
-          </mat-error>                          
+          </mat-error>     
+          <mat-error class="text-box-error-message" *ngIf="employeeProfileForm.get('phone').hasError('minlength')">
+            Phone number must be a minimum of 10 characters
+          </mat-error>                                         
       </mat-form-field>
       <div fxLayout="row" fxLayoutAlign="start center" >
         <p flex style="padding-right: 10px;margin-left:20px; font-size: 14px; color: #2E4d7B;">Bilingual:</p>

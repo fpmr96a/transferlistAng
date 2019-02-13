@@ -29,7 +29,7 @@ export class EmployeeProfileDialogComponent implements OnInit {
     this.employeeProfileForm = this.fb.group({ 
       firstName: {value: '', disabled: true},
       lastName: {value: '', disabled: true},
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.minLength(10)]],
       bilingual: '',
       languages: ''
      });
