@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material';
@@ -22,15 +22,16 @@ export class EmployeeProfileDialogComponent implements OnInit {
   
   constructor(private dialogRef: MatDialogRef<EmployeeProfileDialogComponent>,
               public snackBar: MatSnackBar,
+              private fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any, public dataService: DataService) { }  
 
   ngOnInit(): void {
-    this.employeeProfileForm = new FormGroup({ 
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      phone: new FormControl('', Validators.required),
-      bilingual: new FormControl(false),
-      languages: new FormControl()
+    this.employeeProfileForm = this.fb.group({ 
+      firstName: {value: '', disabled: true},
+      lastName: {value: '', disabled: true},
+      phone: ['', Validators.required],
+      bilingual: '',
+      languages: ''
      });
 
      this.dataService.getEmployeeProfile(this.data.userName).subscribe(
