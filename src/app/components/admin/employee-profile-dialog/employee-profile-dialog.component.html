@@ -21,6 +21,9 @@
           <mat-label>Daytime Phone</mat-label>
           <input matInput placeholder="Daytime Phone" 
                           formControlName="phone">
+          <mat-error *ngIf="employeeProfileForm.get('phone').hasError('required')">
+            Phone number is required
+          </mat-error>                          
       </mat-form-field>
       <div fxLayout="row" fxLayoutAlign="start center" >
         <p flex style="padding-right: 10px;margin-left:20px; font-size: 14px; color: #2E4d7B;">Bilingual:</p>
@@ -49,3 +52,7 @@
    
 </form>
 </div>
+<br>Dirty: {{ employeeProfileForm.Dirty }}
+<br>Touched: {{ employeeProfileForm.Touched }}
+<br>Valid: {{ employeeProfileForm.valid }}
+<br>Fname Value: {{ employeeProfileForm.controls.firstName.value | json  }}

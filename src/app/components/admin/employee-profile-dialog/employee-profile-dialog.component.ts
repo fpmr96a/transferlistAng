@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material';
@@ -28,7 +28,7 @@ export class EmployeeProfileDialogComponent implements OnInit {
     this.employeeProfileForm = new FormGroup({ 
       firstName: new FormControl(),
       lastName: new FormControl(),
-      phone: new FormControl(),
+      phone: new FormControl('', Validators.required),
       bilingual: new FormControl(false),
       languages: new FormControl()
      });
