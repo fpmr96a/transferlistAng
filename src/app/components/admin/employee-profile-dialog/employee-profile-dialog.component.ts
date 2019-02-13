@@ -36,6 +36,14 @@ export class EmployeeProfileDialogComponent implements OnInit {
      this.dataService.getEmployeeProfile(this.data.userName).subscribe(
       returnedEmployeeProfile => {
         this.employeeProfile = returnedEmployeeProfile;
+        this.employeeProfileForm.setValue({
+          firstName: this.employeeProfile.firstName,
+          lastName: this.employeeProfile.lastName,
+          phone: this.employeeProfile.daytimePhoneNumber,
+          languages: this.employeeProfile.languagesSpoken,
+          bilingual: JSON.stringify(this.employeeProfile.bilingual)
+        })
+        //this.employeeProfileForm.controls.bilingual.setValue(JSON.stringify(this.employeeProfile.bilingual));
         console.log("Employee Profile Returned" + JSON.stringify(this.employeeProfile));
       },
       error => this.errorMessage = <any>error
