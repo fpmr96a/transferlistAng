@@ -31,14 +31,17 @@
       <div fxLayout="row" fxLayoutAlign="start center" >
         <p flex style="padding-right: 10px;margin-left:20px; font-size: 14px; color: #2E4d7B;">Bilingual:</p>
         <mat-radio-group flex  formControlName="bilingual">
-          <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color: #2E4d7B;" value="true">Yes</mat-radio-button>
-          <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color: #2E4d7B;" value="false">No</mat-radio-button>
+          <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color: #2E4d7B;" value="true" (click)="setBilingual(true)">Yes</mat-radio-button>
+          <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color: #2E4d7B;" value="false" (click)="setBilingual(false)">No</mat-radio-button>
         </mat-radio-group>
       </div>
       <mat-form-field appearance="outline" style="width: 100%;margin-left:20px;" > 
         <mat-label>Languages Spoken</mat-label>
         <textarea matInput placeholder="Languages Spoken"
                            formControlName="languages"></textarea>
+        <mat-error class="text-box-error-message" *ngIf="employeeProfileForm.get('languages').hasError('required')">
+        Language(s) required when Bilingual
+        </mat-error>     
       </mat-form-field>
  </div>
  <mat-dialog-actions style="margin-left:110px;">

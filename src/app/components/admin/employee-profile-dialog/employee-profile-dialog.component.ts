@@ -45,6 +45,10 @@ export class EmployeeProfileDialogComponent implements OnInit {
           bilingual: JSON.stringify(this.employeeProfile.bilingual)
         })
         //this.employeeProfileForm.controls.bilingual.setValue(JSON.stringify(this.employeeProfile.bilingual));
+
+        // Adjust the Validator for Language based on initial value for Bilingual
+        // ======================================================================
+        this.setBilingual(this.employeeProfile.bilingual);
         console.log("Employee Profile Returned" + JSON.stringify(this.employeeProfile));
       },
       error => this.errorMessage = <any>error
@@ -61,6 +65,20 @@ export class EmployeeProfileDialogComponent implements OnInit {
     this.dialogRef.close(null);
     this.snackBar.open('Employee Profile Changes Disgarded ...', '', {duration: 1500,
     });
+  }
+
+  // If Bilingual Radio Button is YES, then create a validator that requires
+  // Language to be entered.  Otherwise, don't require Language. Re-evaluate validators afterward
+  // ============================================================================================
+  setBilingual(newbilingual: boolean): void {
+    const languagesControl = this.employeeProfileForm.controls.languages;
+    if (newbilingual === true) {
+      languagesControl.setValidators(Validators.required);
+    }
+    else {
+      languagesControl.clearValidators();
+    }
+    languagesControl.updateValueAndValidity();
   }
 
 }
