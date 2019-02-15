@@ -19,7 +19,7 @@
    
       <mat-form-field appearance="outline"  style="width: 100%;margin-left:20px;">
           <mat-label>Daytime Phone</mat-label>
-          <input matInput placeholder="Daytime Phone" 
+          <input matInput placeholder="Daytime Phone" mask="(000) 000-0000"
                           formControlName="phone">
          <mat-error class="text-box-error-message" *ngIf="employeeProfileForm.get('phone').hasError('required')">
             Phone number is required
