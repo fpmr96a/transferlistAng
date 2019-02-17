@@ -56,6 +56,21 @@ export class EmployeeProfileDialogComponent implements OnInit {
   }
 
   save() {
+    // The following line will copy the updated employeeProfileForm FormGroup to the
+    // object this.employeeProfile that was populated when initially GETing the data,
+    // and store updated data in updateEmpProfile.
+    // ==================================================================================
+    const updatedEmpProfile = { ...this.employeeProfile, ...this.employeeProfileForm.value };
+    
+    this.dataService.updateEmployeeProfile(this.data.userName, updatedEmpProfile).subscribe(
+      (data: {}) => {this.onSaveComplete,
+      error => this.errorMessage = <any>error
+      });
+
+   
+  }
+
+  onSaveComplete() {
     this.dialogRef.close(this.employeeProfile);
     this.snackBar.open('Employee Profile Saved ...', 'Complete', {duration: 1500,
     });

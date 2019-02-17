@@ -22,6 +22,7 @@ export class MyTransferlistComponent implements OnInit {
   jobClassFormControl = new FormControl('', Validators.required);
   selectedRowIndex: number;
   errorMessage = '';
+  isLoading = true;
 
   jobClasses: JobClass[] = [];
   selectedJobClass: JobClass;
@@ -44,6 +45,7 @@ export class MyTransferlistComponent implements OnInit {
    this.dataService.getJobClasses().subscribe(
       jobclasses => {
         this.jobClasses = jobclasses;
+        this.isLoading=false;
         console.log("Job classes Returned" + JSON.stringify(this.jobClasses));
       },
       error => this.errorMessage = <any>error
@@ -58,6 +60,7 @@ export class MyTransferlistComponent implements OnInit {
         this.selectedJobClassDescription = this.selectedJobClass.description;
         this.selectedJobClassCode = this.selectedJobClass.code;
         this.GetMyTransferListByJobCode(this.selectedJobClassCode);
+        this.isLoading=true;
       }
     );
 
@@ -78,7 +81,7 @@ GetMyTransferListByJobCode(jobcode: string) {
         mytransferlists => {
           this.dataSource.data = mytransferlists;
           this.dataSource.sort = this.sort;
-  
+          this.isLoading=false;
         },
         error => this.errorMessage = <any>error
       );
