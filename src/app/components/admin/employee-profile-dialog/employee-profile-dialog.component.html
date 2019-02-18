@@ -20,11 +20,11 @@
       <mat-form-field appearance="outline"  style="width: 100%;margin-left:20px;">
           <mat-label>Daytime Phone</mat-label>
           <input matInput placeholder="Daytime Phone" mask="(000) 000-0000"
-                          formControlName="phone">
-         <mat-error class="text-box-error-message" *ngIf="employeeProfileForm.get('phone').hasError('required')">
+                          formControlName="daytimePhoneNumber">
+         <mat-error class="text-box-error-message" *ngIf="employeeProfileForm.get('daytimePhoneNumber').hasError('required')">
             Phone number is required
           </mat-error>     
-          <mat-error class="text-box-error-message" *ngIf="employeeProfileForm.get('phone').hasError('minlength')">
+          <mat-error class="text-box-error-message" *ngIf="employeeProfileForm.get('daytimePhoneNumber').hasError('minlength')">
             Phone number must be a minimum of 10 characters
           </mat-error>                                         
       </mat-form-field>
@@ -38,8 +38,8 @@
       <mat-form-field appearance="outline" style="width: 100%;margin-left:20px;" > 
         <mat-label>Languages Spoken</mat-label>
         <textarea matInput placeholder="Languages Spoken"
-                           formControlName="languages"></textarea>
-        <mat-error class="text-box-error-message" *ngIf="employeeProfileForm.get('languages').hasError('required')">
+                           formControlName="languagesSpoken"></textarea>
+        <mat-error class="text-box-error-message" *ngIf="employeeProfileForm.get('languagesSpoken').hasError('required')">
         Language(s) required when Bilingual
         </mat-error>     
       </mat-form-field>

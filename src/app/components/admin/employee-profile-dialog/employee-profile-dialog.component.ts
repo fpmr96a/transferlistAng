@@ -29,9 +29,9 @@ export class EmployeeProfileDialogComponent implements OnInit {
     this.employeeProfileForm = this.fb.group({ 
       firstName: {value: '', disabled: true},
       lastName: {value: '', disabled: true},
-      phone: ['', [Validators.required, Validators.minLength(10)]],
+      daytimePhoneNumber: ['', [Validators.required, Validators.minLength(10)]],
       bilingual: '',
-      languages: ''
+      languagesSpoken: ''
      });
 
      this.dataService.getEmployeeProfile(this.data.userName).subscribe(
@@ -40,8 +40,8 @@ export class EmployeeProfileDialogComponent implements OnInit {
         this.employeeProfileForm.setValue({
           firstName: this.employeeProfile.firstName,
           lastName: this.employeeProfile.lastName,
-          phone: this.employeeProfile.daytimePhoneNumber,
-          languages: this.employeeProfile.languagesSpoken,
+          daytimePhoneNumber: this.employeeProfile.daytimePhoneNumber,
+          languagesSpoken: this.employeeProfile.languagesSpoken,
           bilingual: JSON.stringify(this.employeeProfile.bilingual)
         })
         //this.employeeProfileForm.controls.bilingual.setValue(JSON.stringify(this.employeeProfile.bilingual));
@@ -61,16 +61,21 @@ export class EmployeeProfileDialogComponent implements OnInit {
     // and store updated data in updateEmpProfile.
     // ==================================================================================
     const updatedEmpProfile = { ...this.employeeProfile, ...this.employeeProfileForm.value };
-    
-    this.dataService.updateEmployeeProfile(this.data.userName, updatedEmpProfile).subscribe(
-      (data: {}) => {this.onSaveComplete,
-      error => this.errorMessage = <any>error
-      });
+    console.log('employeeProfile: ' + JSON.stringify(this.employeeProfile));
+    console.log('employeeProfileForm.value: ' + JSON.stringify(this.employeeProfileForm.value));
+    console.log('updatedEmpProfile: ' + JSON.stringify(updatedEmpProfile));
 
-   
+
+    this.dataService.updateEmployeeProfile(this.data.userName, updatedEmpProfile)
+        .subscribe(
+            (data: any) => this.onSaveComplete(),
+            error => this.errorMessage = <any>error
+        );
+
   }
 
   onSaveComplete() {
+    console.log('ARRIVED at onSaveComplete');
     this.dialogRef.close(this.employeeProfile);
     this.snackBar.open('Employee Profile Saved ...', 'Complete', {duration: 1500,
     });
@@ -86,7 +91,7 @@ export class EmployeeProfileDialogComponent implements OnInit {
   // Language to be entered.  Otherwise, don't require Language. Re-evaluate validators afterward
   // ============================================================================================
   setBilingual(newbilingual: boolean): void {
-    const languagesControl = this.employeeProfileForm.controls.languages;
+    const languagesControl = this.employeeProfileForm.controls.languagesSpoken;
     if (newbilingual === true) {
       languagesControl.setValidators(Validators.required);
     }
