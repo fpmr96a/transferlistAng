@@ -61,9 +61,9 @@ export class EmployeeProfileDialogComponent implements OnInit {
     // and store updated data in updateEmpProfile.
     // ==================================================================================
     const updatedEmpProfile = { ...this.employeeProfile, ...this.employeeProfileForm.value };
-    console.log('employeeProfile: ' + JSON.stringify(this.employeeProfile));
+   /*  console.log('employeeProfile: ' + JSON.stringify(this.employeeProfile));
     console.log('employeeProfileForm.value: ' + JSON.stringify(this.employeeProfileForm.value));
-    console.log('updatedEmpProfile: ' + JSON.stringify(updatedEmpProfile));
+    console.log('updatedEmpProfile: ' + JSON.stringify(updatedEmpProfile)); */
 
 
     this.dataService.updateEmployeeProfile(this.data.userName, updatedEmpProfile)

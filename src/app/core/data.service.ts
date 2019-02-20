@@ -125,29 +125,13 @@ getEmployeeProfile(userName: string): Observable<EmployeeProfile> {
     );
 }
 
-/* updateProduct(product: Product): Observable<Product> {
-  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  const url = `${this.productsUrl}/${product.id}`;
-  return this.http.put<Product>(url, product, { headers: headers })
-    .pipe(
-      tap(() => console.log('updateProduct: ' + product.id)),
-      // Return the product on an update
-      map(() => product),
-      catchError(this.handleError)
-    );
-} */
 // The following calls deal with the Update (Put) Employee Profile
 // ================================================================
-// **** The update is not working. the following are known problems:
-// ***** 1. the empProfile sent from calling function is not sending an object with changes.
-// ***** 2. the Subscribe in calling function never seems to fire, and therefore the
-// *****     popup not closed.
 updateEmployeeProfile(userName: string, empProfile: EmployeeProfile): Observable<EmployeeProfile> {
   userName = userName.trim();
   const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); 
   console.log('PUT:' + this.webApiUrl + '/employee/profile/' + userName + '/'
   + empProfile.daytimePhoneNumber + '/' + empProfile.bilingual + '/' + empProfile.languagesSpoken);
-  //console.log(this.webApiUrl + '/employee/profile/' + userName);
   return this.http.put<EmployeeProfile>(this.webApiUrl + '/employee/profile/' + userName + '/'
          + empProfile.daytimePhoneNumber + '/' + empProfile.bilingual + '/' + empProfile.languagesSpoken,
          empProfile,
