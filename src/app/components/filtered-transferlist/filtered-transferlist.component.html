@@ -1,3 +1,52 @@
-<p>
-  filtered-transferlist works!
-</p>
+<mat-spinner [strokeWidth]="3" [diameter]="50" *ngIf="isLoading" style="margin-left:50px;"></mat-spinner>
+
+<mat-card >
+  <mat-card-header class="matcard-header-rounded-top-left">
+        <mat-card-title>Transfer List Filtering</mat-card-title>
+      </mat-card-header>
+  <div class="mat-elevation-z1">
+  <mat-form-field style="margin-top:20px; width:275px; margin-left: 10px;" color="primary">
+    <mat-label>Job Class</mat-label>
+    <select matNativeControl placeholder="Select Job Class" [formControl]="jobClassFormControl" name="jobclass">
+        <option value="" label= "-- Select One --" selected></option>
+        <option *ngFor="let jobclass of jobClasses" [value]="stringifyJobClassObject(jobclass)" >
+        {{jobclass.description}}
+        </option>
+    </select>
+    <!-- <mat-error *ngIf="jobClassFormControl.hasError('required')">
+        Please select a job class
+    </mat-error> -->
+  </mat-form-field>
+</div>
+
+<mat-card-header class="matcard-header-rounded-top-left">
+  <!-- <mat-card-title>Transfer List - {{this.selectedJobClassDescription}}</mat-card-title> -->
+</mat-card-header>
+<div class="mat-elevation-z1">
+  <!-- mat-table GOES HERE -->
+
+  
+
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+</div>
+
+
+</mat-card>
+
+<div class="sticky-footer" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="sticky-footer-left" flex>
+            <P style="margin-left: 30px;">Transfer List</P>
+    </div>
+    <div class="sticky-footer-center" flex>
+      
+      <button mat-raised-button color="primary" >Print</button>
+    </div>
+    <div class="sticky-footer-right" flex >
+       &nbsp; 
+    </div>
+</div>
+
+
+
+
+
