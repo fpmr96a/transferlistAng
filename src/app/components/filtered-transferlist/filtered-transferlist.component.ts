@@ -20,7 +20,7 @@ export class FilteredTransferlistComponent implements OnInit {
   selectedJobClassDescription: string;
   selectedJobClassCode: string;
 
-
+  isLoading = true;
   errorMessage = '';
 
   constructor(private dataService: DataService) { }
@@ -29,7 +29,7 @@ export class FilteredTransferlistComponent implements OnInit {
    this.dataService.getJobClasses().subscribe(
       jobclasses => {
         this.jobClasses = jobclasses;
-        //this.isLoading=false;
+        this.isLoading=false;
         console.log("Filtered Job classes Returned" + JSON.stringify(this.jobClasses));
       },
       error => this.errorMessage = <any>error
