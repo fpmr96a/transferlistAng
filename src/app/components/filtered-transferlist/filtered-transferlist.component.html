@@ -5,7 +5,7 @@
         <mat-card-title>Transfer List Filtering</mat-card-title>
       </mat-card-header>
   <div class="mat-elevation-z1">
-  <mat-form-field style="margin-top:20px; width:275px; margin-left: 10px;" color="primary">
+  <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
     <mat-label>Job Class</mat-label>
     <select matNativeControl placeholder="Select Job Class" [formControl]="jobClassFormControl" name="jobclass">
         <option value="" label= "-- Select One --" selected></option>
@@ -16,6 +16,56 @@
     <mat-error *ngIf="jobClassFormControl.hasError('required')">
         Please select a job class
     </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
+    <mat-label>Facility</mat-label>
+    <select matNativeControl placeholder="Select Facility" [formControl]="facilityFormControl" name="facility">
+        <option value="" label= "-- Select One --" selected></option>
+        <option *ngFor="let facility of facilities" [value]="facility.code" >
+        {{facility.description}}
+        </option>
+    </select>
+    <mat-error *ngIf="facilityFormControl.hasError('required')">
+        Please select a facility
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
+    <mat-label>Functional Unit</mat-label>
+    <select matNativeControl placeholder="Select Functional Unit" [formControl]="functionalUnitFormControl" name="functionalunit">
+        <option value="" label= "-- Select One --" selected></option>
+        <option *ngFor="let functionalunit of functionalUnits" [value]="functionalunit.chrtFld_Dept_ID" >
+        {{functionalunit.description}}
+        </option>
+    </select>
+    <mat-error *ngIf="functionalUnitFormControl.hasError('required')">
+        Please select a functional unit
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
+    <mat-label>Shift</mat-label>
+    <select matNativeControl placeholder="Select Shift" [formControl]="shiftFormControl" name="shift">
+        <option value="" label= "-- Select One --" selected></option>
+        <option value="1" label= "All" ></option>
+        <option *ngFor="let shift of shifts" [value]="shift.code" >
+        {{shift.description}}
+        </option>
+    </select>
+    <mat-error *ngIf="shiftFormControl.hasError('required')">
+        Please select a shift
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
+    <mat-label>Full-Time / Part-Time</mat-label>
+    <select matNativeControl placeholder="Select Full-Time / Part-Time" [formControl]="ftptFormControl" name="ftpt">
+        <option value="0" label= "Both" ></option>
+        <option value="1" label= "Full-Time" [selected]='true'></option>
+        <option value="2" label= "Part-Time" ></option>
+    </select>
+    
   </mat-form-field>
 </div>
 
