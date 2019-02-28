@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms'
+import { MatDialog } from '@angular/material/dialog';
+import { DataService } from 'src/app/core/data.service';
 
 @Component({
   selector: 'app-vacancies',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vacancies.component.scss']
 })
 export class VacanciesComponent implements OnInit {
-
-  constructor() { }
+  bordersControl = new FormControl();
+  constructor(public dialog: MatDialog,
+             public dataService: DataService) { }
 
   ngOnInit() {
   }
+
+  
+  
 
 }
