@@ -5,9 +5,17 @@
 <div class="mat-elevation-z1" style="background-color: #f2f2f2;">
 <mat-grid-list cols="7" rowHeight="60px" style="width:65%;">
   <mat-grid-tile  colspan="2">
-    <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;" click="FilterJobClass();" >Mental Health Assistant 1
+    <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;" (click)="jobclassSelect.open()" >Mental Health Assistant 1
       <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
     </button>
+    <mat-select style="visibility:hidden;width: 0"
+            #jobclassSelect
+            [formControl]="jobClassFormControl"
+            [disableOptionCentering]="true">
+      <mat-option *ngFor="let jobclass of jobClasses" [value]="stringifyJobClassObject(jobclass)" >
+        {{jobclass.description}}
+        </mat-option>
+    </mat-select>
   </mat-grid-tile>
   <mat-grid-tile>
     <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;" >CVH
@@ -25,12 +33,12 @@
     </button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;  " (click)="mySelect.open()" >Full-Time
+    <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;  " (click)="ftptSelect.open()" >Full-Time
       <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
     </button>
     <mat-select style="visibility:hidden;width: 0"
-            #mySelect
-            [formControl]="bordersControl"
+            #ftptSelect
+            [formControl]="ftptFormControl"
             [disableOptionCentering]="true">
       <mat-option value="0">Both</mat-option>
       <mat-option value="1">Full-Time</mat-option>
