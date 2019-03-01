@@ -326,4 +326,15 @@ mat-slide-toggle:not(.mat-checked):not(.mat-disabled) .mat-slide-toggle-bar {
     margin-top:20px;
  }
 
+ // Controls the height of each Dropdown item
+ // =========================================
+ .mat-option {
+    height: 30px !important;
+    line-height: 30px !important;
+}
+
+.mat-select-panel {
+    max-height: 500px !important;
+  }
+
  
