@@ -19,9 +19,18 @@
     </mat-select>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;" >CVH
+    <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;" (click)="facilitySelect.open()" >
+        {{this.selectedFacilityDescription}}
       <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
     </button>
+    <mat-select style="visibility:hidden;width: 0"
+            #facilitySelect
+            [formControl]="facilityFormControl"
+            [disableOptionCentering]="true">
+      <mat-option *ngFor="let facility of facilities" [value]="stringifySelectObject(facility)" >
+        {{facility.description}}
+        </mat-option>
+    </mat-select>
   </mat-grid-tile>
   <mat-grid-tile colspan="2" style="align-content: flex-start"> 
       <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;" >GPD-B4N-Battell North-Male Rehab

@@ -20,10 +20,14 @@ export class VacanciesComponent implements OnInit {
 
   jobClasses: JobClass[] = [];
   selectedJobClass: JobClass;
-  selectedJobClassDescription: string = "Select Job Class"
+  selectedJobClassDescription: string = "Select Job Class";
   selectedJobClassCode: string;
 
-  selectedFacility: string = "-1";
+  selectedFacility: Facility;
+  selectedFacilityCode: string = "-1";
+  selectedFacilityDescription: string = "Select Facility";
+  
+ 
   selectedFunctionalUnit: string;
   selectedShift: string;
   selectedFTPT: string;
@@ -54,7 +58,17 @@ export class VacanciesComponent implements OnInit {
         this.selectedJobClass = JSON.parse(value);
         this.selectedJobClassDescription = this.selectedJobClass.description;
         this.selectedJobClassCode = this.selectedJobClass.code;
-        
+        this.getFacilityAndShiftByJobclass(this.selectedJobClassCode);
+        //this.isLoading=true;
+      }
+    );
+
+    this.facilityFormControl.valueChanges.subscribe(
+      value => {
+        this.selectedFacility = JSON.parse(value);
+        this.selectedFacilityDescription = this.selectedFacility.description;
+        this.selectedFacilityCode = this.selectedFacility.code;
+       
         //this.isLoading=true;
       }
     );
@@ -68,9 +82,28 @@ export class VacanciesComponent implements OnInit {
     )
   }
 
+  getFacilityAndShiftByJobclass(selectedJobClass: string): void {
+    this.dataService.getTransferFacilityByJobcode(selectedJobClass).subscribe(
+      returnedFacilities => {
+        this.facilities = returnedFacilities;
+        console.log("facilities Returned" + JSON.stringify(this.facilities));
+      },
+      error => this.errorMessage = <any>error
+    ); 
+
+    this.dataService.getShiftByJobcode(selectedJobClass).subscribe(
+      returnedShifts => {
+        this.shifts = returnedShifts;
+        console.log("shifts Returned" + JSON.stringify(this.shifts));
+      },
+      error => this.errorMessage = <any>error
+    ); 
+  }
   stringifyJobClassObject(selectedJobClass: any): string {
     return JSON.stringify(selectedJobClass);
    }
   
-
+   stringifySelectObject(selectedItem: any): string {
+    return JSON.stringify(selectedItem);
+   }
 }
