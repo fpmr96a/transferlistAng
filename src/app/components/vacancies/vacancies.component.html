@@ -2,9 +2,8 @@
   <mat-card-header class="matcard-header-rounded-top-left">
         <mat-card-title>Transfer List Filtering</mat-card-title>
       </mat-card-header>
-<div class="mat-elevation-z1" style="background-color: whitesmoke">
-<mat-grid-list cols="7" rowHeight="60px" style="width:65%;">
-  <mat-grid-tile  colspan="2">
+<div class="mat-elevation-z1" style="background-color: whitesmoke; height: 65px;" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <div flex>
     <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;" (click)="jobclassSelect.open()" >
      {{this.selectedJobClassDescription}}
         <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
@@ -17,8 +16,8 @@
         {{jobclass.description}}
         </mat-option>
     </mat-select>
-  </mat-grid-tile>
-  <mat-grid-tile>
+  </div>
+  <div flex>
     <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;" (click)="facilitySelect.open()" >
         {{this.selectedFacilityDescription}}
       <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
@@ -31,18 +30,18 @@
         {{facility.description}}
         </mat-option>
     </mat-select>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2" style="align-content: flex-start"> 
+  </div>
+  <div flex>
       <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;" >GPD-B4N-Battell North-Male Rehab
         <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
       </button>
-  </mat-grid-tile>
-  <mat-grid-tile>
+    </div>
+    <div flex>
     <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;" >1st Shift
       <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
     </button>
-  </mat-grid-tile>
-  <mat-grid-tile>
+  </div>
+  <div flex>
     <button mat-raised-button  style="margin-left:20px;background-color: gainsboro;  " (click)="ftptSelect.open()" >Full-Time
       <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
     </button>
@@ -54,9 +53,8 @@
       <mat-option value="1">Full-Time</mat-option>
       <mat-option value="2">Part-Time</mat-option>
     </mat-select>
-  </mat-grid-tile>
-  
-</mat-grid-list>
+  </div>
+ 
 </div>
 
 </mat-card>
