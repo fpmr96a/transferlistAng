@@ -20,20 +20,23 @@ export class VacanciesComponent implements OnInit {
 
   jobClasses: JobClass[] = [];
   selectedJobClass: JobClass;
-  selectedJobClassDescription: string = "Select Job Class";
+  selectedJobClassDescription: string = 'Select Job Class';
   selectedJobClassCode: string;
 
   selectedFacility: Facility;
-  selectedFacilityCode: string = "-1";
-  selectedFacilityDescription: string = "Select Facility";
+  selectedFacilityCode: string;
+  selectedFacilityDescription: string = 'Select Facility';
   
- 
-  selectedFunctionalUnit: string;
+  functionalUnits: FunctionalUnit[] = [];
+  selectedFunctionalUnit: FunctionalUnit;
+  selectedFunctionalUnitDescription: string = 'Select Functional Unit';
+  selectedFunctionalUnitCode: string;
+
   selectedShift: string;
   selectedFTPT: string;
 
   facilities: Facility[] = [];
-  functionalUnits: FunctionalUnit[] = [];
+ 
   shifts: Shift[] = [];
 
   isLoading = true;
@@ -57,7 +60,7 @@ export class VacanciesComponent implements OnInit {
       value => {
         this.selectedJobClass = JSON.parse(value);
         this.selectedJobClassDescription = this.selectedJobClass.description;
-        this.selectedJobClassCode = this.selectedJobClass.code;
+        this.selectedJobClassCode = this.selectedJobClass.code.toString();
         this.getFacilityAndShiftByJobclass(this.selectedJobClassCode);
         //this.isLoading=true;
       }
@@ -67,7 +70,18 @@ export class VacanciesComponent implements OnInit {
       value => {
         this.selectedFacility = JSON.parse(value);
         this.selectedFacilityDescription = this.selectedFacility.description;
-        this.selectedFacilityCode = this.selectedFacility.code;
+        this.selectedFacilityCode = this.selectedFacility.code.toString();
+       
+        this.getFunctionalUnits(this.selectedFacilityCode, this.selectedJobClassCode);
+        //this.isLoading=true;
+      }
+    );
+
+    this.functionalUnitFormControl.valueChanges.subscribe(
+      value => {
+        this.selectedFunctionalUnit = JSON.parse(value);
+        this.selectedFunctionalUnitDescription = this.selectedFunctionalUnit.description;
+        this.selectedFunctionalUnitCode = this.selectedFunctionalUnit.chrtFld_Dept_ID.toString();
        
         //this.isLoading=true;
       }
@@ -98,6 +112,17 @@ export class VacanciesComponent implements OnInit {
       },
       error => this.errorMessage = <any>error
     ); 
+  }
+
+  getFunctionalUnits(facility: string, jobcode: string) {
+    this.dataService.getFunctionalUnitByFacilityByJobcode(facility, jobcode).subscribe(
+      returnedFuntionalUnits => {
+        this.functionalUnits = returnedFuntionalUnits;
+        console.log("Functional Units Returned" + JSON.stringify(this.functionalUnits));
+      }, 
+      error => this.errorMessage = <any>error
+      
+    );
   }
   stringifyJobClassObject(selectedJobClass: any): string {
     return JSON.stringify(selectedJobClass);

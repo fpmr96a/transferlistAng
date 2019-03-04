@@ -32,11 +32,20 @@
     </mat-select>
   </div>
   <div flex>
-      <button mat-raised-button  style="background-color: gainsboro;" >GPD-B4N-Battell North-Male Rehab
+      <button mat-raised-button  style="background-color: gainsboro;" (click)="functionalUnitSelect.open()" >
+          {{this.selectedFunctionalUnitDescription}}
         <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
       </button>
+      <mat-select style="visibility:hidden;width: 0"
+            #functionalUnitSelect
+            [formControl]="functionalUnitFormControl"
+            [disableOptionCentering]="true">
+      <mat-option *ngFor="let functionalUnit of functionalUnits" [value]="stringifySelectObject(functionalUnit)" >
+        {{functionalUnit.description}}
+        </mat-option>
+      </mat-select>      
     </div>
-    <div flex>
+  <div flex>
     <button mat-raised-button  style="background-color: gainsboro;" >1st Shift
       <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
     </button>
