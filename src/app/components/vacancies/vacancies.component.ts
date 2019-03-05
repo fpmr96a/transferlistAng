@@ -61,7 +61,10 @@ export class VacanciesComponent implements OnInit {
         this.selectedJobClass = JSON.parse(value);
         this.selectedJobClassDescription = this.selectedJobClass.description;
         this.selectedJobClassCode = this.selectedJobClass.code.toString();
+
         this.getFacilityAndShiftByJobclass(this.selectedJobClassCode);
+        this.resetFacility();
+        this.resetFunctionalUnit();
         //this.isLoading=true;
       }
     );
@@ -73,6 +76,7 @@ export class VacanciesComponent implements OnInit {
         this.selectedFacilityCode = this.selectedFacility.code.toString();
        
         this.getFunctionalUnits(this.selectedFacilityCode, this.selectedJobClassCode);
+        this.resetFunctionalUnit();
         //this.isLoading=true;
       }
     );
@@ -130,5 +134,17 @@ export class VacanciesComponent implements OnInit {
   
    stringifySelectObject(selectedItem: any): string {
     return JSON.stringify(selectedItem);
+   }
+
+   resetFacility(): void {
+    this.selectedFacility = null;
+    this.selectedFacilityCode = '';
+    this.selectedFacilityDescription = 'Select Facility';
+   }
+
+   resetFunctionalUnit(): void {
+    this.selectedFunctionalUnit = null;
+    this.selectedFunctionalUnitDescription = 'Select Functional Unit';
+    this.selectedFunctionalUnitCode = '';
    }
 }
