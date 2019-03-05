@@ -23,6 +23,7 @@ export class VacanciesComponent implements OnInit {
   selectedJobClassDescription: string = 'Select Job Class';
   selectedJobClassCode: string;
 
+  facilities: Facility[] = [];
   selectedFacility: Facility;
   selectedFacilityCode: string;
   selectedFacilityDescription: string = 'Select Facility';
@@ -32,12 +33,16 @@ export class VacanciesComponent implements OnInit {
   selectedFunctionalUnitDescription: string = 'Select Functional Unit';
   selectedFunctionalUnitCode: string;
 
-  selectedShift: string;
+  shifts: Shift[] = [];
+  selelectedShift: Shift;
+  selectedShiftCode: string;
+  selectedShiftDescription: string = 'Select Shift';
+
   selectedFTPT: string;
 
-  facilities: Facility[] = [];
  
-  shifts: Shift[] = [];
+ 
+
 
   isLoading = true;
   errorMessage = '';
@@ -65,6 +70,7 @@ export class VacanciesComponent implements OnInit {
         this.getFacilityAndShiftByJobclass(this.selectedJobClassCode);
         this.resetFacility();
         this.resetFunctionalUnit();
+        this.resetShift();
         //this.isLoading=true;
       }
     );
@@ -77,6 +83,7 @@ export class VacanciesComponent implements OnInit {
        
         this.getFunctionalUnits(this.selectedFacilityCode, this.selectedJobClassCode);
         this.resetFunctionalUnit();
+        this.resetShift();
         //this.isLoading=true;
       }
     );
@@ -86,6 +93,17 @@ export class VacanciesComponent implements OnInit {
         this.selectedFunctionalUnit = JSON.parse(value);
         this.selectedFunctionalUnitDescription = this.selectedFunctionalUnit.description;
         this.selectedFunctionalUnitCode = this.selectedFunctionalUnit.chrtFld_Dept_ID.toString();
+       
+        this.resetShift();
+        //this.isLoading=true;
+      }
+    );
+
+    this.shiftFormControl.valueChanges.subscribe(
+      value => {
+        this.selelectedShift = JSON.parse(value);
+        this.selectedShiftDescription = this.selelectedShift.description;
+        this.selectedShiftCode = this.selelectedShift.code.toString();
        
         //this.isLoading=true;
       }
@@ -146,5 +164,11 @@ export class VacanciesComponent implements OnInit {
     this.selectedFunctionalUnit = null;
     this.selectedFunctionalUnitDescription = 'Select Functional Unit';
     this.selectedFunctionalUnitCode = '';
+   }
+
+   resetShift(): void {
+    this.selelectedShift = null;
+    this.selectedShiftCode = '';
+    this.selectedShiftDescription = 'Select Shift';
    }
 }

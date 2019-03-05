@@ -46,9 +46,18 @@
       </mat-select>      
     </div>
   <div flex>
-    <button mat-raised-button  style="background-color: gainsboro;" >1st Shift
+    <button mat-raised-button  style="background-color: gainsboro;" (click)="shiftSelect.open()"  > 
+      {{this.selectedShiftDescription}}
       <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
     </button>
+    <mat-select style="visibility:hidden;width: 0"
+        #shiftSelect
+        [formControl]="shiftFormControl"
+        [disableOptionCentering]="true">
+      <mat-option *ngFor="let shift of shifts" [value]="stringifySelectObject(shift)" >
+        {{shift.description}}
+      </mat-option>
+    </mat-select>      
   </div>
   <div flex>
     <button mat-raised-button  style="background-color: gainsboro;  " (click)="ftptSelect.open()" >Full-Time
