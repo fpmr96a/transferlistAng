@@ -4,84 +4,81 @@
   <mat-card-header class="matcard-header-rounded-top-left">
         <mat-card-title>Transfer List Filtering</mat-card-title>
       </mat-card-header>
-  <div class="mat-elevation-z1">
-  <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
-    <mat-label>Job Class</mat-label>
-    <select matNativeControl placeholder="Select Job Class" [formControl]="jobClassFormControl" name="jobclass">
-        <option value="" label= "-- Select One --" selected></option>
-        <option *ngFor="let jobclass of jobClasses" [value]="stringifyJobClassObject(jobclass)" >
+<div class="mat-elevation-z1" style="background-color: whitesmoke; height: 65px;" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <div flex>
+    <button mat-raised-button  style="background-color: gainsboro;" (click)="jobclassSelect.open()" >
+     {{this.selectedJobClassDescription}}
+        <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
+    </button>
+    <mat-select style="visibility:hidden;width: 0"
+            #jobclassSelect
+            [formControl]="jobClassFormControl"
+            [disableOptionCentering]="true">
+      <mat-option *ngFor="let jobclass of jobClasses" [value]="stringifyJobClassObject(jobclass)" >
         {{jobclass.description}}
-        </option>
-    </select>
-    <mat-error *ngIf="jobClassFormControl.hasError('required')">
-        Please select a job class
-    </mat-error>
-  </mat-form-field>
-  <br>
-  <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
-    <mat-label>Facility</mat-label>
-    <select matNativeControl placeholder="Select Facility" [formControl]="facilityFormControl" name="facility">
-        <option value="" label= "-- Select One --" selected></option>
-        <option *ngFor="let facility of facilities" [value]="facility.code" >
+        </mat-option>
+    </mat-select>
+  </div>
+  <div flex>
+    <button mat-raised-button  style="background-color: gainsboro;" (click)="facilitySelect.open()" >
+        {{this.selectedFacilityDescription}}
+      <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
+    </button>
+    <mat-select style="visibility:hidden;width: 0"
+            #facilitySelect
+            [formControl]="facilityFormControl"
+            [disableOptionCentering]="true">
+      <mat-option *ngFor="let facility of facilities" [value]="stringifySelectObject(facility)" >
         {{facility.description}}
-        </option>
-    </select>
-    <mat-error *ngIf="facilityFormControl.hasError('required')">
-        Please select a facility
-    </mat-error>
-  </mat-form-field>
-  <br>
-  <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
-    <mat-label>Functional Unit</mat-label>
-    <select matNativeControl placeholder="Select Functional Unit" [formControl]="functionalUnitFormControl" name="functionalunit">
-        <option value="" label= "-- Select One --" selected></option>
-        <option *ngFor="let functionalunit of functionalUnits" [value]="functionalunit.chrtFld_Dept_ID" >
-        {{functionalunit.description}}
-        </option>
-    </select>
-    <mat-error *ngIf="functionalUnitFormControl.hasError('required')">
-        Please select a functional unit
-    </mat-error>
-  </mat-form-field>
-  <br>
-  <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
-    <mat-label>Shift</mat-label>
-    <select matNativeControl placeholder="Select Shift" [formControl]="shiftFormControl" name="shift">
-        <option value="" label= "-- Select One --" selected></option>
-        <option value="1" label= "All" ></option>
-        <option *ngFor="let shift of shifts" [value]="shift.code" >
+        </mat-option>
+    </mat-select>
+  </div>
+  <div flex>
+      <button mat-raised-button  style="background-color: gainsboro;" (click)="functionalUnitSelect.open()" >
+          {{this.selectedFunctionalUnitDescription}}
+        <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
+      </button>
+      <mat-select style="visibility:hidden;width: 0"
+            #functionalUnitSelect
+            [formControl]="functionalUnitFormControl"
+            [disableOptionCentering]="true">
+      <mat-option *ngFor="let functionalUnit of functionalUnits" [value]="stringifySelectObject(functionalUnit)" >
+        {{functionalUnit.description}}
+        </mat-option>
+      </mat-select>      
+    </div>
+  <div flex>
+    <button mat-raised-button  style="background-color: gainsboro;" (click)="shiftSelect.open()"  > 
+      {{this.selectedShiftDescription}}
+      <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
+    </button>
+    <mat-select style="visibility:hidden;width: 0"
+        #shiftSelect
+        [formControl]="shiftFormControl"
+        [disableOptionCentering]="true">
+      <mat-option *ngFor="let shift of shifts" [value]="stringifySelectObject(shift)" >
         {{shift.description}}
-        </option>
-    </select>
-    <mat-error *ngIf="shiftFormControl.hasError('required')">
-        Please select a shift
-    </mat-error>
-  </mat-form-field>
-  <br>
-  <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
-    <mat-label>Full-Time / Part-Time</mat-label>
-    <select matNativeControl placeholder="Select Full-Time / Part-Time" [formControl]="ftptFormControl" name="ftpt">
-        <option value="0" label= "Both" ></option>
-        <option value="1" label= "Full-Time" [selected]='true'></option>
-        <option value="2" label= "Part-Time" ></option>
-    </select>
-    
-  </mat-form-field>
+      </mat-option>
+    </mat-select>      
+  </div>
+  <div flex>
+    <button mat-raised-button  style="background-color: gainsboro;  " (click)="ftptSelect.open()" >Full-Time
+      <mat-icon style="margin-left:10px;">filter_list</mat-icon> 
+    </button>
+    <mat-select style="visibility:hidden;width: 0"
+            #ftptSelect
+            [formControl]="ftptFormControl"
+            [disableOptionCentering]="true">
+      <mat-option value="0">Both</mat-option>
+      <mat-option value="1">Full-Time</mat-option>
+      <mat-option value="2">Part-Time</mat-option>
+    </mat-select>
+  </div>
+ 
 </div>
-
-<mat-card-header class="matcard-header-rounded-top-left">
-  <!-- <mat-card-title>Transfer List - {{this.selectedJobClassDescription}}</mat-card-title> -->
-</mat-card-header>
-<div class="mat-elevation-z1">
-  <!-- mat-table GOES HERE -->
-
-  
-
-  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
-</div>
-
 
 </mat-card>
+
 
 <div class="sticky-footer" fxLayout="row" fxLayoutAlign="space-between center">
     <div class="sticky-footer-left" flex>

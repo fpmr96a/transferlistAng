@@ -24,25 +24,36 @@ export class FilteredTransferlistComponent implements OnInit {
 
   jobClasses: JobClass[] = [];
   selectedJobClass: JobClass;
-  selectedJobClassDescription: string;
+  selectedJobClassDescription: string = 'Select Job Class';
   selectedJobClassCode: string;
 
-  selectedFacility: string = "-1";
-  selectedFunctionalUnit: string;
-  selectedShift: string;
+  facilities: Facility[] = [];
+  selectedFacility: Facility;
+  selectedFacilityCode: string;
+  selectedFacilityDescription: string = 'Select Facility';
+  
+  functionalUnits: FunctionalUnit[] = [];
+  selectedFunctionalUnit: FunctionalUnit;
+  selectedFunctionalUnitDescription: string = 'Select Functional Unit';
+  selectedFunctionalUnitCode: string;
+
+  shifts: Shift[] = [];
+  selelectedShift: Shift;
+  selectedShiftCode: string;
+  selectedShiftDescription: string = 'Select Shift';
+
   selectedFTPT: string;
 
-  facilities: Facility[] = [];
-  functionalUnits: FunctionalUnit[] = [];
-  shifts: Shift[] = [];
+ 
+ 
+
 
   isLoading = true;
   errorMessage = '';
+  constructor(public dataService: DataService) { }
 
-  constructor(private dataService: DataService) { }
-
-  ngOnInit(): void {
-   this.dataService.getJobClasses().subscribe(
+  ngOnInit() {
+    this.dataService.getJobClasses().subscribe(
       jobclasses => {
         this.jobClasses = jobclasses;
         this.isLoading=false;
@@ -50,7 +61,7 @@ export class FilteredTransferlistComponent implements OnInit {
       },
       error => this.errorMessage = <any>error
     ); 
-
+  
     // When an item in Job Class Dropdown selected, grab job class JSON string, load
     // JSON object, and populate code and description properties
     // ==============================================================================
@@ -58,55 +69,110 @@ export class FilteredTransferlistComponent implements OnInit {
       value => {
         this.selectedJobClass = JSON.parse(value);
         this.selectedJobClassDescription = this.selectedJobClass.description;
-        this.selectedJobClassCode = this.selectedJobClass.code;
+        this.selectedJobClassCode = this.selectedJobClass.code.toString();
 
-        this.getFunctionalUnits('-1', this.selectedJobClassCode);
-       // *** TODO: problem - Need to reset the SHIFT when the job class changes. Figure this out.
-        this.dataService.getTransferFacilityByJobcode(this.selectedJobClassCode).subscribe(
-          returnedFacilities => {
-            this.facilities = returnedFacilities;
-            console.log("facilities Returned" + JSON.stringify(this.facilities));
-          },
-          error => this.errorMessage = <any>error
-        ); 
-    
-        this.dataService.getShiftByJobcode(this.selectedJobClassCode).subscribe(
-          returnedShifts => {
-            this.shifts = returnedShifts;
-            console.log("shifts Returned" + JSON.stringify(this.shifts));
-          },
-          error => this.errorMessage = <any>error
-        ); 
-    
-       
-        
-        // When an item in the Facility Dropdown selected, grab facility code and call
-        // web api to get Functional Units.
-        // ==============================================================================
-        this.facilityFormControl.valueChanges.subscribe(
-          value => {
-            this.selectedFacility = value;
-            this.getFunctionalUnits(this.selectedFacility, this.selectedJobClassCode);
-            
-          }
-        );
+        this.getFacilityAndShiftByJobclass(this.selectedJobClassCode);
+        this.resetFacility();
+        this.resetFunctionalUnit();
+        this.resetShift();
         //this.isLoading=true;
       }
     );
+
+    this.facilityFormControl.valueChanges.subscribe(
+      value => {
+        this.selectedFacility = JSON.parse(value);
+        this.selectedFacilityDescription = this.selectedFacility.description;
+        this.selectedFacilityCode = this.selectedFacility.code.toString();
+       
+        this.getFunctionalUnits(this.selectedFacilityCode, this.selectedJobClassCode);
+        this.resetFunctionalUnit();
+        this.resetShift();
+        //this.isLoading=true;
+      }
+    );
+
+    this.functionalUnitFormControl.valueChanges.subscribe(
+      value => {
+        this.selectedFunctionalUnit = JSON.parse(value);
+        this.selectedFunctionalUnitDescription = this.selectedFunctionalUnit.description;
+        this.selectedFunctionalUnitCode = this.selectedFunctionalUnit.chrtFld_Dept_ID.toString();
+       
+        this.resetShift();
+        //this.isLoading=true;
+      }
+    );
+
+    this.shiftFormControl.valueChanges.subscribe(
+      value => {
+        this.selelectedShift = JSON.parse(value);
+        this.selectedShiftDescription = this.selelectedShift.description;
+        this.selectedShiftCode = this.selelectedShift.code.toString();
+       
+        //this.isLoading=true;
+      }
+    );
+
+    this.ftptFormControl.valueChanges.subscribe(
+      value => {
+        this.selectedFTPT = JSON.parse(value);
+        console.log("Selected FT PT: " + this.selectedFTPT);
+       // console.log("Selected property:" + this.ftptFormControl.)
+      }
+    )
   }
 
-  getFunctionalUnits(facility: string, jobcode: string) {
-    this.dataService.getFunctionalUnitByFacilityByJobcode(this.selectedFacility,this.selectedJobClassCode).subscribe(
-      returnedFuntionalUnits => {
-        this.functionalUnits = returnedFuntionalUnits;
-        console.log("Functional Units Returned" + JSON.stringify(this.functionalUnits));
+  getFacilityAndShiftByJobclass(selectedJobClass: string): void {
+    this.dataService.getTransferFacilityByJobcode(selectedJobClass).subscribe(
+      returnedFacilities => {
+        this.facilities = returnedFacilities;
+        console.log("facilities Returned" + JSON.stringify(this.facilities));
+      },
+      error => this.errorMessage = <any>error
+    ); 
+
+    this.dataService.getShiftByJobcode(selectedJobClass).subscribe(
+      returnedShifts => {
+        this.shifts = returnedShifts;
+        console.log("shifts Returned" + JSON.stringify(this.shifts));
       },
       error => this.errorMessage = <any>error
     ); 
   }
 
+  getFunctionalUnits(facility: string, jobcode: string) {
+    this.dataService.getFunctionalUnitByFacilityByJobcode(facility, jobcode).subscribe(
+      returnedFuntionalUnits => {
+        this.functionalUnits = returnedFuntionalUnits;
+        console.log("Functional Units Returned" + JSON.stringify(this.functionalUnits));
+      }, 
+      error => this.errorMessage = <any>error
+      
+    );
+  }
   stringifyJobClassObject(selectedJobClass: any): string {
     return JSON.stringify(selectedJobClass);
    }
+  
+   stringifySelectObject(selectedItem: any): string {
+    return JSON.stringify(selectedItem);
+   }
 
+   resetFacility(): void {
+    this.selectedFacility = null;
+    this.selectedFacilityCode = '';
+    this.selectedFacilityDescription = 'Select Facility';
+   }
+
+   resetFunctionalUnit(): void {
+    this.selectedFunctionalUnit = null;
+    this.selectedFunctionalUnitDescription = 'Select Functional Unit';
+    this.selectedFunctionalUnitCode = '';
+   }
+
+   resetShift(): void {
+    this.selelectedShift = null;
+    this.selectedShiftCode = '';
+    this.selectedShiftDescription = 'Select Shift';
+   }
 }
