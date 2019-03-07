@@ -9,6 +9,7 @@ import { JobClass } from 'src/app/models/JobClass';
 import { Facility } from 'src/app/models/Facility';
 import { FunctionalUnit } from 'src/app/models/FunctionalUnit';
 import { Shift } from 'src/app/models/shift';
+import { FTPT } from 'src/app/models/ftpt';
 
 @Component({
   selector: 'app-filtered-transferlist',
@@ -42,17 +43,18 @@ export class FilteredTransferlistComponent implements OnInit {
   selectedShiftCode: string;
   selectedShiftDescription: string = 'Select Shift';
 
-  selectedFTPT: string;
-
- 
- 
-
+  ftpts: FTPT[] = [];
+  selectedFTPT: FTPT;
+  selectedFTPTCode: string;
+  selectedFTPTDescription: string = 'Select FT/PT';
 
   isLoading = true;
   errorMessage = '';
   constructor(public dataService: DataService) { }
 
   ngOnInit() {
+    // Populate Job Classes Dropdown
+    // =============================
     this.dataService.getJobClasses().subscribe(
       jobclasses => {
         this.jobClasses = jobclasses;
@@ -61,9 +63,15 @@ export class FilteredTransferlistComponent implements OnInit {
       },
       error => this.errorMessage = <any>error
     ); 
+
+    // Populate FT/PT dropdown
+    // =======================
+    this.getFTPT();
   
     // When an item in Job Class Dropdown selected, grab job class JSON string, load
-    // JSON object, and populate code and description properties
+    // JSON object, and populate code and description properties. Also populate the
+    // Facility and Shift dropdowns, for job class selected and clear out the
+    // Facility, functional unit and shift selections, if present.
     // ==============================================================================
     this.jobClassFormControl.valueChanges.subscribe(
       value => {
@@ -79,6 +87,9 @@ export class FilteredTransferlistComponent implements OnInit {
       }
     );
 
+    // When faclity changes, get functional units and reset selected functional unit
+    // and shift, if selected.
+    // =============================================================================
     this.facilityFormControl.valueChanges.subscribe(
       value => {
         this.selectedFacility = JSON.parse(value);
@@ -92,6 +103,8 @@ export class FilteredTransferlistComponent implements OnInit {
       }
     );
 
+    // When functional unit changes, reset shift
+    // =========================================
     this.functionalUnitFormControl.valueChanges.subscribe(
       value => {
         this.selectedFunctionalUnit = JSON.parse(value);
@@ -116,7 +129,9 @@ export class FilteredTransferlistComponent implements OnInit {
     this.ftptFormControl.valueChanges.subscribe(
       value => {
         this.selectedFTPT = JSON.parse(value);
-        console.log("Selected FT PT: " + this.selectedFTPT);
+        this.selectedFTPTCode = this.selectedFTPT.code;
+        this.selectedFTPTDescription = this.selectedFTPT.description;
+        console.log("Selected FT PT: " + this.selectedFTPTDescription);
        // console.log("Selected property:" + this.ftptFormControl.)
       }
     )
@@ -150,6 +165,25 @@ export class FilteredTransferlistComponent implements OnInit {
       
     );
   }
+
+  getFTPT() {
+    const ftpt: FTPT[] = [
+      {
+        'code': '0',
+        'description': 'Both'
+      },
+      {
+        'code': '1',
+        'description': 'Full-Time'
+      },
+      {
+        'code': '2',
+        'description': 'Part-Time'
+      }
+    ];
+    this.ftpts = ftpt;  
+  }
+
   stringifyJobClassObject(selectedJobClass: any): string {
     return JSON.stringify(selectedJobClass);
    }
