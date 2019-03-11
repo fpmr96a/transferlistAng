@@ -11,6 +11,7 @@ import { Facility } from '../models/Facility';
 import { FunctionalUnit } from '../models/FunctionalUnit';
 import { Shift } from '../models/shift';
 import { EmployeeProfile } from '../models/EmployeeProfile';
+import { FilteredTransferList } from '../models/FilteredTransferList';
 
 @Injectable({
   providedIn: 'root'
@@ -126,6 +127,8 @@ getEmployeeProfile(userName: string): Observable<EmployeeProfile> {
 }
 
 // The following calls deal with the Update (Put) Employee Profile
+// NOTE: This should be changed to send updated data to service
+//        via the JSON object only and not send individual parms.
 // ================================================================
 updateEmployeeProfile(userName: string, empProfile: EmployeeProfile): Observable<EmployeeProfile> {
   userName = userName.trim();
@@ -139,6 +142,25 @@ updateEmployeeProfile(userName: string, empProfile: EmployeeProfile): Observable
     .pipe(
       tap(data => console.log('returned from PUT: ' + JSON.stringify(data))),
       catchError(this.handleError)
+    );
+}
+
+// The following Calls are for the Filtered Transfer List screen.
+// Sending parameters via the HttpParams object, which ultimately
+// turns the parameters into regular querystring variables.
+// ===============================================================
+getFilteredTransferList(): Observable<FilteredTransferList[]> {
+  const params =  new HttpParams()
+    .set('FtPtCode', "F")
+    .set('JobCode4', "5724")   
+    .set('FacilityId', "2")
+    .set('ChrtFldDeptId', "MHA53712")
+    .set('ShiftCd', "1");
+
+   return this.http.get<FilteredTransferList[]>(this.webApiUrl + '/transferlist/filter', {params})
+      .pipe(
+        tap(data => console.log(JSON.stringify(data))),
+        catchError(this.handleError)
     );
 }
 

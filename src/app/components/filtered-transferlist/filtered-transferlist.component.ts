@@ -184,6 +184,16 @@ export class FilteredTransferlistComponent implements OnInit {
     this.ftpts = ftpt;  
   }
 
+  getFilteredTransferList() {
+    this.dataService.getFilteredTransferList().subscribe(
+      returnedTransferLists => {
+        console.log("Filtered Transfer List Returned: " + JSON.stringify(returnedTransferLists));
+      }, 
+      error => this.errorMessage = <any>error
+      
+    );
+  }
+
   stringifyJobClassObject(selectedJobClass: any): string {
     return JSON.stringify(selectedJobClass);
    }
