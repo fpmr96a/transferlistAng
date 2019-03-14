@@ -41,7 +41,7 @@
       <mat-select style="visibility:hidden;width: 0"
             #functionalUnitSelect
             [formControl]="functionalUnitFormControl"
-            [disableOptionCentering]="true">
+            [disableOptionCentering]="true"  >
       <mat-option *ngFor="let functionalUnit of functionalUnits" [value]="stringifySelectObject(functionalUnit)" >
         {{functionalUnit.description}}
         </mat-option>

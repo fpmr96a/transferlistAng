@@ -149,13 +149,14 @@ updateEmployeeProfile(userName: string, empProfile: EmployeeProfile): Observable
 // Sending parameters via the HttpParams object, which ultimately
 // turns the parameters into regular querystring variables.
 // ===============================================================
-getFilteredTransferList(): Observable<FilteredTransferList[]> {
+getFilteredTransferList(jobCode4: string, facility_ID: string, 
+  chrtFldDeptId: string, shiftCd: string, ft_PT_Code: string): Observable<FilteredTransferList[]> {
   const params =  new HttpParams()
-    .set('FtPtCode', "F")
-    .set('JobCode4', "5724")   
-    .set('FacilityId', "2")
-    .set('ChrtFldDeptId', "MHA53712")
-    .set('ShiftCd', "1");
+    .set('FtPtCode', ft_PT_Code)
+    .set('JobCode4', jobCode4)   
+    .set('FacilityId', facility_ID)
+    .set('ChrtFldDeptId', chrtFldDeptId)
+    .set('ShiftCd', shiftCd);
 
    return this.http.get<FilteredTransferList[]>(this.webApiUrl + '/transferlist/filter', {params})
       .pipe(

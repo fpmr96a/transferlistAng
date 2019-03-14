@@ -121,6 +121,7 @@ export class FilteredTransferlistComponent implements OnInit {
         this.selectedFunctionalUnitDescription = this.selectedFunctionalUnit.description;
         this.selectedFunctionalUnitCode = this.selectedFunctionalUnit.chrtFld_Dept_ID.toString();
        
+        console.log('FUNCTIONAL UNIT VALUE CHANGED EVENT FIRED!');
         this.resetShift();
         //this.isLoading=true;
       }
@@ -169,7 +170,10 @@ export class FilteredTransferlistComponent implements OnInit {
   getFunctionalUnits(facility: string, jobcode: string) {
     this.dataService.getFunctionalUnitByFacilityByJobcode(facility, jobcode).subscribe(
       returnedFuntionalUnits => {
-        this.functionalUnits = returnedFuntionalUnits;
+         this.functionalUnits = returnedFuntionalUnits;
+        
+      
+
         console.log("Functional Units Returned" + JSON.stringify(this.functionalUnits));
       }, 
       error => this.errorMessage = <any>error
@@ -184,11 +188,11 @@ export class FilteredTransferlistComponent implements OnInit {
         'description': 'Both'
       },
       {
-        'code': '1',
+        'code': 'F',
         'description': 'Full-Time'
       },
       {
-        'code': '2',
+        'code': 'P',
         'description': 'Part-Time'
       }
     ];
@@ -196,7 +200,14 @@ export class FilteredTransferlistComponent implements OnInit {
   }
 
   getFilteredTransferList() {
-    this.dataService.getFilteredTransferList().subscribe(
+    this.dataService.getFilteredTransferList(
+          this.selectedJobClassCode,
+          this.selectedFacilityCode,
+          this.selectedFunctionalUnitCode,
+          this.selectedShiftCode,    
+          this.selectedFTPTCode,
+          )
+    .subscribe(
       returnedTransferLists => {
         console.log("Filtered Transfer List Returned: " + JSON.stringify(returnedTransferLists));
         this.dataSource.data = returnedTransferLists;
@@ -226,6 +237,18 @@ export class FilteredTransferlistComponent implements OnInit {
     this.selectedFunctionalUnit = null;
     this.selectedFunctionalUnitDescription = 'Select Functional Unit';
     this.selectedFunctionalUnitCode = '';
+
+    // *** NOTE: There is an unresolved for each of the SELECT controls, as follows:
+    // ***       If values are selected for all SELECTS, then the user changes the JOB CLASS,
+    // **        which triggers all the other SELECTS to be wiped out, it seems like the prior
+    // **        selected item is not forgotten. That is, if the first item in Functional Unit WAS
+    // **        selected beforehand, and then reloaded after new job class selected, but then if
+    // **        the same prior items are selected, the first item in function unit is pre-selected
+    // **        and therefore if user tries to RE-SELECT the value changes event not fired and user
+    // **        can't reselect.  Tried RESETing the control but not working.
+    
+    //this.functionalUnitFormControl.reset();
+ 
    }
 
    resetShift(): void {
