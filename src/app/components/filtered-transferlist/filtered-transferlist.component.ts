@@ -10,6 +10,7 @@ import { Facility } from 'src/app/models/Facility';
 import { FunctionalUnit } from 'src/app/models/FunctionalUnit';
 import { Shift } from 'src/app/models/shift';
 import { FTPT } from 'src/app/models/ftpt';
+import { FilteredTransferList } from 'src/app/models/FilteredTransferList';
 
 @Component({
   selector: 'app-filtered-transferlist',
@@ -47,6 +48,15 @@ export class FilteredTransferlistComponent implements OnInit {
   selectedFTPT: FTPT;
   selectedFTPTCode: string;
   selectedFTPTDescription: string = 'Select FT/PT';
+
+  filteredTransferLists: FilteredTransferList[] = [];
+
+  displayedColumns: string[] = ['full_Name', 'addedToList_DateTime', 'current_facility', 'current_func_unit', 'fT_PT'];
+
+  dataSource = new MatTableDataSource();
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   isLoading = true;
   errorMessage = '';
@@ -133,6 +143,7 @@ export class FilteredTransferlistComponent implements OnInit {
         this.selectedFTPTDescription = this.selectedFTPT.description;
         console.log("Selected FT PT: " + this.selectedFTPTDescription);
        // console.log("Selected property:" + this.ftptFormControl.)
+       this.getFilteredTransferList();
       }
     )
   }
@@ -188,6 +199,9 @@ export class FilteredTransferlistComponent implements OnInit {
     this.dataService.getFilteredTransferList().subscribe(
       returnedTransferLists => {
         console.log("Filtered Transfer List Returned: " + JSON.stringify(returnedTransferLists));
+        this.dataSource.data = returnedTransferLists;
+        this.dataSource.sort = this.sort;
+        //this.isLoading=false;
       }, 
       error => this.errorMessage = <any>error
       

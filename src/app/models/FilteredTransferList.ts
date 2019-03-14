@@ -1,5 +1,5 @@
 export interface FilteredTransferList {
-    full_name: string;
+    full_Name: string;
     ft_PT_Code: string;
     fT_PT: string;
     current_func_unit: string;

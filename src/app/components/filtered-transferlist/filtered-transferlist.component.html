@@ -75,9 +75,60 @@
           </mat-option>
     </mat-select>
   </div>
- 
-</div>
+ </div>
+ <mat-card-header class="matcard-header-rounded-top-left" style="margin-top: 30px;">
+  <mat-card-title>Transfer List - {{this.selectedJobClassDescription}}</mat-card-title>
+</mat-card-header>
+<div class="mat-elevation-z1">
+  <mat-table [dataSource]="dataSource" matSort>
+    <!-- Name Column -->
+    <ng-container matColumnDef="full_Name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let transferListItem"> {{transferListItem.full_Name}} </mat-cell>
+    </ng-container>
 
+     <!-- Date Added Column -->
+     <ng-container matColumnDef="addedToList_DateTime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Date Added </mat-header-cell>
+      <mat-cell *matCellDef="let transferListItem"> {{transferListItem.addedToList_DateTime | date : 'MM-dd-yyyy'}} </mat-cell>
+    </ng-container>
+
+    <!-- FT / PT Column -->
+    <ng-container matColumnDef="fT_PT">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> FT/PT </mat-header-cell>
+      <mat-cell *matCellDef="let transferListItem"> {{transferListItem.fT_PT}} </mat-cell>
+    </ng-container>
+
+    <!-- Facility Column -->
+    <ng-container matColumnDef="current_facility">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Current Facility </mat-header-cell>
+      <mat-cell *matCellDef="let transferListItem"> {{transferListItem.current_facility}} </mat-cell>
+    </ng-container>
+
+    
+    <!-- Functional Unit Column -->
+    <ng-container matColumnDef="current_func_unit">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Current Functional Unit </mat-header-cell>
+      <mat-cell *matCellDef="let transferListItem"> {{transferListItem.current_func_unit}} </mat-cell>
+    </ng-container>
+
+    
+
+    
+
+     
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+              [ngClass]="{highlighted: selectedRowIndex == row.id}"  (click)="highlight(row)" >
+  </mat-row>
+  </mat-table>
+
+  <div class="no-results" [style.display]="dataSource.data.length == 0 ? '' : 'none'">
+    No transfer lists found ...
+  </div>
+
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+</div>
 </mat-card>
 
 
