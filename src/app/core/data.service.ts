@@ -156,9 +156,9 @@ getFilteredTransferList(jobCode4: string, facility_ID: string,
     .set('JobCode4', jobCode4)   
     .set('FacilityId', facility_ID)
     .set('ChrtFldDeptId', chrtFldDeptId)
-    .set('ShiftCd', shiftCd);
+    .set('ShiftCd', shiftCd.trim());
 
-   return this.http.get<FilteredTransferList[]>(this.webApiUrl + '/transferlist/filter', {params})
+    return this.http.get<FilteredTransferList[]>(this.webApiUrl + '/transferlist/filter', {params})
       .pipe(
         tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError)

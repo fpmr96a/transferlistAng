@@ -89,10 +89,12 @@ export class FilteredTransferlistComponent implements OnInit {
         this.selectedJobClassDescription = this.selectedJobClass.description;
         this.selectedJobClassCode = this.selectedJobClass.code.toString();
 
-        this.getFacilityAndShiftByJobclass(this.selectedJobClassCode);
         this.resetFacility();
         this.resetFunctionalUnit();
-        this.resetShift();
+        this.resetShift(true);
+
+        this.getFacilityAndShiftByJobclass(this.selectedJobClassCode);
+        
         //this.isLoading=true;
       }
     );
@@ -108,7 +110,7 @@ export class FilteredTransferlistComponent implements OnInit {
        
         this.getFunctionalUnits(this.selectedFacilityCode, this.selectedJobClassCode);
         this.resetFunctionalUnit();
-        this.resetShift();
+        this.resetShift(false);
         //this.isLoading=true;
       }
     );
@@ -122,7 +124,9 @@ export class FilteredTransferlistComponent implements OnInit {
         this.selectedFunctionalUnitCode = this.selectedFunctionalUnit.chrtFld_Dept_ID.toString();
        
         console.log('FUNCTIONAL UNIT VALUE CHANGED EVENT FIRED!');
-        this.resetShift();
+
+        this.getFilteredTransferList();
+        //this.resetShift();
         //this.isLoading=true;
       }
     );
@@ -133,6 +137,7 @@ export class FilteredTransferlistComponent implements OnInit {
         this.selectedShiftDescription = this.selelectedShift.description;
         this.selectedShiftCode = this.selelectedShift.code.toString();
        
+        this.getFilteredTransferList();
         //this.isLoading=true;
       }
     );
@@ -200,6 +205,17 @@ export class FilteredTransferlistComponent implements OnInit {
   }
 
   getFilteredTransferList() {
+    /* if (this.selectedJobClassCode.trim() === '' ||
+        this.selectedFacilityCode.trim() === '' ||
+        this.selectedFunctionalUnitCode.trim() === '' ||
+        this.selectedShiftCode.trim() === '' ||
+        this.selectedFTPTCode.trim() === '')
+    {
+      
+      console.log('Exiting getFilteredTransferList due to 1 more parms empty');
+      return;
+    } */
+    
     this.dataService.getFilteredTransferList(
           this.selectedJobClassCode,
           this.selectedFacilityCode,
@@ -231,6 +247,8 @@ export class FilteredTransferlistComponent implements OnInit {
     this.selectedFacility = null;
     this.selectedFacilityCode = '';
     this.selectedFacilityDescription = 'Select Facility';
+
+    this.facilities = [];
    }
 
    resetFunctionalUnit(): void {
@@ -238,6 +256,7 @@ export class FilteredTransferlistComponent implements OnInit {
     this.selectedFunctionalUnitDescription = 'Select Functional Unit';
     this.selectedFunctionalUnitCode = '';
 
+    this.functionalUnits = [];
     // *** NOTE: There is an unresolved for each of the SELECT controls, as follows:
     // ***       If values are selected for all SELECTS, then the user changes the JOB CLASS,
     // **        which triggers all the other SELECTS to be wiped out, it seems like the prior
@@ -251,9 +270,15 @@ export class FilteredTransferlistComponent implements OnInit {
  
    }
 
-   resetShift(): void {
+   resetShift(clearLoadedShifts: boolean): void {
     this.selelectedShift = null;
     this.selectedShiftCode = '';
     this.selectedShiftDescription = 'Select Shift';
+
+    if (clearLoadedShifts)
+    {
+      this.shifts = [];
+    }
+    
    }
 }
