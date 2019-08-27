@@ -25,12 +25,18 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/web.config"
+              "src/web.config",
+              "src/app/reports"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/css/stimulsoft.viewer.office2013.whiteblue.css"
             ],
-            "scripts": []
+            "scripts": [
+							"src/scripts/stimulsoft.reports.js",
+							"src/scripts/stimulsoft.reports.maps.js",
+							"src/scripts/stimulsoft.viewer.js"
+						]
           },
           "configurations": {
             "production": {
