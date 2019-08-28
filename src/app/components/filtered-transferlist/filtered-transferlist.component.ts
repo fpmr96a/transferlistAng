@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
@@ -11,6 +12,9 @@ import { FunctionalUnit } from 'src/app/models/FunctionalUnit';
 import { Shift } from 'src/app/models/shift';
 import { FTPT } from 'src/app/models/ftpt';
 import { FilteredTransferList } from 'src/app/models/FilteredTransferList';
+import { ReportViewerDialogComponent } from '../report-viewer-dialog/report-viewer-dialog.component';
+
+
 
 @Component({
   selector: 'app-filtered-transferlist',
@@ -60,7 +64,8 @@ export class FilteredTransferlistComponent implements OnInit {
 
   isLoading = true;
   errorMessage = '';
-  constructor(public dataService: DataService) { }
+  constructor(public dataService: DataService,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     // Populate Job Classes Dropdown
@@ -281,4 +286,15 @@ export class FilteredTransferlistComponent implements OnInit {
     }
     
    }
+
+   viewSampleReport(userName: string, jobCode4: string){
+    
+    let dialogRef = this.dialog.open(ReportViewerDialogComponent, {
+    width: '1100px',
+    height: '800px',
+    disableClose: true,
+    data: {userName: userName, jobCode4: jobCode4, jobclassDescription: this.selectedJobClassDescription}
+  });
+   
+  }
 }

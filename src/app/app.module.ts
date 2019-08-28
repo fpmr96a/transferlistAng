@@ -18,6 +18,7 @@ import { EmployeeProfileDialogComponent } from './components/admin/employee-prof
 import { DeleteAllDialogComponent } from './components/my-transferlist/dialogs/delete-all-dialog.component';
 import { DeleteOneDialogComponent } from './components/my-transferlist/dialogs/delete-one-dialog.component';
 import { CreateTransferlistDialogComponent } from './components/my-transferlist/dialogs/create-transferlist-dialog.component';
+import { ReportViewerDialogComponent } from './components/report-viewer-dialog/report-viewer-dialog.component';
 
 
 @NgModule({
@@ -30,13 +31,16 @@ import { CreateTransferlistDialogComponent } from './components/my-transferlist/
     EmployeeProfileDialogComponent,
     DeleteAllDialogComponent,
     DeleteOneDialogComponent,
-    CreateTransferlistDialogComponent
+    CreateTransferlistDialogComponent,
+    ReportViewerDialogComponent
   ],
   entryComponents: [
     EmployeeProfileDialogComponent,
     DeleteAllDialogComponent,
     DeleteOneDialogComponent,
-    CreateTransferlistDialogComponent
+    CreateTransferlistDialogComponent,
+    ReportViewerDialogComponent
+
   ],
   imports: [
     BrowserModule,

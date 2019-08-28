@@ -61,8 +61,12 @@ export class ReportsComponent implements OnInit {
 			report.loadFile("app/reports/MyTransferList.mrt");
 			report.dictionary.databases.clear();
 			var dsMyTransferList = new Stimulsoft.System.Data.DataSet();
+
 			dsMyTransferList.readJson(JSON.stringify(this.jsonDataFromServer));
+			//dsMyTransferList.readJson(JSON.stringify(mytransferlists));
+
 			report.regData("MyTransferList", null, dsMyTransferList);
+			
 
 			this.viewer.report = report;
 			this.viewer.renderHtml("viewerContent");
