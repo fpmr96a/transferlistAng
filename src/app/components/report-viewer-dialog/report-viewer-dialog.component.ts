@@ -33,16 +33,12 @@ constructor(private dialogRef: MatDialogRef<ReportViewerDialogComponent>,
   GetMyTransferListByJobCode(jobcode: string) {
 		this.dataService.getMyTransferListByJobcode(jobcode).subscribe(
 		  mytransferlists => {
-			//this.jsonDataFromServer = mytransferlists;
-			//console.log("JSON from service" + JSON.stringify(mytransferlists));
-			//console.log("jsonDataFromServer from service" + JSON.stringify(this.jsonDataFromServer));
-
+			
 			var report = new Stimulsoft.Report.StiReport();
 			report.loadFile("app/reports/MyTransferList.mrt");
 			report.dictionary.databases.clear();
 			var dsMyTransferList = new Stimulsoft.System.Data.DataSet();
 
-			//dsMyTransferList.readJson(JSON.stringify(this.jsonDataFromServer));
 			dsMyTransferList.readJson(JSON.stringify(mytransferlists));
 
 			report.regData("MyTransferList", null, dsMyTransferList);

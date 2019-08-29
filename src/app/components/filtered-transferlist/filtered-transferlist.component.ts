@@ -290,8 +290,8 @@ export class FilteredTransferlistComponent implements OnInit {
    viewSampleReport(userName: string, jobCode4: string){
     
     let dialogRef = this.dialog.open(ReportViewerDialogComponent, {
-    width: '1100px',
-    height: '800px',
+    width: '75%',
+    height: '93%',
     disableClose: true,
     data: {userName: userName, jobCode4: jobCode4, jobclassDescription: this.selectedJobClassDescription}
   });
