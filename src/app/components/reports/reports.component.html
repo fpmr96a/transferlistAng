@@ -1,4 +1,46 @@
-<div>
-  <h2>Stimulsoft Report Viewer</h2>
-  <div id="viewerContent"></div>
+<mat-spinner [strokeWidth]="3" [diameter]="50" *ngIf="isLoading"  class="spinner"></mat-spinner>
+<mat-card >
+  
+<mat-card-header class="matcard-header-rounded-top-left" >
+  <mat-card-title>Reports</mat-card-title>
+</mat-card-header>
+<div class="mat-elevation-z1">
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Report Description Column -->
+    <ng-container matColumnDef="reportDescription">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Report Description</mat-header-cell>
+      <mat-cell *matCellDef="let myReportListItem"> {{myReportListItem.reportDescription}} </mat-cell>
+    </ng-container>
+
+    <!-- Open Report Button Column -->
+    <ng-container matColumnDef="deleteButtonColumn">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let myReportListItem">
+        <button mat-button color="primary" (click)="deleteTransferList('faraclass', myReportListItem.jobCode4,
+        myReportListItem.facility_ID, myReportListItem.chrtFldDeptId, 
+        myReportListItem.shiftCd, myReportListItem.ft_PT_Code  )" >
+          <mat-icon>pageview</mat-icon>Open Report
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+              [ngClass]="{highlighted: selectedRowIndex == row.id}"  (click)="highlight(row)" >
+  </mat-row>
+  </mat-table>
+
+  <div class="no-results" [style.display]="dataSource.data.length == 0 ? '' : 'none'">
+    No reports found ...
+  </div>
+
 </div>
+
+
+</mat-card>
+
+
+
+
+
