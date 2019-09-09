@@ -12,6 +12,7 @@ import { JobClass } from 'src/app/models/JobClass';
 import { DeleteAllDialogComponent } from './dialogs/delete-all-dialog.component';
 import { DeleteOneDialogComponent } from './dialogs/delete-one-dialog.component';
 import { CreateTransferlistDialogComponent } from './dialogs/create-transferlist-dialog.component';
+import { ReportViewerDialogComponent } from '../report-viewer-dialog/report-viewer-dialog.component';
 
 @Component({
   selector: 'app-my-transferlist',
@@ -150,6 +151,17 @@ createTransferLists(userName: string, jobCode4: string){
 
  stringifyJobClassObject(selectedJobClass: any): string {
    return JSON.stringify(selectedJobClass);
+  }
+
+  openReport(userName: string, jobCode4: string){
+    
+    let dialogRef = this.dialog.open(ReportViewerDialogComponent, {
+    width: '75%',
+    height: '93%',
+    disableClose: true,
+    data: {userName: userName, jobCode4: jobCode4, jobclassDescription: this.selectedJobClassDescription}
+  });
+   
   }
   /* public dataStateChange(state: DataStateChangeEvent): void {
       this.state = state;

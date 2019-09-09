@@ -7,6 +7,7 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { DataService } from '../../core/data.service';
 
 import { ReportList } from 'src/app/models/ReportList';
+import { ReportViewerDialogComponent } from '../report-viewer-dialog/report-viewer-dialog.component';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class ReportsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
 	  this.getReports();
@@ -65,6 +67,14 @@ getReports() {
 	this.isLoading=false; 
 	}
  
-
+  openReport(userName: string, jobCode4: string){
+    
+    let dialogRef = this.dialog.open(ReportViewerDialogComponent, {
+    width: '75%',
+    height: '93%',
+    disableClose: true,
+    data: {userName: userName, jobCode4: jobCode4, jobclassDescription: this.selectedJobClassDescription}
+  });
+}
  
 }
