@@ -14,13 +14,13 @@
     </ng-container>
 
     <!-- Open Report Button Column -->
-    <ng-container matColumnDef="deleteButtonColumn">
+    <ng-container matColumnDef="singleButtonColumn" >
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let myReportListItem">
         <button mat-button color="primary" (click)="deleteTransferList('faraclass', myReportListItem.jobCode4,
         myReportListItem.facility_ID, myReportListItem.chrtFldDeptId, 
         myReportListItem.shiftCd, myReportListItem.ft_PT_Code  )" >
-          <mat-icon>pageview</mat-icon>Open Report
+          <mat-icon>description</mat-icon>Open Report
         </button>
       </mat-cell>
     </ng-container>

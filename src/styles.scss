@@ -153,6 +153,11 @@ mat-form-field.mat-form-field {
     background-color: whitesmoke;
   }
 
+  .mat-column-singleButtonColumn{
+      flex: 0 0 120px;
+      justify-content: center;
+  }
+
  // No results in mat table
  // =======================
 .no-results {

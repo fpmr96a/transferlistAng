@@ -26,7 +26,7 @@ export class ReportsComponent implements OnInit {
 
 
 
-  displayedColumns: string[] = ['reportDescription', 'deleteButtonColumn'];
+  displayedColumns: string[] = ['reportDescription', 'singleButtonColumn'];
 
   dataSource = new MatTableDataSource();
 
