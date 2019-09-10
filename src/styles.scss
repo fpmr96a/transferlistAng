@@ -153,10 +153,19 @@ mat-form-field.mat-form-field {
     background-color: whitesmoke;
   }
 
+  // fixed width column in mat-table for ONE BUTTON
+  // ================================================
   .mat-column-singleButtonColumn{
       flex: 0 0 120px;
       justify-content: center;
   }
+
+  // fixed width column in mat-table for Functional Unit
+  // ====================================================
+  .mat-column-functionalUnitDescription{
+    flex: 0 0 300px;
+    justify-content: center;
+}
 
  // No results in mat table
  // =======================

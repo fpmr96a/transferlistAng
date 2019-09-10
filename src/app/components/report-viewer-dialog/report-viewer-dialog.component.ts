@@ -35,7 +35,21 @@ constructor(private dialogRef: MatDialogRef<ReportViewerDialogComponent>,
 		  mytransferlists => {
 			
 			var report = new Stimulsoft.Report.StiReport();
-			report.loadFile("app/reports/MyTransferList.mrt");
+      //report.loadFile("app/reports/MyTransferList.mrt");
+      //report.loadFile("app/reports/JobCodeReport.mrt");
+
+      var rptID = 'rpt02';
+      
+      switch  (rptID) {
+        case 'rpt01': {
+          report.loadFile("app/reports/MyTransferList.mrt");
+          break;
+        }
+        case 'rpt02': {
+          report.loadFile("app/reports/JobCodeReport.mrt");
+          break;
+        }
+      }
 			report.dictionary.databases.clear();
 			var dsMyTransferList = new Stimulsoft.System.Data.DataSet();
 
