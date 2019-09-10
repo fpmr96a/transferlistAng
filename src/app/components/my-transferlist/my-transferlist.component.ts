@@ -153,13 +153,13 @@ createTransferLists(userName: string, jobCode4: string){
    return JSON.stringify(selectedJobClass);
   }
 
-  openReport(userName: string, jobCode4: string){
+  openReport(reportID: string, jobCode4: string){
     
     let dialogRef = this.dialog.open(ReportViewerDialogComponent, {
     width: '75%',
     height: '93%',
     disableClose: true,
-    data: {userName: userName, jobCode4: jobCode4, jobclassDescription: this.selectedJobClassDescription}
+    data: {rptID: reportID, jobCode4: jobCode4}
   });
    
   }

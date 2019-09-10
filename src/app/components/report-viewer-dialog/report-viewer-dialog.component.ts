@@ -27,10 +27,60 @@ constructor(private dialogRef: MatDialogRef<ReportViewerDialogComponent>,
 
 
   ngOnInit() {
-    this.GetMyTransferListByJobCode("5724");
+    //this.GetMyTransferListByJobCode("5724");
+
+    switch  (this.data.rptID) {
+      case 'rpt01': {
+        this.openJobCodeReport(this.data.jobCode4);
+        break;
+      }
+      case 'rpt02': {
+        this.openMyTransferListReport(this.data.jobCode4);
+        break;
+      }
+    }
+
+
+
   }
 
-  GetMyTransferListByJobCode(jobcode: string) {
+  openJobCodeReport(jobcode: string) {
+		this.dataService.getMyTransferListByJobcode(jobcode).subscribe(
+		  mytransferlists => {
+			
+			var report = new Stimulsoft.Report.StiReport();
+      report.loadFile("app/reports/JobCodeReport.mrt");
+          
+			report.dictionary.databases.clear();
+			var dsMyTransferList = new Stimulsoft.System.Data.DataSet();
+			dsMyTransferList.readJson(JSON.stringify(mytransferlists));
+			report.regData("MyTransferList", null, dsMyTransferList);
+			this.viewer.report = report;
+			this.viewer.renderHtml("viewerContent");
+		  },
+		  //error => this.errorMessage = <any>error
+		);
+  }
+
+  openMyTransferListReport(jobcode: string) {
+		this.dataService.getMyTransferListByJobcode(jobcode).subscribe(
+		  mytransferlists => {
+			
+			var report = new Stimulsoft.Report.StiReport();
+      report.loadFile("app/reports/MyTransferList.mrt");
+          
+			report.dictionary.databases.clear();
+			var dsMyTransferList = new Stimulsoft.System.Data.DataSet();
+			dsMyTransferList.readJson(JSON.stringify(mytransferlists));
+			report.regData("MyTransferList", null, dsMyTransferList);
+			this.viewer.report = report;
+			this.viewer.renderHtml("viewerContent");
+		  },
+		  //error => this.errorMessage = <any>error
+		);
+  }
+
+  /* GetMyTransferListByJobCode(jobcode: string) {
 		this.dataService.getMyTransferListByJobcode(jobcode).subscribe(
 		  mytransferlists => {
 			
@@ -55,7 +105,7 @@ constructor(private dialogRef: MatDialogRef<ReportViewerDialogComponent>,
 
 			dsMyTransferList.readJson(JSON.stringify(mytransferlists));
 
-			report.regData("MyTransferList", null, dsMyTransferList);
+			report.regData("MyTransferListXXX", null, dsMyTransferList);
 			
 
 			this.viewer.report = report;
@@ -63,7 +113,7 @@ constructor(private dialogRef: MatDialogRef<ReportViewerDialogComponent>,
 		  },
 		  //error => this.errorMessage = <any>error
 		);
-    }
+    } */
     
     closeWindow(): void {
       this.dialogRef.close();
