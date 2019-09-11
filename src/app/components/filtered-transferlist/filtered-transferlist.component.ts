@@ -293,7 +293,7 @@ export class FilteredTransferlistComponent implements OnInit {
     width: '75%',
     height: '93%',
     disableClose: true,
-    data: {userName: userName, jobCode4: jobCode4, jobclassDescription: this.selectedJobClassDescription}
+    data: {rptID: 'rpt01', jobCode4: '5724'}
   });
    
   }
