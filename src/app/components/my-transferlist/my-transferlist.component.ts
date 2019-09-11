@@ -57,11 +57,24 @@ export class MyTransferlistComponent implements OnInit {
     // ==============================================================================
     this.jobClassFormControl.valueChanges.subscribe(
       value => {
+        console.log('selected job code is: ' + value);
+        if (value.trim() == "")
+        {
+          this.selectedJobClassDescription = "";
+          this.selectedJobClassCode = "";
+          this.GetMyTransferListByJobCode("0000");  /* Clear grid if Job Code not selected */
+        }
+        else
+        {
         this.selectedJobClass = JSON.parse(value);
         this.selectedJobClassDescription = this.selectedJobClass.description;
         this.selectedJobClassCode = this.selectedJobClass.code;
         this.GetMyTransferListByJobCode(this.selectedJobClassCode);
         this.isLoading=true;
+        }
+
+        
+        
       }
     );
 
@@ -154,13 +167,16 @@ createTransferLists(userName: string, jobCode4: string){
   }
 
   openReport(reportID: string, jobCode4: string){
-    
-    let dialogRef = this.dialog.open(ReportViewerDialogComponent, {
-    width: '75%',
-    height: '93%',
-    disableClose: true,
-    data: {rptID: reportID, jobCode4: jobCode4}
-  });
+    if (jobCode4.trim() != "")
+    {
+
+        let dialogRef = this.dialog.open(ReportViewerDialogComponent, {
+        width: '75%',
+        height: '93%',
+        disableClose: true,
+        data: {rptID: reportID, jobCode4: jobCode4}
+      });
+    }
    
   }
   /* public dataStateChange(state: DataStateChangeEvent): void {

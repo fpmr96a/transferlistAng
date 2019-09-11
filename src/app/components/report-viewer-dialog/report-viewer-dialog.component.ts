@@ -17,6 +17,8 @@ declare var Stimulsoft: any;
 })
 export class ReportViewerDialogComponent implements OnInit {
 
+  errorMessage = '';
+
   options: any = new Stimulsoft.Viewer.StiViewerOptions();
   viewer: any = new Stimulsoft.Viewer.StiViewer(this.options, 'StiViewer', false);
 
@@ -58,7 +60,8 @@ constructor(private dialogRef: MatDialogRef<ReportViewerDialogComponent>,
 			this.viewer.report = report;
 			this.viewer.renderHtml("viewerContent");
 		  },
-		  //error => this.errorMessage = <any>error
+      error => this.errorMessage = <any>error
+      //console.log(error);
 		);
   }
 
