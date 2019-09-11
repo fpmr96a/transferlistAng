@@ -56,7 +56,7 @@
         #shiftSelect
         [formControl]="shiftFormControl"
         [disableOptionCentering]="true">
-      <mat-option *ngFor="let shift of shifts" [value]="stringifySelectObject(shift)" >
+      <mat-option *ngFor="let shift of shifts" [value]="stringifySelectObject(shift)" (click)="shiftClicked()">
         {{shift.description}}
       </mat-option>
     </mat-select>      

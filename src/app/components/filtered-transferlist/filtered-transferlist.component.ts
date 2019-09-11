@@ -54,6 +54,7 @@ export class FilteredTransferlistComponent implements OnInit {
   selectedFTPTDescription: string = 'Select FT/PT';
 
   filteredTransferLists: FilteredTransferList[] = [];
+  emptyFilteredTransferLists: FilteredTransferList[] = [];
 
   displayedColumns: string[] = ['full_Name', 'addedToList_DateTime', 'current_facility', 'current_func_unit', 'fT_PT'];
 
@@ -100,6 +101,9 @@ export class FilteredTransferlistComponent implements OnInit {
 
         this.getFacilityAndShiftByJobclass(this.selectedJobClassCode);
         
+        // Clear Grid
+        // ===========
+        this.dataSource.data = this.emptyFilteredTransferLists;
         //this.isLoading=true;
       }
     );
@@ -116,7 +120,11 @@ export class FilteredTransferlistComponent implements OnInit {
         this.getFunctionalUnits(this.selectedFacilityCode, this.selectedJobClassCode);
         this.resetFunctionalUnit();
         this.resetShift(false);
-        //this.isLoading=true;
+        
+        // Clear Grid
+        // ===========
+        this.dataSource.data = this.emptyFilteredTransferLists;
+       
       }
     );
 
@@ -296,5 +304,11 @@ export class FilteredTransferlistComponent implements OnInit {
     data: {rptID: 'rpt01', jobCode4: '5724'}
   });
    
+  }
+
+  shiftClicked() {
+    // If Shift clicked, refresh grid.
+    // =============================== 
+    this.getFilteredTransferList();
   }
 }
