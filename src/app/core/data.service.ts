@@ -94,8 +94,9 @@ export class DataService {
 }
 
 getFunctionalUnitByFacilityByJobcode(facilityCD: string, jobcodeSearch: string): Observable<FunctionalUnit[]> {
-  jobcodeSearch = jobcodeSearch.trim();
-  facilityCD = facilityCD.trim();
+  console.log('getFunctionalUnitByFacility facilityCD = ' + facilityCD);
+  /* jobcodeSearch = jobcodeSearch.trim();
+  facilityCD = facilityCD.trim(); */
   console.log(this.webApiUrl + '/Lookup/FunctionalUnit/' + jobcodeSearch + '/' + facilityCD);
   return this.http.get<FunctionalUnit[]>(this.webApiUrl + '/Lookup/FunctionalUnit/' + jobcodeSearch + '/' + facilityCD)
     .pipe(

@@ -100,18 +100,20 @@ export class FilteredTransferlistComponent implements OnInit {
         this.resetShift(true);
 
         this.getFacilityAndShiftByJobclass(this.selectedJobClassCode);
+
+        console.log('selectedJobClassCode = ' + this.selectedJobClassCode);
         
         // Clear Grid
         // ===========
         this.dataSource.data = this.emptyFilteredTransferLists;
-        //this.isLoading=true;
+       
       }
     );
 
     // When faclity changes, get functional units and reset selected functional unit
     // and shift, if selected.
     // =============================================================================
-    this.facilityFormControl.valueChanges.subscribe(
+    /* this.facilityFormControl.valueChanges.subscribe(
       value => {
         this.selectedFacility = JSON.parse(value);
         this.selectedFacilityDescription = this.selectedFacility.description;
@@ -126,34 +128,35 @@ export class FilteredTransferlistComponent implements OnInit {
         this.dataSource.data = this.emptyFilteredTransferLists;
        
       }
-    );
+    ); */
 
     // When functional unit changes, reset shift
     // =========================================
-    this.functionalUnitFormControl.valueChanges.subscribe(
+    /* this.functionalUnitFormControl.valueChanges.subscribe(
       value => {
         this.selectedFunctionalUnit = JSON.parse(value);
         this.selectedFunctionalUnitDescription = this.selectedFunctionalUnit.description;
         this.selectedFunctionalUnitCode = this.selectedFunctionalUnit.chrtFld_Dept_ID.toString();
        
-        console.log('FUNCTIONAL UNIT VALUE CHANGED EVENT FIRED!');
-
         this.getFilteredTransferList();
-        //this.resetShift();
-        //this.isLoading=true;
+       
       }
-    );
+    ); */
 
-    this.shiftFormControl.valueChanges.subscribe(
+    // Stopped using the 'valueChanges' subscribing to refresh because this does not fire if the same
+    // value is re-selected after a first time. Now using click event for mat-option which fires
+    // unconditionally.
+    // ===================================================================================================
+    /* this.shiftFormControl.valueChanges.subscribe(
       value => {
         this.selelectedShift = JSON.parse(value);
         this.selectedShiftDescription = this.selelectedShift.description;
         this.selectedShiftCode = this.selelectedShift.code.toString();
        
         this.getFilteredTransferList();
-        //this.isLoading=true;
+       
       }
-    );
+    ); */
 
     this.ftptFormControl.valueChanges.subscribe(
       value => {
@@ -306,9 +309,39 @@ export class FilteredTransferlistComponent implements OnInit {
    
   }
 
-  shiftClicked() {
+  shiftClicked($event, shift) {
     // If Shift clicked, refresh grid.
     // =============================== 
+    this.selelectedShift = shift;
+    this.selectedShiftDescription = shift.description;
+    this.selectedShiftCode = shift.code;
     this.getFilteredTransferList();
+
+  }
+
+  functionalUnitClicked($event, functionalUnit) {
+    this.selectedFunctionalUnit = functionalUnit;
+    this.selectedFunctionalUnitDescription = functionalUnit.description;
+    this.selectedFunctionalUnitCode = functionalUnit.chrtFld_Dept_ID;
+    //this.selectedFunctionalUnitCode = this.selectedFunctionalUnit.chrtFld_Dept_ID.toString();
+   
+    this.getFilteredTransferList(); 
+  }
+
+  facilityClicked($event, facility) {
+    this.selectedFacility = facility;
+    this.selectedFacilityDescription = facility.description;
+    this.selectedFacilityCode = facility.code;
+    
+    console.log('facility is ' + this.selectedFacilityCode + '  and selectedJobClassCode = ' + this.selectedJobClassCode);
+    this.resetFunctionalUnit();
+
+    this.getFunctionalUnits(this.selectedFacilityCode, this.selectedJobClassCode);
+    
+    this.resetShift(false);
+    
+    // Clear Grid
+    // ===========
+    this.dataSource.data = this.emptyFilteredTransferLists;
   }
 }

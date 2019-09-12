@@ -28,7 +28,7 @@
             #facilitySelect
             [formControl]="facilityFormControl"
             [disableOptionCentering]="true">
-      <mat-option *ngFor="let facility of facilities" [value]="stringifySelectObject(facility)" >
+      <mat-option *ngFor="let facility of facilities" [value]="stringifySelectObject(facility)" (click)="facilityClicked($event, facility)">
         {{facility.description}}
         </mat-option>
     </mat-select>
@@ -42,7 +42,7 @@
             #functionalUnitSelect
             [formControl]="functionalUnitFormControl"
             [disableOptionCentering]="true"  >
-      <mat-option *ngFor="let functionalUnit of functionalUnits" [value]="stringifySelectObject(functionalUnit)" >
+      <mat-option *ngFor="let functionalUnit of functionalUnits" [value]="stringifySelectObject(functionalUnit)"  (click)="functionalUnitClicked($event, functionalUnit)">
         {{functionalUnit.description}}
         </mat-option>
       </mat-select>      
@@ -56,7 +56,7 @@
         #shiftSelect
         [formControl]="shiftFormControl"
         [disableOptionCentering]="true">
-      <mat-option *ngFor="let shift of shifts" [value]="stringifySelectObject(shift)" (click)="shiftClicked()">
+      <mat-option *ngFor="let shift of shifts" [value]="stringifySelectObject(shift)" (click)="shiftClicked($event, shift)">
         {{shift.description}}
       </mat-option>
     </mat-select>      
