@@ -12,6 +12,7 @@ import { FunctionalUnit } from '../models/FunctionalUnit';
 import { Shift } from '../models/shift';
 import { EmployeeProfile } from '../models/EmployeeProfile';
 import { FilteredTransferList } from '../models/FilteredTransferList';
+import { Vacancy } from '../models/Vacancy';
 
 @Injectable({
   providedIn: 'root'
@@ -180,5 +181,18 @@ getFilteredTransferList(jobCode4: string, facility_ID: string,
     }
     console.error(err);
     return throwError(errorMessage);
+  }
+
+  // Service Calls for the Vacancy screen
+  getClosedVacancies(daysSinceFilled: string, jobCode4: string): Observable<Vacancy[]> {
+    const params =  new HttpParams()
+      .set('DaysSinceFilled', daysSinceFilled)
+      .set('JobCode4', jobCode4);
+  
+      return this.http.get<Vacancy[]>(this.webApiUrl + '/transferlist/ClosedVacancy', {params})
+        .pipe(
+          tap(data => console.log(JSON.stringify(data))),
+          catchError(this.handleError)
+      );
   }
 }
