@@ -19,9 +19,9 @@
   <div fxLayout="row" fxLayoutAlign="start center" >
     <p flex style="padding-right: 10px;margin-left:10px; font-size: 14px; color: #2E4d7B; font-weight: bold">Vacancy Status:</p>
     <mat-radio-group flex  formControlName="bilingual">
-      <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color:#2E4d7B;" value="true" (click)="this.GetClosedVacanciesByJobCode(this.selectedJobClassCode)">Open</mat-radio-button>
-      <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color:#2E4d7B;" value="false" (click)="this.GetClosedVacanciesByJobCode(this.selectedJobClassCode)">Closed</mat-radio-button>
-      <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color: #2E4d7B;" value="false" (click)="this.GetClosedVacanciesByJobCode(this.selectedJobClassCode)">Cleared Through Transfer Event</mat-radio-button>
+      <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color:#2E4d7B;" value="1" (click)="this.GetClosedVacanciesByJobCode(this.selectedJobClassCode)">Open</mat-radio-button>
+      <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color:#2E4d7B;" value="2" (click)="this.GetClosedVacanciesByJobCode(this.selectedJobClassCode)">Closed</mat-radio-button>
+      <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color: #2E4d7B;" value="3" (click)="this.GetClosedVacanciesByJobCode(this.selectedJobClassCode)">Cleared Through Transfer Event</mat-radio-button>
     </mat-radio-group>
   </div>
 </div>
