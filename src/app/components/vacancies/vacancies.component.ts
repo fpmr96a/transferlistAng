@@ -54,14 +54,14 @@ export class VacanciesComponent implements OnInit {
          {
            this.selectedJobClassDescription = "";
            this.selectedJobClassCode = "";
-           //this.GetMyTransferListByJobCode("0000");  /* Clear grid if Job Code not selected */
+           this.GetClosedVacanciesByJobCode("0000");  /* Clear grid if Job Code not selected */
          }
          else
          {
          this.selectedJobClass = JSON.parse(value);
          this.selectedJobClassDescription = this.selectedJobClass.description;
          this.selectedJobClassCode = this.selectedJobClass.code;
-         //this.GetMyTransferListByJobCode(this.selectedJobClassCode);
+         this.GetClosedVacanciesByJobCode(this.selectedJobClassCode);
          this.isLoading=true;
          }
  
@@ -74,5 +74,16 @@ export class VacanciesComponent implements OnInit {
    stringifyJobClassObject(selectedJobClass: any): string {
     return JSON.stringify(selectedJobClass);
    }
+
+   GetClosedVacanciesByJobCode(jobcode: string) {
+    this.dataService.getClosedVacancies('10', jobcode).subscribe(
+      closedVacancies => {
+        this.dataSource.data = closedVacancies;
+        this.dataSource.sort = this.sort;
+        this.isLoading=false;
+      },
+      error => this.errorMessage = <any>error
+    );
+  }
 
 }

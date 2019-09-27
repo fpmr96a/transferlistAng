@@ -21,6 +21,7 @@ export class DataService {
   
   private webApiUrl = 'http://10.15.56.123:8080/api';
   private transferlistUrl = 'https://localhost:5001/api/MyTransferList/ ';
+  private localWebApiUrl = 'https://localhost:44345/api';
  
 
   constructor(private http: HttpClient) { }
@@ -189,9 +190,9 @@ getFilteredTransferList(jobCode4: string, facility_ID: string,
       .set('DaysSinceFilled', daysSinceFilled)
       .set('JobCode4', jobCode4);
   
-      return this.http.get<Vacancy[]>(this.webApiUrl + '/transferlist/ClosedVacancy', {params})
+      return this.http.get<Vacancy[]>(this.localWebApiUrl + '/transferlist/ClosedVacancy', {params})
         .pipe(
-          tap(data => console.log(JSON.stringify(data))),
+          tap(data => console.log('closed vacancies: ' + JSON.stringify(data))),
           catchError(this.handleError)
       );
   }
