@@ -161,11 +161,22 @@ mat-form-field.mat-form-field {
   }
 
   // fixed width column in mat-table for Functional Unit
-  // ====================================================
+  // mapped to HTML via:  matColumnDef="functionalUnitDescription"
+  // ==============================================================
   .mat-column-functionalUnitDescription{
     flex: 0 0 300px;
-    justify-content: center;
+    justify-content: left;
 }
+
+  // fixed width column in mat-table for Functional Unit
+  // mapped to HTML via:  matColumnDef="functionalUnitDesc"
+  // =======================================================
+  .mat-column-functionalUnitDesc{
+    flex: 0 0 300px;
+    justify-content: left;
+}
+
+
 
  // No results in mat table
  // =======================

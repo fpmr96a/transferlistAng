@@ -1,7 +1,7 @@
 <mat-spinner [strokeWidth]="3" [diameter]="50" *ngIf="isLoading"  class="spinner"></mat-spinner>
 <mat-card >
   <mat-card-header class="matcard-header-rounded-top-left">
-        <mat-card-title>Job Class Filtering</mat-card-title>
+        <mat-card-title>Vacancy Filtering</mat-card-title>
       </mat-card-header>
   <div class="mat-elevation-z1">
   <mat-form-field style="margin-top:20px; width:275px; margin-left: 10px;" color="primary">
@@ -16,6 +16,14 @@
         Please select a job class
     </mat-error>
   </mat-form-field>
+  <div fxLayout="row" fxLayoutAlign="start center" >
+    <p flex style="padding-right: 10px;margin-left:10px; font-size: 14px; color: #2E4d7B; font-weight: bold">Vacancy Status:</p>
+    <mat-radio-group flex  formControlName="bilingual">
+      <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color:#2E4d7B;" value="true" (click)="this.GetClosedVacanciesByJobCode(this.selectedJobClassCode)">Open</mat-radio-button>
+      <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color:#2E4d7B;" value="false" (click)="this.GetClosedVacanciesByJobCode(this.selectedJobClassCode)">Closed</mat-radio-button>
+      <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color: #2E4d7B;" value="false" (click)="this.GetClosedVacanciesByJobCode(this.selectedJobClassCode)">Cleared Through Transfer Event</mat-radio-button>
+    </mat-radio-group>
+  </div>
 </div>
 <mat-card-header class="matcard-header-rounded-top-left" style="margin-top: 30px;">
   <mat-card-title>Vacancies for - {{this.selectedJobClassDescription}}</mat-card-title>
