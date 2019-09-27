@@ -1,3 +1,106 @@
-<p>
-  vacancies works!
-</p>
+<mat-spinner [strokeWidth]="3" [diameter]="50" *ngIf="isLoading"  class="spinner"></mat-spinner>
+<mat-card >
+  <mat-card-header class="matcard-header-rounded-top-left">
+        <mat-card-title>Job Class Filtering</mat-card-title>
+      </mat-card-header>
+  <div class="mat-elevation-z1">
+  <mat-form-field style="margin-top:20px; width:275px; margin-left: 10px;" color="primary">
+    <mat-label>Job Class</mat-label>
+    <select matNativeControl placeholder="Select Job Class" [formControl]="jobClassFormControl" name="jobclass">
+        <option value="" label= "-- Select One --" selected></option>
+        <option *ngFor="let jobclass of jobClasses" [value]="stringifyJobClassObject(jobclass)" >
+        {{jobclass.description}}
+        </option>
+    </select>
+    <mat-error *ngIf="jobClassFormControl.hasError('required')">
+        Please select a job class
+    </mat-error>
+  </mat-form-field>
+</div>
+<mat-card-header class="matcard-header-rounded-top-left" style="margin-top: 30px;">
+  <mat-card-title>Vacancies for - {{this.selectedJobClassDescription}}</mat-card-title>
+</mat-card-header>
+<div class="mat-elevation-z1">
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Facility Column -->
+    <ng-container matColumnDef="pcn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>PCN </mat-header-cell>
+      <mat-cell *matCellDef="let vacancies"> {{vacancies.pcn}} </mat-cell>
+    </ng-container>
+
+    <!-- Functional Unit Column -->
+    <ng-container matColumnDef="facilityShortDescription">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Facility </mat-header-cell>
+      <mat-cell *matCellDef="let vacancies"> {{vacancies.facilityShortDescription}} </mat-cell>
+    </ng-container>
+
+    <!-- Shift Column -->
+    <ng-container matColumnDef="functionalUnitDesc">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Functional Unit </mat-header-cell>
+      <mat-cell *matCellDef="let vacancies"> {{vacancies.functionalUnitDesc}} </mat-cell>
+    </ng-container>
+
+    <!-- FT / PT Column -->
+    <ng-container matColumnDef="approvalDateVMS">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Vacancy Date </mat-header-cell>
+      <mat-cell *matCellDef="let vacancies"> {{vacancies.approvalDateVMS | date : 'MM-dd-yyyy'}} </mat-cell>
+    </ng-container>
+
+     <!-- FT / PT Column -->
+    <ng-container matColumnDef="shiftDesc">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Shift </mat-header-cell>
+      <mat-cell *matCellDef="let vacancies"> {{vacancies.shiftDesc}} </mat-cell>
+    </ng-container>
+
+     <!-- FT / PT Column -->
+     <ng-container matColumnDef="hours">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Hours </mat-header-cell>
+      <mat-cell *matCellDef="let vacancies"> {{vacancies.hours}} </mat-cell>
+    </ng-container>
+
+    <!-- FT / PT Column -->
+    <ng-container matColumnDef="ftPT">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> FT/PT </mat-header-cell>
+      <mat-cell *matCellDef="let vacancies"> {{vacancies.ftPT}} </mat-cell>
+    </ng-container>
+
+    <!-- FT / PT Column -->
+    <ng-container matColumnDef="createDt">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Cut-Off Date </mat-header-cell>
+      <mat-cell *matCellDef="let vacancies"> {{vacancies.createDt | date : 'MM-dd-yyyy'}} </mat-cell>
+    </ng-container>
+
+
+      <!-- Delete Button Column -->
+    <ng-container matColumnDef="singleButtonColumn">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let vacancies">
+        <button mat-button color="primary" (click)="deleteTransferList('faraclass', vacancies.jobCode4,
+                                                    vacancies.facility_ID, vacancies.chrtFldDeptId, 
+                                                    vacancies.shiftCd, vacancies.ft_PT_Code  )" >
+          <mat-icon>delete</mat-icon>Delete
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+              [ngClass]="{highlighted: selectedRowIndex == row.id}"  (click)="highlight(row)" >
+  </mat-row>
+  </mat-table>
+
+  <div class="no-results" [style.display]="dataSource.data.length == 0 ? '' : 'none'">
+    No vacancies found ...
+  </div>
+
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+</div>
+
+
+</mat-card>
+
+
+
+
+
