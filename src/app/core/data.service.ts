@@ -185,14 +185,26 @@ getFilteredTransferList(jobCode4: string, facility_ID: string,
   }
 
   // Service Calls for the Vacancy screen
+  // =====================================
   getClosedVacancies(daysSinceFilled: string, jobCode4: string): Observable<Vacancy[]> {
     const params =  new HttpParams()
       .set('DaysSinceFilled', daysSinceFilled)
       .set('JobCode4', jobCode4);
   
-      return this.http.get<Vacancy[]>(this.localWebApiUrl + '/transferlist/ClosedVacancy', {params})
+      return this.http.get<Vacancy[]>(this.webApiUrl + '/transferlist/ClosedVacancy', {params})
         .pipe(
           tap(data => console.log('closed vacancies: ' + JSON.stringify(data))),
+          catchError(this.handleError)
+      );
+  }
+
+  getOpenVacancies(jobCode4: string): Observable<Vacancy[]> {
+    const params =  new HttpParams()
+      .set('JobCode4', jobCode4);
+  
+      return this.http.get<Vacancy[]>(this.webApiUrl + '/transferlist/OpenVacancy', {params})
+        .pipe(
+          tap(data => console.log('open vacancies: ' + JSON.stringify(data))),
           catchError(this.handleError)
       );
   }

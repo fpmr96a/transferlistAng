@@ -61,7 +61,7 @@ export class VacanciesComponent implements OnInit {
          this.selectedJobClass = JSON.parse(value);
          this.selectedJobClassDescription = this.selectedJobClass.description;
          this.selectedJobClassCode = this.selectedJobClass.code;
-         this.GetClosedVacanciesByJobCode(this.selectedJobClassCode);
+         this.GetOpenVacanciesByJobCode(this.selectedJobClassCode);
          this.isLoading=true;
          }
  
@@ -79,6 +79,17 @@ export class VacanciesComponent implements OnInit {
     this.dataService.getClosedVacancies('10', jobcode).subscribe(
       closedVacancies => {
         this.dataSource.data = closedVacancies;
+        this.dataSource.sort = this.sort;
+        this.isLoading=false;
+      },
+      error => this.errorMessage = <any>error
+    );
+  }
+
+  GetOpenVacanciesByJobCode(jobcode: string) {
+    this.dataService.getOpenVacancies(jobcode).subscribe(
+      openVacancies => {
+        this.dataSource.data = openVacancies;
         this.dataSource.sort = this.sort;
         this.isLoading=false;
       },
