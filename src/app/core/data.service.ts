@@ -208,4 +208,15 @@ getFilteredTransferList(jobCode4: string, facility_ID: string,
           catchError(this.handleError)
       );
   }
+
+  getClearedOpenVacancies(jobCode4: string): Observable<Vacancy[]> {
+    const params =  new HttpParams()
+      .set('JobCode4', jobCode4);
+  
+      return this.http.get<Vacancy[]>(this.webApiUrl + '/transferlist/ClearedOpenVacancy', {params})
+        .pipe(
+          tap(data => console.log('cleared open vacancies: ' + JSON.stringify(data))),
+          catchError(this.handleError)
+      );
+  }
 }

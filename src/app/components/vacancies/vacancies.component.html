@@ -21,7 +21,7 @@
     <mat-radio-group flex  formControlName="bilingual">
       <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color:gray; " value="1" (click)="this.GetOpenVacanciesByJobCode(this.selectedJobClassCode)" [checked]="true">Open</mat-radio-button>
       <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color:gray" value="2" (click)="this.GetClosedVacanciesByJobCode(this.selectedJobClassCode)">Closed</mat-radio-button>
-      <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color: gray" value="3" (click)="this.GetClosedVacanciesByJobCode(this.selectedJobClassCode)">Cleared Through Transfer Event</mat-radio-button>
+      <mat-radio-button flex style="padding-right: 10px;font-size: 14px; color: gray" value="3" (click)="this.GetClearedOpenVacancies(this.selectedJobClassCode)">Cleared Through Transfer Event</mat-radio-button>
     </mat-radio-group>
   </div>
 </div>

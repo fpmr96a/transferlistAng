@@ -23,6 +23,7 @@ export class VacanciesComponent implements OnInit {
   selectedJobClass: JobClass;
   selectedJobClassDescription: string;
   selectedJobClassCode: string;
+  selectedStatusCode: string;
 
   vacancies: Vacancy[] = [];
   displayedColumns: string[] = ['pcn', 'facilityShortDescription', 'functionalUnitDesc', 'approvalDateVMS', 'shiftDesc', 'hours', 'ftPT','createDt'];
@@ -35,6 +36,10 @@ export class VacanciesComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    // Initialize Status Code Filtering variable to 1, which is OPEN
+    // =============================================================
+    this.selectedStatusCode = "1";
+
     this.dataService.getJobClasses().subscribe(
        jobclasses => {
          this.jobClasses = jobclasses;
@@ -61,7 +66,7 @@ export class VacanciesComponent implements OnInit {
          this.selectedJobClass = JSON.parse(value);
          this.selectedJobClassDescription = this.selectedJobClass.description;
          this.selectedJobClassCode = this.selectedJobClass.code;
-         this.GetOpenVacanciesByJobCode(this.selectedJobClassCode);
+         this.GetVacanciesByStatusAndJobcode(this.selectedJobClassCode);
          this.isLoading=true;
          }
  
@@ -76,6 +81,8 @@ export class VacanciesComponent implements OnInit {
    }
 
    GetClosedVacanciesByJobCode(jobcode: string) {
+    this.selectedStatusCode = "2";
+
     this.dataService.getClosedVacancies('10', jobcode).subscribe(
       closedVacancies => {
         this.dataSource.data = closedVacancies;
@@ -87,6 +94,8 @@ export class VacanciesComponent implements OnInit {
   }
 
   GetOpenVacanciesByJobCode(jobcode: string) {
+    this.selectedStatusCode = "1";
+
     this.dataService.getOpenVacancies(jobcode).subscribe(
       openVacancies => {
         this.dataSource.data = openVacancies;
@@ -95,6 +104,42 @@ export class VacanciesComponent implements OnInit {
       },
       error => this.errorMessage = <any>error
     );
+  }
+
+  GetClearedOpenVacancies(jobcode: string) {
+    this.selectedStatusCode = "3";
+
+    this.dataService.getClearedOpenVacancies(jobcode).subscribe(
+      clearedOpenVacancies => {
+        this.dataSource.data = clearedOpenVacancies;
+        this.dataSource.sort = this.sort;
+        this.isLoading=false;
+      },
+      error => this.errorMessage = <any>error
+    );
+  }
+
+  GetVacanciesByStatusAndJobcode(jobcode: string){
+
+    switch  (this.selectedStatusCode) {
+      case '1': {
+        this.GetOpenVacanciesByJobCode(this.selectedJobClassCode);
+        break;
+      }
+      case '2': {
+        this.GetClosedVacanciesByJobCode(this.selectedJobClassCode);
+        break;
+      }
+      case '3': {
+        this.GetClearedOpenVacancies(this.selectedJobClassCode);
+        break;
+      }
+      default: { 
+        this.GetClosedVacanciesByJobCode("0000");  /* Clear grid if status not selected */
+        break; 
+     } 
+
+    }
   }
 
 }
