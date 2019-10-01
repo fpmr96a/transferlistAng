@@ -90,4 +90,8 @@ export class CreateTransferlistDialogComponent implements OnInit {
   noClicked(): void {
     this.dialogRef.close();
   }
+
+  cancelClicked(): void {
+    this.dialogRef.close();
+  }
 }
