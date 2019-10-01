@@ -23,7 +23,9 @@ export class VacanciesComponent implements OnInit {
   selectedJobClass: JobClass;
   selectedJobClassDescription: string;
   selectedJobClassCode: string;
+
   selectedStatusCode: string;
+  selectedStatusDesc: string;
 
   vacancies: Vacancy[] = [];
   displayedColumns: string[] = ['pcn', 'facilityShortDescription', 'functionalUnitDesc', 'approvalDateVMS', 'shiftDesc', 'hours', 'ftPT','createDt'];
@@ -39,6 +41,7 @@ export class VacanciesComponent implements OnInit {
     // Initialize Status Code Filtering variable to 1, which is OPEN
     // =============================================================
     this.selectedStatusCode = "1";
+    this.selectedStatusDesc= "Open";
 
     this.dataService.getJobClasses().subscribe(
        jobclasses => {
@@ -82,6 +85,7 @@ export class VacanciesComponent implements OnInit {
 
    GetClosedVacanciesByJobCode(jobcode: string) {
     this.selectedStatusCode = "2";
+    this.selectedStatusDesc = "Closed";
 
     this.dataService.getClosedVacancies('10', jobcode).subscribe(
       closedVacancies => {
@@ -95,6 +99,7 @@ export class VacanciesComponent implements OnInit {
 
   GetOpenVacanciesByJobCode(jobcode: string) {
     this.selectedStatusCode = "1";
+    this.selectedStatusDesc = "Open";
 
     this.dataService.getOpenVacancies(jobcode).subscribe(
       openVacancies => {
@@ -108,6 +113,7 @@ export class VacanciesComponent implements OnInit {
 
   GetClearedOpenVacancies(jobcode: string) {
     this.selectedStatusCode = "3";
+    this.selectedStatusDesc = "Cleared Through Transfer Event";
 
     this.dataService.getClearedOpenVacancies(jobcode).subscribe(
       clearedOpenVacancies => {

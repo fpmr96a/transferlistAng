@@ -26,7 +26,7 @@
   </div>
 </div>
 <mat-card-header class="matcard-header-rounded-top-left" style="margin-top: 30px;">
-  <mat-card-title>Vacancies for:&nbsp;  {{this.selectedJobClassDescription}}</mat-card-title>
+  <mat-card-title>{{this.selectedStatusDesc}}&nbsp;Vacancies for:&nbsp;  {{this.selectedJobClassDescription}}</mat-card-title>
 </mat-card-header>
 <div class="mat-elevation-z1">
   <mat-table [dataSource]="dataSource" matSort>
