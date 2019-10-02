@@ -26,6 +26,21 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+
+  // ****************************************************************************************************
+  // ** All XmlHttpRequest calls not working when using EDGE browser. This is due to 10.15.56.123      **
+  // ** being blocked and Developer Tools / Network indicates results pulled from cache, but that is   **
+  // ** deceiving. I added an HttpInterceptor that injects http headers into each XmlHttpRequest       **
+  // ** that attempts to turn off caching, but that didn't remedy the problem.                         **
+  // ** The hokey workaround is to have Fiddler running when running from EDGE. Supposedly, when       **
+  // ** Fiddler is running, the proxy settings are pointed at Fiddler itself and EDGE is able to       **
+  // ** access the web api server. It is stated that EDGE runs in Enhanced Protected Mode (AppCenter). **
+  // ** That has a feature which blocks access to Private Network Resources from Internet-Zone         **
+  // ** processes.                                                                                     **
+  // ** The workaround/solution is to add the server to the Local Intranet zone in Internet Options.   **
+  // ** Another recommendation was to add the server to TRUSTED WEBSITES .                             **
+  // ****************************************************************************************************
+
   // Service Calls for MyTransferList page
   // =====================================
   getJobClasses(): Observable<JobClass[]> {
