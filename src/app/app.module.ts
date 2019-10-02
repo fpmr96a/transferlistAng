@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {NgxMaskModule} from 'ngx-mask'
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,7 @@ import { DeleteAllDialogComponent } from './components/my-transferlist/dialogs/d
 import { DeleteOneDialogComponent } from './components/my-transferlist/dialogs/delete-one-dialog.component';
 import { CreateTransferlistDialogComponent } from './components/my-transferlist/dialogs/create-transferlist-dialog.component';
 import { ReportViewerDialogComponent } from './components/report-viewer-dialog/report-viewer-dialog.component';
+import { NoCacheHeadersInterceptor } from './core/http-interceptor';
 
 
 @NgModule({
@@ -53,7 +54,9 @@ import { ReportViewerDialogComponent } from './components/report-viewer-dialog/r
     NgxMaskModule.forRoot({})
     
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: NoCacheHeadersInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
