@@ -163,6 +163,52 @@ updateEmployeeProfile(userName: string, empProfile: EmployeeProfile): Observable
     );
 }
 
+createTransferListEmployee(jobCode4: string, facility_ID: string, 
+  chrtFldDeptId: string, shiftCd: string, ft_PT_Code: string, userName: string, lastModID: string): Observable<MyTransferList> {
+  
+    console.log('POST:' + this.localWebApiUrl + '/TransferListEmployee/' +
+    ft_PT_Code    + '/' +
+    jobCode4      + '/' +
+    facility_ID   + '/' +
+    chrtFldDeptId + '/' +
+    shiftCd.trim()       + '/' +
+    userName      + '/' +
+    lastModID);
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); 
+
+    return this.http.post<MyTransferList>(this.localWebApiUrl + '/TransferListEmployee/' +
+              ft_PT_Code    + '/' +
+              jobCode4      + '/' +
+              facility_ID   + '/' +
+              chrtFldDeptId + '/' +
+              shiftCd.trim()       + '/' +
+              userName      + '/' +
+              lastModID,
+              { headers: headers })
+    .pipe(
+      tap(data => console.log('Post data returned: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+  );
+
+     /* const params =  new HttpParams()
+    .set('ftPtCode', ft_PT_Code)
+    .set('jobCodeFour', jobCode4)   
+    .set('facilityId', facility_ID)
+    .set('chrtFldDeptId', chrtFldDeptId)
+    .set('shiftCd', shiftCd)
+    .set('userName', userName)
+    .set('lastModifiedUser', lastModID)
+
+
+    return this.http.post<MyTransferList>(this.localWebApiUrl + '/TransferListEmployee', {params})
+      .pipe(
+        tap(data => console.log('Post data returned: ' + JSON.stringify(data))),
+        catchError(this.handleError)
+    ); */
+}
+
+
 // The following Calls are for the Filtered Transfer List screen.
 // Sending parameters via the HttpParams object, which ultimately
 // turns the parameters into regular querystring variables.

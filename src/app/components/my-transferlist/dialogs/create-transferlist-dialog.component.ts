@@ -52,14 +52,7 @@ export class CreateTransferlistDialogComponent implements OnInit {
     ); 
 
     this.getFunctionalUnits('-1', this.data.jobCode4);
-    /* this.dataService.getFunctionalUnitByFacilityByJobcode(this.selectedFacility,this.data.jobCode4).subscribe(
-      returnedFuntionalUnits => {
-        this.functionalUnits = returnedFuntionalUnits;
-        console.log("Functional Units Returned" + JSON.stringify(this.functionalUnits));
-      },
-      error => this.errorMessage = <any>error
-    );  */
-
+    
     // When an item in the Facility Dropdown selected, grab facility code and call
     // web api to get Functional Units.
     // ==============================================================================
@@ -68,6 +61,30 @@ export class CreateTransferlistDialogComponent implements OnInit {
         this.selectedFacility = value;
         this.getFunctionalUnits(this.selectedFacility, this.data.jobCode4);
         
+      }
+    );
+
+    // When an item in the Functional Unit dropdown selected, grab chrtFld_deptID
+    // ==========================================================================
+    this.functionalUnitFormControl.valueChanges.subscribe(
+      value => {
+        this.selectedFunctionalUnit = value;
+      }
+    );
+
+    // When an item in the Shift dropdown selected, grab shift code
+    // =============================================================
+    this.shiftFormControl.valueChanges.subscribe(
+      value => {
+        this.selectedShift = value;
+      }
+    );
+
+    // When an item in the FT/PT dropdown selected, FT_PT code
+    // ======================================================= 
+    this.ftptFormControl.valueChanges.subscribe(
+      value => {
+        this.selectedFTPT = value;
       }
     );
   }
@@ -84,6 +101,19 @@ export class CreateTransferlistDialogComponent implements OnInit {
 
 
   createTransferlists(): void {
+    this.dataService.createTransferListEmployee(this.data.jobCode4, this.selectedFacility, this.selectedFunctionalUnit,
+       this.selectedShift, this.selectedFTPT, 'faraclass', 'faraclass')
+       .subscribe(
+        (data: any) => this.onSaveComplete(),
+        error => this.errorMessage = <any>error
+    );
+
+    
+  }
+
+  onSaveComplete() {
+    console.log('ARRIVED at onSaveComplete');
+    this.dialogRef.close();
     this.snackBar.open('Transfer List(s) created for ' + this.data.jobclassDescription, 'Complete', {duration: 1500, }); 
   }
 
