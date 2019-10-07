@@ -152,7 +152,8 @@ createTransferLists(userName: string, jobCode4: string){
 });
 
   dialogRef.afterClosed().subscribe(result => {
-  if (result === true) {
+    console.log('Result returned from createTransferLists is: ' + result);
+    if (result === true) {
 
   // Refresh the grid, for currently selected job class.
   // =================================================== 

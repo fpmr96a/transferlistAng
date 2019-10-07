@@ -21,7 +21,7 @@ export class CreateTransferlistDialogComponent implements OnInit {
   selectedFacility: string = "-1";
   selectedFunctionalUnit: string;
   selectedShift: string;
-  selectedFTPT: string;
+  selectedFTPT: string = "F";
 
   facilities: Facility[] = [];
   functionalUnits: FunctionalUnit[] = [];
