@@ -19,6 +19,7 @@
     <mat-label>Functional Unit</mat-label>
     <select matNativeControl placeholder="Select Functional Unit" [formControl]="functionalUnitFormControl" name="functionalunit">
         <option value="" label= "-- Select One --" selected></option>
+        <option value="---" label= "All" ></option>
         <option *ngFor="let functionalunit of functionalUnits" [value]="functionalunit.chrtFld_Dept_ID" >
         {{functionalunit.description}}
         </option>
@@ -32,7 +33,7 @@
     <mat-label>Shift</mat-label>
     <select matNativeControl placeholder="Select Shift" [formControl]="shiftFormControl" name="shift">
         <option value="" label= "-- Select One --" selected></option>
-        <option value="1" label= "All" ></option>
+        <option value="---" label= "All" ></option>
         <option *ngFor="let shift of shifts" [value]="shift.code" >
         {{shift.description}}
         </option>
@@ -45,7 +46,7 @@
   <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
     <mat-label>Full-Time / Part-Time</mat-label>
     <select matNativeControl placeholder="Select Full-Time / Part-Time" [formControl]="ftptFormControl" name="ftpt">
-        <option value="0" label= "Both" ></option>
+        <option value=" " label= "Both" ></option>
         <option value="F" label= "Full-Time" [selected]='true'></option>
         <option value="P" label= "Part-Time" ></option>
     </select>

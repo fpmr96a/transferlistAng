@@ -152,15 +152,10 @@ createTransferLists(userName: string, jobCode4: string){
 });
 
   dialogRef.afterClosed().subscribe(result => {
-    console.log('Result returned from createTransferLists is: ' + result);
-    if (result === true) {
-
-  // Refresh the grid, for currently selected job class.
-  // =================================================== 
-  this.GetMyTransferListByJobCode(this.selectedJobClassCode);
-  }
-
-});
+    // Refresh grid unconditionally
+    // ============================
+    this.GetMyTransferListByJobCode(this.selectedJobClassCode);
+ });
 }
 
  stringifyJobClassObject(selectedJobClass: any): string {

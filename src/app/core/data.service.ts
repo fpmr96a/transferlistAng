@@ -166,7 +166,7 @@ updateEmployeeProfile(userName: string, empProfile: EmployeeProfile): Observable
 createTransferListEmployee(jobCode4: string, facility_ID: string, 
   chrtFldDeptId: string, shiftCd: string, ft_PT_Code: string, userName: string, lastModID: string): Observable<MyTransferList> {
   
-    console.log('POST:' + this.localWebApiUrl + '/TransferListEmployee/' +
+    console.log('POST:' + this.webApiUrl + '/TransferListEmployee/' +
     ft_PT_Code    + '/' +
     jobCode4      + '/' +
     facility_ID   + '/' +
@@ -177,7 +177,7 @@ createTransferListEmployee(jobCode4: string, facility_ID: string,
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); 
 
-    return this.http.post<MyTransferList>(this.localWebApiUrl + '/TransferListEmployee/' +
+    return this.http.post<MyTransferList>(this.webApiUrl + '/TransferListEmployee/' +
               ft_PT_Code    + '/' +
               jobCode4      + '/' +
               facility_ID   + '/' +
