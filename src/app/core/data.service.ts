@@ -76,9 +76,13 @@ export class DataService {
   deleteTransferList(userName: string, jobCode4: string, facility_ID: number, 
                      chrtFldDeptId: string, shiftCd: string, ft_PT_Code: string ): Observable<{}> {
                     
-          return this.http.delete(this.webApiUrl +  '/TransferListEmployee/' + ft_PT_Code + '/' +
-              jobCode4 + '/' + facility_ID.toString().trim() + '/' + chrtFldDeptId + '/' +
-              shiftCd.trim() + '/' + userName)
+    return this.http.delete(this.webApiUrl +  '/TransferListEmployee/' + 
+        ft_PT_Code + '/' +
+        jobCode4 + '/' + 
+        facility_ID.toString().trim() + '/' + 
+        chrtFldDeptId + '/' +
+        shiftCd.trim() + '/' + 
+        userName)
       .pipe(
         tap(data => console.log('DELETED: ' + JSON.stringify(data))),
         catchError(this.handleError)
@@ -89,11 +93,13 @@ export class DataService {
   // ==================================================
   deleteAllTransferLists(userName: string, jobCode4: string, lastModifiedUser: string): Observable<{}> {
    
-          return this.http.delete(this.webApiUrl +  '/TransferListEmployee/' + userName + '/' +
-                jobCode4 + '/' + lastModifiedUser)
-    .pipe(
-      tap(data => console.log('DELETED: ' + JSON.stringify(data))),
-      catchError(this.handleError)
+    return this.http.delete(this.webApiUrl +  '/TransferListEmployee/' + 
+        userName + '/' +
+        jobCode4 + '/' + 
+        lastModifiedUser)
+      .pipe(
+        tap(data => console.log('DELETED: ' + JSON.stringify(data))),
+        catchError(this.handleError)
     ); 
 }
 
@@ -112,8 +118,7 @@ export class DataService {
 
 getFunctionalUnitByFacilityByJobcode(facilityCD: string, jobcodeSearch: string): Observable<FunctionalUnit[]> {
   console.log('getFunctionalUnitByFacility facilityCD = ' + facilityCD);
-  /* jobcodeSearch = jobcodeSearch.trim();
-  facilityCD = facilityCD.trim(); */
+ 
   console.log(this.webApiUrl + '/Lookup/FunctionalUnit/' + jobcodeSearch + '/' + facilityCD);
   return this.http.get<FunctionalUnit[]>(this.webApiUrl + '/Lookup/FunctionalUnit/' + jobcodeSearch + '/' + facilityCD)
     .pipe(
@@ -195,21 +200,7 @@ createTransferListEmployee(jobCode4: string, facility_ID: string,
       catchError(this.handleError)
   );
 
-     /* const params =  new HttpParams()
-    .set('ftPtCode', ft_PT_Code)
-    .set('jobCodeFour', jobCode4)   
-    .set('facilityId', facility_ID)
-    .set('chrtFldDeptId', chrtFldDeptId)
-    .set('shiftCd', shiftCd)
-    .set('userName', userName)
-    .set('lastModifiedUser', lastModID)
-
-
-    return this.http.post<MyTransferList>(this.localWebApiUrl + '/TransferListEmployee', {params})
-      .pipe(
-        tap(data => console.log('Post data returned: ' + JSON.stringify(data))),
-        catchError(this.handleError)
-    ); */
+   
 }
 
 
