@@ -153,10 +153,14 @@ updateEmployeeProfile(userName: string, empProfile: EmployeeProfile): Observable
   const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); 
   console.log('PUT:' + this.webApiUrl + '/employee/profile/' + userName + '/'
   + empProfile.daytimePhoneNumber + '/' + empProfile.bilingual + '/' + empProfile.languagesSpoken);
-  return this.http.put<EmployeeProfile>(this.webApiUrl + '/employee/profile/' + userName + '/'
-         + empProfile.daytimePhoneNumber + '/' + empProfile.bilingual + '/' + empProfile.languagesSpoken,
-         empProfile,
-         { headers: headers })
+  
+  return this.http.put<EmployeeProfile>(this.webApiUrl + '/employee/profile/' + 
+          userName + '/' + 
+          empProfile.daytimePhoneNumber + '/' + 
+          empProfile.bilingual + '/' + 
+          empProfile.languagesSpoken,
+          empProfile,
+          { headers: headers })
     .pipe(
       tap(data => console.log('returned from PUT: ' + JSON.stringify(data))),
       catchError(this.handleError)
