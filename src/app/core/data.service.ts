@@ -43,6 +43,10 @@ export class DataService {
 
   // Service Calls for MyTransferList page
   // =====================================
+
+  // This method should be replaced with one that passes userName and returns Transfer List Job Codes
+  // that the user is authorized to access, as opposed to all transfer list job codes
+  // ================================================================================================
   getJobClasses(): Observable<JobClass[]> {
     return this.http.get<JobClass[]>(this.webApiUrl + "/lookup/maxjobcodefour")
       .pipe(
@@ -141,8 +145,8 @@ getShiftByJobcode(jobcodeSearch: string): Observable<Shift[]> {
 // ===================================================
 getEmployeeProfile(userName: string): Observable<EmployeeProfile> {
   userName = userName.trim();
-  console.log(this.webApiUrl + '/employee/profile/' + userName);
-  return this.http.get<EmployeeProfile>(this.webApiUrl + '/employee/profile/' + userName)
+  console.log(this.webApiUrl + '/Employee/profile/' + userName);
+  return this.http.get<EmployeeProfile>(this.webApiUrl + '/Employee/profile/' + userName)
     .pipe(
       tap(data => console.log(JSON.stringify(data))),
       catchError(this.handleError)
@@ -159,7 +163,7 @@ updateEmployeeProfile(userName: string, empProfile: EmployeeProfile): Observable
   console.log('PUT:' + this.webApiUrl + '/employee/profile/' + userName + '/'
   + empProfile.daytimePhoneNumber + '/' + empProfile.bilingual + '/' + empProfile.languagesSpoken);
   
-  return this.http.put<EmployeeProfile>(this.webApiUrl + '/employee/profile/' + 
+  return this.http.put<EmployeeProfile>(this.webApiUrl + '/Employee/profile/' + 
           userName + '/' + 
           empProfile.daytimePhoneNumber + '/' + 
           empProfile.bilingual + '/' + 
