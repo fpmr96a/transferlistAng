@@ -19,6 +19,7 @@ import { DeleteAllDialogComponent } from './components/my-transferlist/dialogs/d
 import { DeleteOneDialogComponent } from './components/my-transferlist/dialogs/delete-one-dialog.component';
 import { CreateTransferlistDialogComponent } from './components/my-transferlist/dialogs/create-transferlist-dialog.component';
 import { ReportViewerDialogComponent } from './components/report-viewer-dialog/report-viewer-dialog.component';
+import { EmployeeSeniorityDialogComponent } from './components/admin/employee-seniority-dialog/employee-seniority-dialog.component';
 import { NoCacheHeadersInterceptor } from './core/http-interceptor';
 
 
@@ -33,14 +34,16 @@ import { NoCacheHeadersInterceptor } from './core/http-interceptor';
     DeleteAllDialogComponent,
     DeleteOneDialogComponent,
     CreateTransferlistDialogComponent,
-    ReportViewerDialogComponent
+    ReportViewerDialogComponent,
+    EmployeeSeniorityDialogComponent
   ],
   entryComponents: [
     EmployeeProfileDialogComponent,
     DeleteAllDialogComponent,
     DeleteOneDialogComponent,
     CreateTransferlistDialogComponent,
-    ReportViewerDialogComponent
+    ReportViewerDialogComponent,
+    EmployeeSeniorityDialogComponent
 
   ],
   imports: [

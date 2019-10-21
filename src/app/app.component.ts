@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Router} from '@angular/router'
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeProfileDialogComponent } from './components/admin/employee-profile-dialog/employee-profile-dialog.component';
+import { EmployeeSeniorityDialogComponent } from './components/admin/employee-seniority-dialog/employee-seniority-dialog.component';
 
 
 @Component({
@@ -43,6 +44,7 @@ ngOnInit(): void {
 }
 
 openEmployeeProfile(): void {
+  
     let dialogRef = this.dialog.open(EmployeeProfileDialogComponent, {
         width: '450px',
         height: '470px',
@@ -53,6 +55,24 @@ openEmployeeProfile(): void {
     dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed', result);
     });
-  }   
+  }
+  
+  openEmployeeSeniority(): void {
+    console.log('entered OpenEmployeeSeniority');
+    let dialogRef = this.dialog.open(EmployeeSeniorityDialogComponent, {
+        width: '450px',
+        height: '470px',
+        disableClose: true,
+        data: {userName: 'ruggieroc'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed', result);
+    });
+  }
+  
+  deleteAll(): void{
+    console.log('deleteAll clicked');
+  }
 
 }
