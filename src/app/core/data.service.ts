@@ -13,6 +13,7 @@ import { Shift } from '../models/shift';
 import { EmployeeProfile } from '../models/EmployeeProfile';
 import { FilteredTransferList } from '../models/FilteredTransferList';
 import { Vacancy } from '../models/Vacancy';
+import { Employee } from '../models/Employee';
 
 @Injectable({
   providedIn: 'root'
@@ -276,6 +277,19 @@ getFilteredTransferList(jobCode4: string, facility_ID: string,
       return this.http.get<Vacancy[]>(this.webApiUrl + '/transferlist/ClearedOpenVacancy', {params})
         .pipe(
           tap(data => console.log('cleared open vacancies: ' + JSON.stringify(data))),
+          catchError(this.handleError)
+      );
+  }
+
+  // Service calls for Employee Seniority Popup
+  // ==========================================
+  searchEmployees(employeeName: string): Observable<Employee[]> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); 
+ 
+      return this.http.get<Employee[]>(this.webApiUrl + '/Employee/search/' +  employeeName,
+        { headers: headers })
+        .pipe(
+          tap(data => console.log('names matching search: ' + JSON.stringify(data))),
           catchError(this.handleError)
       );
   }

@@ -1,3 +1,105 @@
-<p>
-  employee-seniority-dialog works!
-</p>
+<div mat-dialog-title class="dialog-header-rounded-left"><p style="margin-left:10px;">Employee Seniority</p></div>
+<mat-card >
+<form [formGroup]="employeeSearchForm">
+  <mat-card-header class="matcard-header-rounded-top-left">
+        <mat-card-title>Employee Search</mat-card-title>
+      </mat-card-header>
+  <div class="mat-elevation-z1" style="height:100px;">
+    <mat-form-field appearance="outline"  style="width: 400px;margin-left:20px;top:20px;">
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Last Name"
+                      formControlName="searchName">
+     <mat-error class="text-box-error-message" *ngIf="employeeSearchForm.get('searchName').hasError('required')">
+        Last Name may not be blank
+      </mat-error>     
+      <mat-error class="text-box-error-message" *ngIf="employeeSearchForm.get('searchName').hasError('minlength')">
+        Last Name must be at least 2 characters
+      </mat-error>                                         
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="searchEmployees()" >Search</button>
+  </div>
+</form>
+<div *ngIf="errorMessage">{{errorMessage}}  </div>
+
+<mat-card-header class="matcard-header-rounded-top-left" style="margin-top: 30px;">
+  <mat-card-title>Employee(s) Found</mat-card-title>
+</mat-card-header>
+<div class="mat-elevation-z1">
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Employee # Column -->
+    <ng-container matColumnDef="UserName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Emp # </mat-header-cell>
+      <mat-cell *matCellDef="let myEmployeeItem"> {{myEmployeeItem.UserName}} </mat-cell>
+    </ng-container>
+
+    <!-- First Name Column -->
+    <ng-container matColumnDef="FirstName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> First name </mat-header-cell>
+      <mat-cell *matCellDef="let myEmployeeItem"> {{myEmployeeItem.FirstName}} </mat-cell>
+    </ng-container>
+
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="LastName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name </mat-header-cell>
+        <mat-cell *matCellDef="let myEmployeeItem"> {{myEmployeeItem.LastName}} </mat-cell>
+      </ng-container>
+
+    <!-- Job Class Column -->
+    <ng-container matColumnDef="Job_Code4">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Job Class </mat-header-cell>
+      <mat-cell *matCellDef="let myEmployeeItem"> {{myEmployeeItem.Job_Code4}} </mat-cell>
+    </ng-container>
+
+     <!-- Seniority Column -->
+     <ng-container matColumnDef="Seniority">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Seniority </mat-header-cell>
+        <mat-cell *matCellDef="let myEmployeeItem"> {{myEmployeeItem.Seniority}} </mat-cell>
+      </ng-container>
+
+     <!--  CORE Layoff Seniority Date Column -->
+    <ng-container matColumnDef="Layoff_Sen_Dt_CORE">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> CORE Layoff Seniority Dt </mat-header-cell>
+      <mat-cell *matCellDef="let myEmployeeItem"> {{myEmployeeItem.Layoff_Sen_Dt_CORE | date : 'MM-dd-yyyy'}} </mat-cell>
+    </ng-container>
+
+     <!--  Union Layoff Seniority Date Column -->
+     <ng-container matColumnDef="Layoff_Sen_Dt_Override">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Union Seniority Dt </mat-header-cell>
+        <mat-cell *matCellDef="let myEmployeeItem"> {{myEmployeeItem.Layoff_Sen_Dt_Override | date : 'MM-dd-yyyy'}} </mat-cell>
+      </ng-container>
+
+      <!-- Edit Button Column -->
+    <ng-container matColumnDef="singleButtonColumn">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let myEmployeeItem">
+        <!-- <button mat-button color="primary" (click)="deleteTransferList('faraclass', myEmployeeItem.jobCode4,
+                                                    myEmployeeItem.facility_ID, myEmployeeItem.chrtFldDeptId, 
+                                                    myEmployeeItem.shiftCd, myEmployeeItem.ft_PT_Code  )" >
+          <mat-icon>delete</mat-icon>Edit
+        </button> -->
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+              [ngClass]="{highlighted: selectedRowIndex == row.id}"  (click)="highlight(row)" >
+  </mat-row>
+  </mat-table>
+
+  <div class="no-results" [style.display]="dataSource.data.length == 0 ? '' : 'none'">
+    No employees found ...
+  </div>
+
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+</div>
+
+
+</mat-card>
+<mat-dialog-actions style="margin-left:110px;">
+    <button mat-raised-button color="primary" (click)="closeClicked()" >Close</button>
+    
+</mat-dialog-actions>
+
+
+
