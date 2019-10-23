@@ -293,4 +293,16 @@ getFilteredTransferList(jobCode4: string, facility_ID: string,
           catchError(this.handleError)
       );
   }
+
+  updateLayoffSeniorityDate(userName: string, updatedSeniorityDate: string): Observable<Employee> {
+    userName = userName.trim();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); 
+
+    return this.http.put<Employee>(this.webApiUrl + '/Employee/SeniorityDate/' + userName + '/' +  updatedSeniorityDate,
+    { headers: headers })
+      .pipe(
+        tap(data => console.log('returned from PUT: ' + JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
 }

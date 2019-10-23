@@ -15,6 +15,8 @@ export class EmployeeSeniorityDialogComponent implements OnInit {
   employeeSearchForm: FormGroup;
 
   employees: Employee[] = [];
+  selectedEmployee: Employee;
+  selectedRowIndex: number;
 
   displayedColumns: string[] = ['UserName', 'FirstName', 'LastName', 'Job_Code4', 'Seniority', 'Layoff_Sen_Dt_CORE', 'Layoff_Sen_Dt_Override' ];
 
@@ -52,8 +54,29 @@ export class EmployeeSeniorityDialogComponent implements OnInit {
     );
   }
 
+updateSeniorityDate(revisedSeniorityDate: string, updatedEmployee: Employee) {
+    console.log('revisedSeniorityDate is ' + revisedSeniorityDate + '  UpdatedEmployee is ' + JSON.stringify(updatedEmployee) );
+
+    this.dataService.updateLayoffSeniorityDate(updatedEmployee.UserName, revisedSeniorityDate)
+    .subscribe(
+        (data: any) => this.onSaveComplete(),
+        error => this.errorMessage = <any>error
+     );
+}
+
+onSaveComplete() {
+  console.log('ARRIVED at onSaveComplete');
+  this.searchEmployees();
+  //this.snackBar.open('Employee Profile Saved ...', 'Complete', {duration: 1500,
+  //});
+}
+
   closeClicked(): void {
     this.dialogRef.close();
   }
+
+  highlight(row){
+    this.selectedRowIndex = row.id;
+    }
 
 }

@@ -64,10 +64,21 @@
     </ng-container>
 
      <!--  Union Layoff Seniority Date Column -->
-     <ng-container matColumnDef="Layoff_Sen_Dt_Override">
+     <!-- <ng-container matColumnDef="Layoff_Sen_Dt_Override">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Union Seniority Dt </mat-header-cell>
         <mat-cell *matCellDef="let myEmployeeItem"> {{myEmployeeItem.Layoff_Sen_Dt_Override | date : 'MM-dd-yyyy'}} </mat-cell>
+      </ng-container> -->
+
+      <ng-container matColumnDef="Layoff_Sen_Dt_Override">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Union Seniority Dt</mat-header-cell>
+          <mat-cell *matCellDef="let myEmployeeItem">
+              <span *ngIf="selectedEmployee !== myEmployeeItem" (click)="selectedEmployee = myEmployeeItem">
+                  {{myEmployeeItem.Layoff_Sen_Dt_Override | date : 'MM-dd-yyyy'}} 
+              </span>
+              <input *ngIf="selectedEmployee === myEmployeeItem" matInput [value]="myEmployeeItem.Layoff_Sen_Dt_Override"(focusout)="updateSeniorityDate($event.target.value, myEmployeeItem)" placeholder="Union Seniority Dt">
+          </mat-cell>
       </ng-container>
+
 
       <!-- Edit Button Column -->
     <ng-container matColumnDef="singleButtonColumn">
