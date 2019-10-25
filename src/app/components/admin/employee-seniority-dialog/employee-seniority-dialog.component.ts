@@ -17,6 +17,7 @@ export class EmployeeSeniorityDialogComponent implements OnInit {
   employees: Employee[] = [];
   selectedEmployee: Employee;
   selectedRowIndex: number;
+  
 
   displayedColumns: string[] = ['UserName', 'FirstName', 'LastName', 'Job_Code4', 'Seniority', 'Layoff_Sen_Dt_CORE', 'Layoff_Sen_Dt_Override' ];
 
@@ -24,6 +25,7 @@ export class EmployeeSeniorityDialogComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
 
   errorMessage: any;
   
@@ -54,7 +56,7 @@ export class EmployeeSeniorityDialogComponent implements OnInit {
     );
   }
 
-updateSeniorityDate(revisedSeniorityDate: string, updatedEmployee: Employee) {
+updateSeniorityDate(updatedEmployee: Employee, revisedSeniorityDate: string) {
     console.log('revisedSeniorityDate is ' + revisedSeniorityDate + '  UpdatedEmployee is ' + JSON.stringify(updatedEmployee) );
 
     this.dataService.updateLayoffSeniorityDate(updatedEmployee.UserName, revisedSeniorityDate)

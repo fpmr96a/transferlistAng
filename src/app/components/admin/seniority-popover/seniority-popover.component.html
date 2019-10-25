@@ -1,0 +1,14 @@
+<div>
+    <div class="mat-subheading-2">Seniority Date</div>
+    
+    <mat-form-field>
+        <input  matInput  value="{{this.seniorityDate  | date : 'MM-dd-yyyy'}}"
+        
+        placeholder="Union Seniority Dt">
+    </mat-form-field>
+
+    <div class="actions">
+      <button mat-button type="button" color="primary" (click)="onCancel()">Cancel</button>
+      <button mat-button type="submit" color="primary" (click)="onSave()">Save</button>
+    </div>
+</div>

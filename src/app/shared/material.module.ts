@@ -21,6 +21,8 @@ import {  MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {  MatProgressBarModule } from '@angular/material/progress-bar';
 import {  MatGridListModule} from '@angular/material/grid-list';
 import {  MatSelectModule} from '@angular/material/select';
+import {  MatDatepickerModule } from '@angular/material/datepicker';
+import {  MatNativeDateModule, MatRippleModule} from '@angular/material/core';
  
 
 @NgModule({
@@ -47,6 +49,7 @@ import {  MatSelectModule} from '@angular/material/select';
           MatProgressBarModule,
           MatGridListModule,
           MatSelectModule
+          
   ],
   exports: [
           MatButtonModule, 
@@ -69,7 +72,10 @@ import {  MatSelectModule} from '@angular/material/select';
           MatProgressSpinnerModule,
           MatProgressBarModule,
           MatGridListModule,
-          MatSelectModule
+          MatSelectModule,
+          MatDatepickerModule,
+          MatNativeDateModule,
+          MatRippleModule
   ]
 })
 export class MaterialModule { }

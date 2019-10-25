@@ -69,28 +69,87 @@
         <mat-cell *matCellDef="let myEmployeeItem"> {{myEmployeeItem.Layoff_Sen_Dt_Override | date : 'MM-dd-yyyy'}} </mat-cell>
       </ng-container> -->
 
-      <ng-container matColumnDef="Layoff_Sen_Dt_Override">
+
+
+      <!-- <ng-container matColumnDef="Layoff_Sen_Dt_Override">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Union Seniority Dt</mat-header-cell>
           <mat-cell *matCellDef="let myEmployeeItem">
               <span *ngIf="selectedEmployee !== myEmployeeItem" (click)="selectedEmployee = myEmployeeItem">
                   {{myEmployeeItem.Layoff_Sen_Dt_Override | date : 'MM-dd-yyyy'}} 
               </span>
-              <input *ngIf="selectedEmployee === myEmployeeItem" matInput [value]="myEmployeeItem.Layoff_Sen_Dt_Override"(focusout)="updateSeniorityDate($event.target.value, myEmployeeItem)" placeholder="Union Seniority Dt">
+              <input *ngIf="selectedEmployee === myEmployeeItem" matInput 
+                      [value]="myEmployeeItem.Layoff_Sen_Dt_Override"(focusout)="updateSeniorityDate($event.target.value, myEmployeeItem)" 
+                      placeholder="Union Seniority Dt">
           </mat-cell>
-      </ng-container>
+      </ng-container> -->
+
+
+
+     <!--  <ng-container matColumnDef="Layoff_Sen_Dt_Override">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Union Seniority Dt</mat-header-cell>
+          <mat-cell *matCellDef="let myEmployeeItem">
+              <span *ngIf="selectedEmployee !== myEmployeeItem" (click)="selectedEmployee = myEmployeeItem">
+                  {{myEmployeeItem.Layoff_Sen_Dt_Override | date : 'MM-dd-yyyy'}} 
+              </span>
+              <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                  <mat-datepicker #picker></mat-datepicker>
+              <button mat-raised-button color="primary" (click)="picker.open()">edit</button>
+          </mat-cell>
+      </ng-container> -->
+
+      <!-- <ng-container matColumnDef="Layoff_Sen_Dt_Override">
+          <th mat-header-cell *matHeaderCellDef>Union Seniority Dt </th>
+          <td mat-cell *matCellDef="let myEmployeeItem; let i = index">
+            <mat-form-field>
+              <input matInput  [matDatepicker]="picker" placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </td>
+        </ng-container> -->
+
+        <ng-container matColumnDef="Layoff_Sen_Dt_Override">
+            <mat-header-cell *matHeaderCellDef> Union Seniority Dt </mat-header-cell>
+            <mat-cell *matCellDef="let myEmployeeItem" [satPopoverAnchor]="p" (click)="p.toggle()" >
+                <span style="color:  #2E4d7B; font-weight: bold;padding-right: 10px;" >
+                    Edit
+                  </span>
+              <ng-container *ngIf="myEmployeeItem.Layoff_Sen_Dt_Override">
+                  {{myEmployeeItem.Layoff_Sen_Dt_Override | date : 'MM-dd-yyyy'}} 
+              </ng-container>
+              
+    
+              <sat-popover #p
+                  hasBackdrop
+                  xAlign="start"
+                  yAlign="start"
+                  (closed)="updateSeniorityDate(myEmployeeItem, $event)">
+                <app-seniority-popover [value]="myEmployeeItem.Layoff_Sen_Dt_Override"></app-seniority-popover>
+              </sat-popover>
+            </mat-cell>
+            <mat-cell *matCellDef="let myEmployeeItem">
+                <button mat-button color="primary" [satPopoverAnchor]="p" (click)="p.toggle()">Edit</button>
+              <!-- <button mat-button color="primary" (click)="deleteTransferList('faraclass', myEmployeeItem.jobCode4,
+                                                          myEmployeeItem.facility_ID, myEmployeeItem.chrtFldDeptId, 
+                                                          myEmployeeItem.shiftCd, myEmployeeItem.ft_PT_Code  )" >
+                <mat-icon>delete</mat-icon>Edit
+              </button> -->
+            </mat-cell>
+          </ng-container>
 
 
       <!-- Edit Button Column -->
-    <ng-container matColumnDef="singleButtonColumn">
+    <!-- <ng-container matColumnDef="singleButtonColumn">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let myEmployeeItem">
+          <button mat-button color="primary" [satPopoverAnchor]="p" (click)="p.toggle()">Edit</button> -->
         <!-- <button mat-button color="primary" (click)="deleteTransferList('faraclass', myEmployeeItem.jobCode4,
                                                     myEmployeeItem.facility_ID, myEmployeeItem.chrtFldDeptId, 
                                                     myEmployeeItem.shiftCd, myEmployeeItem.ft_PT_Code  )" >
           <mat-icon>delete</mat-icon>Edit
         </button> -->
-      </mat-cell>
-    </ng-container>
+      <!-- </mat-cell>
+    </ng-container> -->
 
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"

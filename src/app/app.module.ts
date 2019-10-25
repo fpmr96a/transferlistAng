@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {NgxMaskModule} from 'ngx-mask'
+import { NgxMaskModule} from 'ngx-mask'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,8 @@ import { CreateTransferlistDialogComponent } from './components/my-transferlist/
 import { ReportViewerDialogComponent } from './components/report-viewer-dialog/report-viewer-dialog.component';
 import { EmployeeSeniorityDialogComponent } from './components/admin/employee-seniority-dialog/employee-seniority-dialog.component';
 import { NoCacheHeadersInterceptor } from './core/http-interceptor';
+import { SatPopoverModule } from '@ncstate/sat-popover';
+import { SeniorityPopoverComponent } from './components/admin/seniority-popover/seniority-popover.component';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { NoCacheHeadersInterceptor } from './core/http-interceptor';
     DeleteOneDialogComponent,
     CreateTransferlistDialogComponent,
     ReportViewerDialogComponent,
-    EmployeeSeniorityDialogComponent
+    EmployeeSeniorityDialogComponent,
+    SeniorityPopoverComponent
   ],
   entryComponents: [
     EmployeeProfileDialogComponent,
@@ -54,6 +57,7 @@ import { NoCacheHeadersInterceptor } from './core/http-interceptor';
     HttpClientModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    SatPopoverModule,
     NgxMaskModule.forRoot({})
     
   ],

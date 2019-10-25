@@ -60,7 +60,7 @@ openEmployeeProfile(): void {
   openEmployeeSeniority(): void {
     console.log('entered OpenEmployeeSeniority');
     let dialogRef = this.dialog.open(EmployeeSeniorityDialogComponent, {
-        width: '900px',
+        width: '1100px',
         height: '800px',
         disableClose: true,
         data: {userName: 'ruggieroc'}
