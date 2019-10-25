@@ -56,6 +56,8 @@ export class EmployeeSeniorityDialogComponent implements OnInit {
     );
   }
 
+
+//**** Left off here. This is actually updating.  Need to validate the date next ****** */
 updateSeniorityDate(updatedEmployee: Employee, revisedSeniorityDate: string) {
     console.log('revisedSeniorityDate is ' + revisedSeniorityDate + '  UpdatedEmployee is ' + JSON.stringify(updatedEmployee) );
 

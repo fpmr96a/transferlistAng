@@ -30,10 +30,10 @@ ngOnInit() {
   }
 }
 
-onSave() {
+onSave(newSeniorityDate: string) {
   if (this.popover) {
-    console.log('seniorityDate in popover when closing is ' + this.seniorityDate);
-    this.popover.close(this.seniorityDate);
+    console.log('newSeniorityDate in popover when closing is ' + newSeniorityDate);
+    this.popover.close(newSeniorityDate);
   }
 }
 
