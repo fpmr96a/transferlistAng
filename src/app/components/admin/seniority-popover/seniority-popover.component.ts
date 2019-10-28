@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Optional, Host  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SatPopover } from '@ncstate/sat-popover';
-import { filter } from 'rxjs/operators';
+import { DateValidator} from 'src/app/components/utility/date-validator/date-validator.component';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -28,7 +29,7 @@ constructor(@Optional()
             public popover: SatPopover,
             private fb: FormBuilder) {
               this.seniorityDateForm = this.fb.group({
-                seniorityDateField: [this.seniorityDate, Validators.compose([Validators.required])]
+                seniorityDateField: [this.seniorityDate, Validators.compose([DateValidator.dateValidator])]
               });
 }
 
@@ -40,7 +41,11 @@ ngOnInit() {
   } */
  // Initialize Seniority Date
  // =========================
- this.seniorityDateForm.setValue({ seniorityDateField: this.seniorityDate});
+ const format = 'MM-dd-yyyy';
+ const myDate = this.seniorityDate;
+ const locale = 'en-US';
+ const formattedDate = formatDate(myDate, format, locale);
+ this.seniorityDateForm.setValue({ seniorityDateField: formattedDate});
 }
 
 onSave() {
