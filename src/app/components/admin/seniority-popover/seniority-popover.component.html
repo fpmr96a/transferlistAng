@@ -1,14 +1,16 @@
-<div>
+<div [formGroup]="seniorityDateForm">
     <div class="mat-subheading-2">Seniority Date</div>
     
     <mat-form-field>
-        <input  matInput #seniorityDateField value="{{this.seniorityDate  | date : 'MM-dd-yyyy'}}"
-        
-        placeholder="Union Seniority Dt">
+        <input  matInput formControlName="seniorityDateField" value="{{this.seniorityDate  | date : 'MM-dd-yyyy'}}" >
+        <p *ngIf="seniorityDateForm.get('seniorityDateField').hasError('required')">Required Error</p>
     </mat-form-field>
 
     <div class="actions">
       <button mat-button type="button" color="primary" (click)="onCancel()">Cancel</button>
-      <button mat-button type="submit" color="primary" (click)="onSave(seniorityDateField.value)">Save</button>
+      <button mat-button type="submit" color="primary" 
+          (click)="onSave()"
+          [title]="seniorityDateForm.valid ? 'save seniority override' : 'Disabled until valid data provided'"
+          [disabled]="!seniorityDateForm.valid">Save</button>
     </div>
 </div>

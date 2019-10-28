@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Optional, Host  } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SatPopover } from '@ncstate/sat-popover';
 import { filter } from 'rxjs/operators';
 
@@ -20,19 +21,32 @@ private _value = '';
 /** Form model for the input. */
 seniorityDate = '';
 
-constructor(@Optional() @Host() public popover: SatPopover) { }
+seniorityDateForm: FormGroup;
+
+constructor(@Optional()
+            @Host() 
+            public popover: SatPopover,
+            private fb: FormBuilder) {
+              this.seniorityDateForm = this.fb.group({
+                seniorityDateField: [this.seniorityDate, Validators.compose([Validators.required])]
+              });
+}
 
 ngOnInit() {
   // subscribe to cancellations and reset form value
-  if (this.popover) {
+  /* if (this.popover) {
     this.popover.closed.pipe(filter(val => val == null))
       .subscribe(() => this.seniorityDate = this.value || '');
-  }
+  } */
+ // Initialize Seniority Date
+ // =========================
+ this.seniorityDateForm.setValue({ seniorityDateField: this.seniorityDate});
 }
 
-onSave(newSeniorityDate: string) {
+onSave() {
   if (this.popover) {
-    console.log('newSeniorityDate in popover when closing is ' + newSeniorityDate);
+    var newSeniorityDate = this.seniorityDateForm.controls["seniorityDateField"].value;
+    console.log('newSeniorityDate in popover when closing is ' + newSeniorityDate );
     this.popover.close(newSeniorityDate);
   }
 }
