@@ -160,6 +160,38 @@ mat-form-field.mat-form-field {
       justify-content: center;
   }
 
+  // fixed width column in mat-table for Emp number
+  // used in Layoff Seniority Override popup
+  // ================================================
+  .mat-column-UserName{
+    flex: 0 0 100px;
+    justify-content: left;
+}
+
+  // fixed width column in mat-table for Job code
+  // used in Layoff Seniority Override popup
+  // ================================================
+  .mat-column-Job_Code4{
+    flex: 0 0 100px;
+    justify-content: left;
+}
+
+// fixed width column in mat-table for Job code
+  // used in Layoff Seniority Override popup
+  // ================================================
+  .mat-column-Layoff_Sen_Dt_CORE{
+    flex: 0 0 175px;
+    justify-content: left;
+}
+
+  // fixed width column in mat-table for Seniority
+  // used in Layoff Seniority Override popup
+  // ================================================
+  .mat-column-Seniority{
+    flex: 0 0 100px;
+    justify-content: left;
+}
+
   // fixed width column in mat-table for Functional Unit
   // mapped to HTML via:  matColumnDef="functionalUnitDescription"
   // ==============================================================
