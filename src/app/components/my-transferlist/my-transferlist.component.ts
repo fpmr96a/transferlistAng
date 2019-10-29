@@ -95,6 +95,7 @@ GetMyTransferListByJobCode(jobcode: string) {
         mytransferlists => {
           this.dataSource.data = mytransferlists;
           this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
           this.isLoading=false;
         },
         error => this.errorMessage = <any>error

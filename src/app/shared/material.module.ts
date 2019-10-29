@@ -23,6 +23,7 @@ import {  MatGridListModule} from '@angular/material/grid-list';
 import {  MatSelectModule} from '@angular/material/select';
 import {  MatDatepickerModule } from '@angular/material/datepicker';
 import {  MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import {  MatPaginatorModule } from '@angular/material/paginator';
  
 
 @NgModule({
@@ -36,6 +37,7 @@ import {  MatNativeDateModule, MatRippleModule} from '@angular/material/core';
           MatIconModule,
           MatFormFieldModule, 
           MatInputModule, 
+          MatPaginatorModule,
           MatTableModule, 
           MatToolbarModule, 
           MatSortModule,  
@@ -60,6 +62,7 @@ import {  MatNativeDateModule, MatRippleModule} from '@angular/material/core';
           MatIconModule,
           MatFormFieldModule, 
           MatInputModule, 
+          MatPaginatorModule,
           MatTableModule, 
           MatToolbarModule, 
           MatSortModule,  
