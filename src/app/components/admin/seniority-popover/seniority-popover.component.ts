@@ -50,7 +50,9 @@ ngOnInit() {
 onSave() {
   if (this.popover) {
 
-    // Format date to be saved in MM-DD-YYYY format (dashes)
+    // Format date to be saved in MM-DD-YYYY format (dashes). 
+    // Slashes allowed during data entry. Dashes used when
+    // saving due to API call and slashes getting in the way.
     // ======================================================
     const format = 'MM-dd-yyyy';
     const myDate = this.seniorityDateForm.controls["seniorityDateField"].value;
