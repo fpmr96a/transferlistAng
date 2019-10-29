@@ -6,7 +6,7 @@
   <div class="mat-elevation-z1">
   <mat-form-field style="margin-top:20px; width:275px; margin-left: 10px;" color="primary">
     <mat-label>Job Class</mat-label>
-    <select matNativeControl placeholder="Select Job Class" [formControl]="jobClassFormControl" name="jobclass">
+    <select matNativeControl placeholder="Select Job Class" [formControl]="jobClassFormControl" name="jobclass" style="padding-left: 10px;">
         <option value="" label= "-- Select One --" selected></option>
         <option *ngFor="let jobclass of jobClasses" [value]="stringifyJobClassObject(jobclass)" >
         {{jobclass.description}}
