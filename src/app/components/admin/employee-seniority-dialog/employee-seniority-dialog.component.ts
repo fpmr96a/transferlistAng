@@ -1,10 +1,13 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
+
 import { DataService } from 'src/app/core/data.service';
 import { Employee } from 'src/app/models/Employee';
 
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-employee-seniority-dialog',
@@ -32,6 +35,7 @@ export class EmployeeSeniorityDialogComponent implements OnInit {
   
   constructor(private dialogRef: MatDialogRef<EmployeeSeniorityDialogComponent>,
     private fb: FormBuilder,
+    public snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any, public dataService: DataService) { }  
 
   ngOnInit() {
@@ -87,8 +91,8 @@ onSaveComplete() {
   console.log('ARRIVED at onSaveComplete');
   var searchName = this.employeeSearchForm.controls["searchName"].value;
   this.searchEmployees(searchName);
-  //this.snackBar.open('Employee Profile Saved ...', 'Complete', {duration: 1500,
-  //});
+  this.snackBar.open('Seniority Date Override Saved ...', 'Complete', {duration: 1500,
+  });
 }
 
   closeClicked(): void {
