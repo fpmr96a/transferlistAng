@@ -3,7 +3,10 @@
     
     <mat-form-field>
         <input  matInput formControlName="seniorityDateField" value="{{this.seniorityDate  | date : 'MM-dd-yyyy'}}" >
-        <p  *ngIf="seniorityDateForm.get('seniorityDateField').hasError('dateValidator')">Invalid Date. Please use MM-DD-YYYY</p>
+        <p style="color:red"  *ngIf="seniorityDateForm.get('seniorityDateField').hasError('dateValidator')">Invalid Date. Please use MM-DD-YYYY</p>
+        <!-- <mat-error class="text-box-error-message" *ngIf="seniorityDateForm.get('seniorityDateField').hasError('dateValidator')">
+            Invalid Date. Please use MM-DD-YYYY
+          </mat-error>    -->
     </mat-form-field>
 
     <div class="actions">
