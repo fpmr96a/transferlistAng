@@ -244,6 +244,7 @@ export class FilteredTransferlistComponent implements OnInit {
         console.log("Filtered Transfer List Returned: " + JSON.stringify(returnedTransferLists));
         this.dataSource.data = returnedTransferLists;
         this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
         //this.isLoading=false;
       }, 
       error => this.errorMessage = <any>error
