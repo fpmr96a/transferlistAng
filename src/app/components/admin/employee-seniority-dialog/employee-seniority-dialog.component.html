@@ -19,7 +19,7 @@
     <button mat-raised-button color="primary" (click)="searchEmployees()" >Search</button>
   </div>
 </form>
-<div *ngIf="errorMessage">{{errorMessage}}  </div>
+<!-- <div *ngIf="errorMessage">{{errorMessage}}  </div> -->
 
 <mat-card-header class="matcard-header-rounded-top-left" style="margin-top: 30px;">
   <mat-card-title>Employee(s) Found</mat-card-title>
@@ -153,7 +153,7 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"
-              [ngClass]="{highlighted: selectedRowIndex == row.id}"  (click)="highlight(row)" >
+              [ngClass]="{highlighted: selectedRowIndex == row.UserName}"  (click)="highlight(row)" >
   </mat-row>
   </mat-table>
 

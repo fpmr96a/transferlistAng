@@ -16,7 +16,7 @@ export class EmployeeSeniorityDialogComponent implements OnInit {
 
   employees: Employee[] = [];
   selectedEmployee: Employee;
-  selectedRowIndex: number;
+  selectedRowIndex: number = -1;
   
 
   displayedColumns: string[] = ['UserName', 'FirstName', 'LastName', 'Job_Code4', 'Seniority', 'Layoff_Sen_Dt_CORE', 'Layoff_Sen_Dt_Override' ];
@@ -80,7 +80,7 @@ onSaveComplete() {
   }
 
   highlight(row){
-    this.selectedRowIndex = row.id;
+    this.selectedRowIndex = row.UserName;
     }
 
 }

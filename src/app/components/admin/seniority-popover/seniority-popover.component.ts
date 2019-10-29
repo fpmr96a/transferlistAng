@@ -11,7 +11,7 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./seniority-popover.component.scss']
 })
 export class SeniorityPopoverComponent implements OnInit {
-/** Overrides the comment and provides a reset value when changes are cancelled. */
+
 @Input()
 get value(): string { return this._value; }
 set value(x: string) {
@@ -19,7 +19,6 @@ set value(x: string) {
 }
 private _value = '';
 
-/** Form model for the input. */
 seniorityDate = '';
 
 seniorityDateForm: FormGroup;
@@ -50,7 +49,13 @@ ngOnInit() {
 
 onSave() {
   if (this.popover) {
-    var newSeniorityDate = this.seniorityDateForm.controls["seniorityDateField"].value;
+
+    // Format date to be saved in MM-DD-YYYY format (dashes)
+    // ======================================================
+    const format = 'MM-dd-yyyy';
+    const myDate = this.seniorityDateForm.controls["seniorityDateField"].value;
+    const locale = 'en-US';
+    const newSeniorityDate = formatDate(myDate, format, locale);
     console.log('newSeniorityDate in popover when closing is ' + newSeniorityDate );
     this.popover.close(newSeniorityDate);
   }
