@@ -1,22 +1,23 @@
 <div mat-dialog-title class="dialog-header-rounded-left"><p style="margin-left:10px;">Employee Seniority</p></div>
 <mat-card >
-<form [formGroup]="employeeSearchForm">
+<form [formGroup]="employeeSearchForm" autocomplete="off"> 
   <mat-card-header class="matcard-header-rounded-top-left">
         <mat-card-title>Employee Search</mat-card-title>
       </mat-card-header>
   <div class="mat-elevation-z1" style="height:100px;">
     <mat-form-field appearance="outline"  style="width: 400px;margin-left:20px;top:20px;">
-      <mat-label>Last Name</mat-label>
+      <mat-label>Last Name Search</mat-label>
       <input matInput placeholder="Last Name"
-                      formControlName="searchName">
-     <mat-error class="text-box-error-message" *ngIf="employeeSearchForm.get('searchName').hasError('required')">
+                      formControlName="searchName"
+                      >
+     <!-- <mat-error class="text-box-error-message" *ngIf="employeeSearchForm.get('searchName').hasError('required')">
         Last Name may not be blank
-      </mat-error>     
-      <mat-error class="text-box-error-message" *ngIf="employeeSearchForm.get('searchName').hasError('minlength')">
+      </mat-error>    -->  
+      <!-- <mat-error class="text-box-error-message" *ngIf="employeeSearchForm.get('searchName').hasError('minlength')">
         Last Name must be at least 2 characters
-      </mat-error>                                         
+      </mat-error>   -->                                       
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="searchEmployees()" >Search</button>
+    <!-- <button mat-raised-button color="primary" (click)="searchEmployees()" >Search</button> -->
   </div>
 </form>
 <!-- <div *ngIf="errorMessage">{{errorMessage}}  </div> -->

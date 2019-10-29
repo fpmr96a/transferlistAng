@@ -15,6 +15,7 @@ export class EmployeeSeniorityDialogComponent implements OnInit {
   employeeSearchForm: FormGroup;
 
   employees: Employee[] = [];
+  emptyEmployeesList: Employee[] = [];
   selectedEmployee: Employee;
   selectedRowIndex: number = -1;
   
@@ -35,15 +36,29 @@ export class EmployeeSeniorityDialogComponent implements OnInit {
 
   ngOnInit() {
     this.employeeSearchForm = this.fb.group({ 
-      searchName: ['', [Validators.required, Validators.minLength(2)]],
+      searchName: '',
      });
+
+     this.employeeSearchForm.controls["searchName"].valueChanges.subscribe( 
+      value => {
+        var nameToSearch = value;
+        this.searchEmployees(nameToSearch);
+              
+        // Clear Grid for scenario where no last names found
+        // =================================================
+        this.dataSource.data = this.emptyEmployeesList;
+       
+      }
+    );
   }
 
-  searchEmployees() {
-    var searchName = this.employeeSearchForm.controls["searchName"].value;
-    console.log('name being searched for: ' + searchName);
+  
+
+  searchEmployees(searchValue: string) {
+    // var searchName = this.employeeSearchForm.controls["searchName"].value;
+    console.log('name being searched for: ' + searchValue);
     
-    this.dataService.searchEmployees(searchName)
+    this.dataService.searchEmployees(searchValue)
      .subscribe(
         employeesFound => {
           console.log("employees returned from service " + JSON.stringify(employeesFound));
@@ -69,7 +84,8 @@ updateSeniorityDate(updatedEmployee: Employee, revisedSeniorityDate: string) {
 
 onSaveComplete() {
   console.log('ARRIVED at onSaveComplete');
-  this.searchEmployees();
+  var searchName = this.employeeSearchForm.controls["searchName"].value;
+  this.searchEmployees(searchName);
   //this.snackBar.open('Employee Profile Saved ...', 'Complete', {duration: 1500,
   //});
 }
