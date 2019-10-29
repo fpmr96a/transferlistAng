@@ -64,6 +64,7 @@ export class EmployeeSeniorityDialogComponent implements OnInit {
           console.log("employees returned from service " + JSON.stringify(employeesFound));
           this.dataSource.data = employeesFound;
           this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
           //this.isLoading=false;
         }, 
         error => this.errorMessage = <any>error
