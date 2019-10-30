@@ -23,6 +23,7 @@ import { EmployeeSeniorityDialogComponent } from './components/admin/employee-se
 import { NoCacheHeadersInterceptor } from './core/http-interceptor';
 import { SatPopoverModule } from '@ncstate/sat-popover';
 import { SeniorityPopoverComponent } from './components/admin/seniority-popover/seniority-popover.component';
+import { FunctionalUnitSetupDialogComponent } from './components/admin/functional-unit-setup-dialog/functional-unit-setup-dialog.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { SeniorityPopoverComponent } from './components/admin/seniority-popover/
     CreateTransferlistDialogComponent,
     ReportViewerDialogComponent,
     EmployeeSeniorityDialogComponent,
-    SeniorityPopoverComponent
+    SeniorityPopoverComponent,
+    FunctionalUnitSetupDialogComponent
   ],
   entryComponents: [
     EmployeeProfileDialogComponent,
@@ -46,7 +48,8 @@ import { SeniorityPopoverComponent } from './components/admin/seniority-popover/
     DeleteOneDialogComponent,
     CreateTransferlistDialogComponent,
     ReportViewerDialogComponent,
-    EmployeeSeniorityDialogComponent
+    EmployeeSeniorityDialogComponent,
+    FunctionalUnitSetupDialogComponent
 
   ],
   imports: [

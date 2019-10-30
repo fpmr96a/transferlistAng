@@ -3,6 +3,7 @@ import { Router} from '@angular/router'
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeProfileDialogComponent } from './components/admin/employee-profile-dialog/employee-profile-dialog.component';
 import { EmployeeSeniorityDialogComponent } from './components/admin/employee-seniority-dialog/employee-seniority-dialog.component';
+import { FunctionalUnitSetupDialogComponent } from './components/admin/functional-unit-setup-dialog/functional-unit-setup-dialog.component';
 
 
 @Component({
@@ -70,7 +71,22 @@ openEmployeeProfile(): void {
         console.log('The dialog was closed', result);
     });
   }
-  
+
+  openFuncUnitSetup(): void { 
+    console.log('entered functional unit setup');
+    let dialogRef = this.dialog.open(FunctionalUnitSetupDialogComponent, {
+        width: '475px',
+        height: '490px',
+        disableClose: true,
+        data: {userName: 'ruggieroc'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed', result);
+    });
+  }
+
+
   deleteAll(): void{
     console.log('deleteAll clicked');
   }
