@@ -36,15 +36,7 @@ export class FunctionalUnitSetupDialogComponent implements OnInit {
   ngOnInit() {
     // Populate Job Classes Dropdown
     // =============================
-    this.dataService.getJobClasses().subscribe(
-      jobclasses => {
-        this.jobClasses = jobclasses;
-        
-        console.log("Filtered Job classes Returned" + JSON.stringify(this.jobClasses));
-      },
-      error => this.errorMessage = <any>error
-    ); 
-    
+    this. getJobClasses();
     
     // When an item in Job Class Dropdown selected, grab job class JSON string, load
     // JSON object, and populate code and description properties. Also populate the
@@ -59,17 +51,11 @@ export class FunctionalUnitSetupDialogComponent implements OnInit {
         this.resetFunctionalUnit();
         
         this.getFacilities(this.selectedJobClass);
-       /*  this.getTransferFacilityByJobcode(this.selectedJobClassCode);
-
-        console.log('selectedJobClassCode = ' + this.selectedJobClassCode) */;
-        
-               
+                     
       }
     );
     
-    
-    
-    
+   
 
     // When an item in the Facility Dropdown selected, grab facility code and call
     // web api to get Functional Units.
@@ -91,6 +77,19 @@ export class FunctionalUnitSetupDialogComponent implements OnInit {
     );
   }
 
+  getJobClasses() {
+    // Populate Job Classes Dropdown
+    // =============================
+    this.dataService.getJobClasses().subscribe(
+      jobclasses => {
+        this.jobClasses = jobclasses;
+        
+        console.log("Filtered Job classes Returned" + JSON.stringify(this.jobClasses));
+      },
+      error => this.errorMessage = <any>error
+    ); 
+
+  }
 
   getFacilities(jobcode: string) {
     console.log('getFacilities entered with job code of ' + jobcode);
@@ -115,27 +114,21 @@ export class FunctionalUnitSetupDialogComponent implements OnInit {
     ); 
   }
 
-  /* createTransferlists(): void {
-    this.dataService.createTransferListEmployee(this.data.jobCode4, this.selectedFacility, this.selectedFunctionalUnit,
-       this.selectedShift, this.selectedFTPT, 'faraclass', 'faraclass')
-       .subscribe(
-        (data: any) => this.onSaveComplete(),
-        error => this.errorMessage = <any>error
-    );
-
-    
-  } */
-
+  
   saveFunctionalUnits(jobClass: string, facility: string, functionalUnit: string): void {
 
   }
 
   resetAll(): void {
-    this.selectedJobClass = '';
-    this.jobClasses = [];
-
+   
+    this.resetJobClass();
     this.resetFacility();
     this.resetFunctionalUnit();
+
+  }
+
+  resetJobClass(): void {
+    this.jobClassFormControl.setValue('');
 
   }
 

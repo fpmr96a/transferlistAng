@@ -17,7 +17,7 @@
 
   <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
     <mat-label>Facility</mat-label>
-    <select matNativeControl placeholder="Select Facility" [formControl]="facilityFormControl" name="facility">
+    <select matNativeControl placeholder="Select Facility" [formControl]="facilityFormControl" name="facility" style="padding-left: 10px;">
         <option value="" label= "-- Select One --" selected></option>
         <option *ngFor="let facility of facilities" [value]="facility.code" >
         {{facility.description}}
@@ -30,9 +30,8 @@
 
   <mat-form-field style="margin-top:20px; width:400px; margin-left: 10px;" color="primary">
     <mat-label>Functional Unit</mat-label>
-    <select matNativeControl placeholder="Select Functional Unit" [formControl]="functionalUnitFormControl" name="functionalunit">
+    <select matNativeControl placeholder="Select Functional Unit" [formControl]="functionalUnitFormControl" name="functionalunit" style="padding-left: 10px;">
         <option value="" label= "-- Select One --" selected></option>
-        <option value="---" label= "All" ></option>
         <option *ngFor="let functionalunit of functionalUnits" [value]="functionalunit.chrtFld_Dept_ID" >
         {{functionalunit.description}}
         </option>
@@ -44,7 +43,7 @@
 
     
 
-  <mat-dialog-actions style="margin-left:50px;">
+  <mat-dialog-actions style="margin-left:43px;">
     
       
         <button mat-raised-button color="primary" (click)="saveFunctionalUnits(this.selectedJobClass, this.selectedFacility, this.selectedFunctionalUnit)">Save Functional Unit</button>

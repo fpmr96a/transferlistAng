@@ -76,7 +76,7 @@ openEmployeeProfile(): void {
     console.log('entered functional unit setup');
     let dialogRef = this.dialog.open(FunctionalUnitSetupDialogComponent, {
         width: '475px',
-        height: '490px',
+        height: '400px',
         disableClose: true,
         data: {userName: 'ruggieroc'}
     });
