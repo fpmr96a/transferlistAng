@@ -325,6 +325,8 @@ getFilteredTransferList(jobCode4: string, facility_ID: string,
 
   updateLayoffSeniorityDate(userName: string, updatedSeniorityDate: string): Observable<Employee> {
     userName = userName.trim();
+    updatedSeniorityDate = updatedSeniorityDate.toString().trim();
+    console.log('updatedSeniorityDate = ' + updatedSeniorityDate);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); 
 
     return this.http.put<Employee>(this.webApiUrl + '/Employee/SeniorityDate/' + userName + '/' +  updatedSeniorityDate,

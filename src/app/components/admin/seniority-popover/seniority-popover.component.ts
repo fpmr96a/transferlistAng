@@ -56,8 +56,14 @@ onSave() {
     // ======================================================
     const format = 'MM-dd-yyyy';
     const myDate = this.seniorityDateForm.controls["seniorityDateField"].value;
-    const locale = 'en-US';
-    const newSeniorityDate = formatDate(myDate, format, locale);
+    var newSeniorityDate = "BLANK";
+
+    if (myDate.trim() != "")
+    {
+      const locale = 'en-US';
+      newSeniorityDate = formatDate(myDate, format, locale);
+    }
+    
     console.log('newSeniorityDate in popover when closing is ' + newSeniorityDate );
     this.popover.close(newSeniorityDate);
   }
