@@ -116,7 +116,11 @@ export class FunctionalUnitSetupDialogComponent implements OnInit {
 
   
   saveFunctionalUnits(jobClass: string, facility: string, functionalUnit: string): void {
-
+    this.dataService.createTransferLists(jobClass, facility, functionalUnit,'faraclass')
+      .subscribe(
+       (data: any) => this.onSaveComplete(),
+       error => this.errorMessage = <any>error
+   );
   }
 
   resetAll(): void {
@@ -150,7 +154,7 @@ export class FunctionalUnitSetupDialogComponent implements OnInit {
   onSaveComplete() {
     console.log('ARRIVED at onSaveComplete');
     this.dialogRef.close();
-    this.snackBar.open('Transfer List(s) created for ' + this.data.jobclassDescription, 'Complete', {duration: 1500, }); 
+    this.snackBar.open('Transfer List(s) created ...', 'Complete', {duration: 1500, }); 
   }
 
   closePopup(): void {

@@ -20,7 +20,7 @@ import { Employee } from '../models/Employee';
 })
 export class DataService {
   
-  private webApiUrl = 'http://10.15.56.123:8080/api';
+  private webApiUrl = 'http://10.15.25.48:8080/api';
   private transferlistUrl = 'https://localhost:5001/api/MyTransferList/ ';
   private localWebApiUrl = 'https://localhost:44345/api';
  
@@ -198,6 +198,35 @@ createTransferListEmployee(jobCode4: string, facility_ID: string,
               chrtFldDeptId + '/' +
               shiftCd.trim()       + '/' +
               userName      + '/' +
+              lastModID,
+              { headers: headers })
+    .pipe(
+      tap(data => console.log('Post data returned: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+  );
+
+   
+}
+
+createTransferLists(jobCode4: string, facility_ID: string, 
+  chrtFldDeptId: string, lastModID: string): Observable<any> {
+  
+    /* console.log('POST:' + this.webApiUrl + '/TransferList/' +
+    ft_PT_Code    + '/' +
+    jobCode4      + '/' +
+    facility_ID   + '/' +
+    chrtFldDeptId + '/' +
+    shiftCd.trim()       + '/' +
+    userName      + '/' +
+    lastModID); */
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); 
+
+    return this.http.post<any>(this.webApiUrl + '/TransferList/' +
+              
+              jobCode4      + '/' +
+              facility_ID   + '/' +
+              chrtFldDeptId + '/' +
               lastModID,
               { headers: headers })
     .pipe(
