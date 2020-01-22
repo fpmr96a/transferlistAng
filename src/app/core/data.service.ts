@@ -20,9 +20,12 @@ import { Employee } from '../models/Employee';
 })
 export class DataService {
   
-  private webApiUrl = 'http://10.15.25.48:8080/api';
+  private webApiUrl = 'http://10.15.25.48:8088/api';
+  //private webApiUrl ='http://localhost:52282/api';
+  //private webApiUrl ='http://localhost:8088/api';
+  //private webApiUrl ='http://localhost/5001/api';
   private transferlistUrl = 'https://localhost:5001/api/MyTransferList/ ';
-  private localWebApiUrl = 'https://localhost:44345/api';
+  private localWebApiUrl = 'http://localhost:52282/api';
  
 
   constructor(private http: HttpClient) { }
@@ -40,6 +43,8 @@ export class DataService {
   // ** processes.                                                                                     **
   // ** The workaround/solution is to add the server to the Local Intranet zone in Internet Options.   **
   // ** Another recommendation was to add the server to TRUSTED WEBSITES .                             **
+  // ** Update 12/31/2019: After upgrading api and server to core 3.1, problem still happening with    **
+  // ** with EDGE and running fiddler is still the workaround.                                         **
   // ****************************************************************************************************
 
   // Service Calls for MyTransferList page
@@ -230,7 +235,7 @@ createTransferLists(jobCode4: string, facility_ID: string,
               lastModID,
               { headers: headers })
     .pipe(
-      tap(data => console.log('Post data returned: ' + JSON.stringify(data))),
+      tap(data => console.log('createTransferLists Post data returned: ' + JSON.stringify(data))),
       catchError(this.handleError)
   );
 
